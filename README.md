@@ -54,8 +54,8 @@ java -cp ./bin ricm3.parser.AutomataParser example/automata.txt > ast.dot
 
 ## Les conditions booléennes de base
 -  True
--  Key(Touche) : la Touche est enfoncé
--  MyDir(Direction) : entité est orientée dans la Direction
+-  Key(Touche) : la Touche est enfoncée
+-  MyDir(Direction) : l'entité est orientée dans la Direction
 -  Cell(Direction, Entité) : La cellule dans la Direction contient une Entité
 -  Closest(Entité, Direction) : la plus proche Entité est dans la Direction
 -  GotPower : reste t'il de l'énergie à l'entité ?
