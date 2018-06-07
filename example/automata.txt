@@ -57,7 +57,7 @@ Explorer(Explore_R){
 
 * (Explore_L):
     | Cell(F,V) ? Move    :(Explore_L)
-    | Cell(L,V) ? Turn(L) :(Explore-L)
+    | Cell(L,V) ? Turn(L) :(Explore_L)
     | Cell(R,V) ? Turn(R) :(Explore_L)
     | True ? Turn(B) :(Explore_R)
 }
@@ -81,38 +81,38 @@ SuperHero(Explore){
   | Cell(B,E) & Cell(F,V) ? Move(F) :(Escape)
   | Cell(R,E) & Cell(L,V) ? Move(L) :(Escape)
   | Cell(L,E) & Cell(R,V) ? Move(R) :(Escape)
-  | Cell(F,E) & not(Cell(B,V)) ? Hit :(Fight)
+  | Cell(F,E) & !(Cell(B,V)) ? Hit  :(Fight)
   | True ? :(Explore)
 
 * (Fight):
-  | Cell(F,E) & Cell(L,E) & not(Cell(R,V) / Cell(B,V)) ? Hit :(Angry)
-  | Cell(F,E) & Cell(R,E) & not(Cell(L,V) / Cell(B,V)) ? Hit :(Angry)
-  | Cell(F,E) & Cell(B,E) & not(Cell(L,V) / Cell(R,V)) ? Hit :(Angry)
-  | Cell(L,E) & Cell(R,E) & not(Cell(F,V) / Cell(B,V)) ? Turn(R) :(Angry)
+  | Cell(F,E) & Cell(L,E) & !(Cell(R,V) / Cell(B,V)) ? Hit     :(Angry)
+  | Cell(F,E) & Cell(R,E) & !(Cell(L,V) / Cell(B,V)) ? Hit     :(Angry)
+  | Cell(F,E) & Cell(B,E) & !(Cell(L,V) / Cell(R,V)) ? Hit     :(Angry)
+  | Cell(L,E) & Cell(R,E) & !(Cell(F,V) / Cell(B,V)) ? Turn(R) :(Angry)
   | True ? Pop :(Escape)
 
 * (Angry):
-  | GotPower ? Hit          :(Angry_11)
-  | Not(GotPower) ? Protect :(Angry_11)
+  | GotPower ? Hit      :(Angry_11)
+  | !GotPower ? Protect :(Angry_11)
 
 * (Angry_11): True ? Turn(B) :(Angry_12)
 
 * (Angry_12):
-  | GotPower ? Hit
-  | Not(GotPower) ? Protect
-  :(Angry_13)
+  | GotPower ? Hit      :(Angry_13)
+  | !GotPower ? Protect :(Angry_13)
+
 
 * (Angry_13): True ? Turn(R) :(Angry_14)
 * (Angry_14):
-  | GotPower ? Hit
-  | Not(GotPower) ? Protect
-  :(Angry_15)
+  | GotPower ? Hit      :(Angry_15)
+  | !GotPower ? Protect :(Angry_15)
+
 
 * (Angry_16): True ? Turn(B) :(Angry_17)
 * (Angry_17):
-  | GotPower ? Hit
-  | Not(GotPower) ? Protect
-  :(Angry_18)
+  | GotPower ? Hit      :(Angry_18)
+  | !GotPower ? Protect :(Angry_18)
+
 
 * (Angry_18): True ? Turn(R) :(Rest)
 
@@ -121,11 +121,11 @@ SuperHero(Explore){
   | True ? Power :(Run)
 
 * (Happy):
-| Cell(F,P) ? Pick :(Happy_2)
+| Cell(F,P) ? Pick    :(Happy_2)
 | Cell(B,P) ? Turn(B) :(Happy)
 | Cell(L,P) ? Turn(L) :(Happy)
 | Cell(R,P) ? Turn(R) :(Happy)
-| True ? Turn(A) :(Explore)
+| True ? Turn(L)      :(Explore)
 
 *(Happy): True ? Store :(Crazy)
 
@@ -141,8 +141,8 @@ SuperHero(Explore){
   | Cell(R,J) ? Turn(R) :(Think)
 
 * (Build):
-  | GotStuff ? Get : (Build_1)
-  | True ? Wizz :(Explore)
+  | GotStuff ? Get :(Build_1)
+  | True ? Wizz    :(Explore)
 
 * (Build_1): True ? Throw :(Build)
 }
