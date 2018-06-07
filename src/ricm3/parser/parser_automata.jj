@@ -9,6 +9,9 @@
  */
 
 PARSER_BEGIN(AutomataParser)
+
+package ricm3.parser;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -16,13 +19,15 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
 
+import ricm3.parser.Ast.*;
+
 public class AutomataParser {
 
-/*	public static Ast from_file(String path_file) throws Exception {
+	public static Ast from_file(String path_file) throws Exception {
   		Ast ast = AutomataParser(new BufferedReader(new FileReader(path_file))).Run();
   		return ast;
    }
-*/
+
    public static Ast from_string(String input) throws Exception {
         Ast ast = new AutomataParser(new java.io.StringReader(input)).Run() ;
   		return ast ;

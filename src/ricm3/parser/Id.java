@@ -1,3 +1,4 @@
+package ricm3.parser;
 /* Michael PÉRIN, Verimag / Univ. Grenoble Alpes, december 2017 */
 
 public final class Id {

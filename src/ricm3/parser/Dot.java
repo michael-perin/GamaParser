@@ -1,3 +1,4 @@
+package ricm3.parser;
 
 public final class Dot {
 

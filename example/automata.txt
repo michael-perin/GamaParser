@@ -82,7 +82,7 @@ SuperHero(Explore){
   | Cell(R,E) & Cell(L,V) ? Move(L) :(Escape)
   | Cell(L,E) & Cell(R,V) ? Move(R) :(Escape)
   | Cell(F,E) & !(Cell(B,V)) ? Hit  :(Fight)
-  | True ? :(Explore)
+  | True ? Power :(Explore)
 
 * (Fight):
   | Cell(F,E) & Cell(L,E) & !(Cell(R,V) / Cell(B,V)) ? Hit     :(Angry)
