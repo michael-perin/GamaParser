@@ -73,22 +73,22 @@ SuperHero(Explore){
 
 * (Run):
   | Cell(F,V) ? Move(F) :(Explore)
-  | Cell(F,E) / Cell(B,E) / Cell(L,E) / Cell(R,E) ? Wizz :(Escape)
+  | Cell(F,A) / Cell(B,A) / Cell(L,A) / Cell(R,A) ? Wizz :(Escape)
   | True ? Pop :(Explore)
 
 * (Escape):
-  | Cell(F,E) & Cell(B,V) ? Move(B) :(Escape)
-  | Cell(B,E) & Cell(F,V) ? Move(F) :(Escape)
-  | Cell(R,E) & Cell(L,V) ? Move(L) :(Escape)
-  | Cell(L,E) & Cell(R,V) ? Move(R) :(Escape)
-  | Cell(F,E) & !(Cell(B,V)) ? Hit  :(Fight)
+  | Cell(F,A) & Cell(B,V) ? Move(B) :(Escape)
+  | Cell(B,A) & Cell(F,V) ? Move(F) :(Escape)
+  | Cell(R,A) & Cell(L,V) ? Move(L) :(Escape)
+  | Cell(L,A) & Cell(R,V) ? Move(R) :(Escape)
+  | Cell(F,A) & !(Cell(B,V)) ? Hit  :(Fight)
   | True ? Power :(Explore)
 
 * (Fight):
-  | Cell(F,E) & Cell(L,E) & !(Cell(R,V) / Cell(B,V)) ? Hit     :(Angry)
-  | Cell(F,E) & Cell(R,E) & !(Cell(L,V) / Cell(B,V)) ? Hit     :(Angry)
-  | Cell(F,E) & Cell(B,E) & !(Cell(L,V) / Cell(R,V)) ? Hit     :(Angry)
-  | Cell(L,E) & Cell(R,E) & !(Cell(F,V) / Cell(B,V)) ? Turn(R) :(Angry)
+  | Cell(F,A) & Cell(L,A) & !(Cell(R,V) / Cell(B,V)) ? Hit     :(Angry)
+  | Cell(F,A) & Cell(R,A) & !(Cell(L,V) / Cell(B,V)) ? Hit     :(Angry)
+  | Cell(F,A) & Cell(B,A) & !(Cell(L,V) / Cell(R,V)) ? Hit     :(Angry)
+  | Cell(L,A) & Cell(R,A) & !(Cell(F,V) / Cell(B,V)) ? Turn(R) :(Angry)
   | True ? Pop :(Escape)
 
 * (Angry):

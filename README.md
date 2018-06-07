@@ -1,5 +1,21 @@
-# GamaParser
-A parser of Game Automata in Java CC
+# GamaParser = A parser of Game Automata in Java CC
+
+## PARSER
+Le parser fourni dans parser_automata.jj prend en paramètre de ligne de commande un nom de fichier et génére l'Abstract Syntaxe Tree (AST) au format .dot sur la sortie standard.
+
+
+Le fichier .dot décrit l'AST qu'on peut visualiser avec l'outil graphviz.
+
+## TODO
+
+Votre tâche consiste à créer une méthode *make* pour chaque classe interne de Ast
+afin de générer un interpréteur de transitions. L'intepréteur doit posséder une méthode qui lance le calcul. Par exemple
+- *boolean eval()* pour les Conditions
+- *... exec()* pour les Actions (il est possible de rendre un booléen qui indique si l'action a pu s'effectuer ou non).
+
+
+## DEMO
+java -cp ./bin ricm3.parser.AutomataParser example/automata.txt > ast.dot
 
 # LES DIRECTIONS
 
@@ -27,12 +43,12 @@ A parser of Game Automata in Java CC
 
 - V = Void
 - T = Team = une entité de mon équipe
-- E = un Ennemi
+- A = un Adversaire
 - D = un Danger
-- P = un élément qu on peut prendre,stocker,lancer,déposer
+- P = un élément qu on peut Prendre,stocker,lancer,déposer
 - J = un élément sur lequel on peut sauter
-- G = un gate
-- M = un missile
+- G = un Gate
+- M = un Missile
 
 # LES CONDITIONS
 
@@ -42,6 +58,7 @@ A parser of Game Automata in Java CC
 -  MyDir(Direction) : entité est orientée dans la Direction
 -  Cell(Direction, Entité) : La cellule dans la Direction contient une Entité
 -  Closest(Entité, Direction) : la plus proche Entité est dans la Direction
+-  GotPower : reste t'il de l'énergie à l'entité ?
 
 ## Les opérateurs sur les conditions
 - conjonction: Condition1 & Condition2

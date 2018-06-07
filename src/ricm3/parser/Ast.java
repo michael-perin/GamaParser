@@ -33,13 +33,12 @@ public class Ast {
 	public String as_dot_automata() {
 		return "undefined";
 	}
-
-	public static abstract class Expression extends Ast {
-		
-		public Object make() {
-		  return null; // TODO
-		}
+	
+	public Object  make() {
+		  return null; // TODO à définir dans la plupart des classes internes ci-dessous.
 	}
+	
+	public static abstract class Expression extends Ast {}
 
 	public static class Terminal extends Ast {
 		String value;
@@ -142,14 +141,6 @@ public class Ast {
 			return left_operand.as_tree_son_of(this) + operator.as_tree_son_of(this)
 					+ right_operand.as_tree_son_of(this);
 		}
-		/*
-		 * class Interpreter { bool eval(){ ... } } class Conjonction extends
-		 * Interpreter { Interpreter left ; Interpreter right ; bool eval(){ return
-		 * left.eval() & right.eval() ; } }
-		 * 
-		 * Interpreter make() { if (operator = "&") return new conjonction(
-		 * left_operatand.make(), right_operand.make() ) ; else ... }
-		 */
 	}
 
 	public static class FunCall extends Expression {
@@ -312,36 +303,3 @@ public class Ast {
 		}
 	}
 }
-
-// BOOLEAN EXPRESSION
-
-/*
- * 
- * class BoolCst extends Expression { Boolean bool;
- * 
- * BoolCst(String input_string){ this.bool = (input_string.equals("True")); }
- * 
- * public String toString() { return this.bool.toString(); } public String
- * toDot() { return toString(); } }
- * 
- * 
- * class BoolExp extends Expression { Expression expr;
- * 
- * BoolExp(Expression expr){ this.expr = expr; } public String toString() {
- * return this.expr.toString(); } public String toDot() { return toString(); } }
- * 
- * 
- * class Not extends Expression { Expression expr;
- * 
- * Not(Expression expr){ this.expr = expr; } public String toString() { return
- * "not(" + this.expr.toString() + ")"; } public String toDot() { return
- * toString(); } }
- * 
- * 
- * class Conjunction extends Expression{ Expression conjunction;
- * Conjunction(Expression e1, Expression e2){ if (e1==null) this.conjunction =
- * e2; if (e2==null) this.conjunction = e1; else this.conjunction = new
- * BinaryOp(e1,"&&",e2); } public String toString(){ return
- * this.conjunction.toString(); } public String toDot() { return toString(); } }
- * 
- */

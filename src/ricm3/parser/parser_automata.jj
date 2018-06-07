@@ -24,8 +24,8 @@ import ricm3.parser.Ast.*;
 public class AutomataParser {
 
 	public static Ast from_file(String path_file) throws Exception {
-  		Ast ast = AutomataParser(new BufferedReader(new FileReader(path_file))).Run();
-  		return ast;
+  		Ast ast = new AutomataParser(new BufferedReader(new FileReader(path_file))).Run();
+  		return ast; 
    }
 
    public static Ast from_string(String input) throws Exception {
@@ -34,9 +34,10 @@ public class AutomataParser {
    }
 
    public static void main(String[] args) throws Exception {
-        Ast ast = from_string(args[0]) ;
+        Ast ast ;
+        // ast = from_string(args[0]) ;
+        ast = from_file(args[0]) ;
         System.out.println("// THE AST of the PARSED AUTOMATA in DOT FORMAT \n" + ast.as_dot_tree()) ;
-        /* System.out.println("// THE AUTOMATA in DOT FORMAT \n" + ast.as_dot_automata()) ; */
     }
 	
 }
@@ -66,7 +67,7 @@ TOKEN:
 { < ENTVAR: "e" > }
 
 TOKEN:
-{ <  ENTITY: "V" | "T" | "E" | "P" | "J" | "D" | "O" > }
+{ <  ENTITY: "V" | "T" | "A" | "P" | "J" | "D" | "O" | "G" | "M" > }
 
 TOKEN:
 { < ID: <LETTER> (<LETTER>|<DIGIT>|"_")* > }
