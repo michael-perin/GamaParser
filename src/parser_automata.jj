@@ -1,0 +1,581 @@
+/* Michael PÉRIN, Verimag / Univ. Grenoble Alpes, may 2018
+ *
+ * A JavaCC parser for automata
+ *
+ * The parser produces an ast in the dot format for Graphviz
+ *
+ * Use the Graphviz viewer available at (https://graphviz.gitlab.io)
+ * to get a graphical view of the resulting ast
+ */
+
+PARSER_BEGIN(AutomataParser)
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.ListIterator;
+
+public class AutomataParser {
+
+/*	public static Ast from_file(String path_file) throws Exception {
+  		Ast ast = AutomataParser(new BufferedReader(new FileReader(path_file))).Run();
+  		return ast;
+   }
+*/
+   public static Ast from_string(String input) throws Exception {
+        Ast ast = new AutomataParser(new java.io.StringReader(input)).Run() ;
+  		return ast ;
+   }
+
+   public static void main(String[] args) throws Exception {
+        Ast ast = from_string(args[0]) ;
+        System.out.println("// THE AST of the PARSED AUTOMATA in DOT FORMAT \n" + ast.as_dot_tree()) ;
+        /* System.out.println("// THE AUTOMATA in DOT FORMAT \n" + ast.as_dot_automata()) ; */
+    }
+	
+}
+
+PARSER_END(AutomataParser)
+
+
+SKIP:  { " " | "\t" | "\n" | "\r" }
+
+TOKEN: { < #LETTER: ["a"-"z"] | ["A"-"Z"] > }
+
+TOKEN: { < #DIGIT: ["0"-"9"] > }
+
+TOKEN:
+{ <  UNARY: "!" | "Opp" > }
+
+TOKEN:
+{ <  BINOP: "&" | "/" > }
+
+TOKEN:
+{ < DIRVAR: "d" > }
+
+TOKEN:
+{ <  DIRECTION: "N" | "S" | "O" | "E" | "F" | "B" | "L" | "R" > }
+
+TOKEN:
+{ < ENTVAR: "e" > }
+
+TOKEN:
+{ <  ENTITY: "V" | "T" | "E" | "P" | "J" | "D" | "O" > }
+
+TOKEN:
+{ < ID: <LETTER> (<LETTER>|<DIGIT>|"_")* > }
+
+TOKEN:
+{ < INT: (<DIGIT>)+ > }
+
+
+   
+/* == The grammar for writing automata
+
+Run
+  | Some_Automata <EOF>
+
+Some_Automata
+  | Automaton Some_Automata
+  | epsilon
+
+Automaton
+  | Identifier "(" Identifier ")" "{" At_least_one_Behaviour "}"
+
+At_least_one_Behaviour
+  | Behaviour  Some_Behaviour
+
+Some_Behaviour
+  | At_least_one_Behaviour
+  | epsilon
+
+Behaviour
+  | "*"  State Opt_points Some_Transitions
+
+Opt_points
+  | ":" 
+  | epsilon
+
+State
+  | "(" State_Identifier ")"
+
+State_Identifier
+  | Identifier
+  | "_"
+  | epsilon 
+
+Some_Transitions
+  | Transition  Some_Transitions 
+  | epsilon
+  
+Transition
+  | Opt_Bar  Condition "?" Action ":"  State
+
+Opt_Bar
+  | "|"
+  | epsilon
+
+Condition
+  | "(" Condition ")" 
+  | "!" Condition  
+  | Atomic_Condition  Op_Condition
+
+Op_Condition
+  | "&" Condition
+  | "/" Condition
+  | epsilon  
+
+Atomic_Condition
+  | Available_Condition Opt_Parameters
+  
+Available_Condition
+  | Identifier 
+
+Action
+  | Atomic_Action Op_Action
+
+Op_Action
+  | "/" Action
+  | epsilon 
+   
+Atomic_Action
+  | Available_Action  Opt_Parameters
+
+Available_Action
+  |  Identifier 
+
+    
+Opt_Parameters
+  | "(" Some_Parameters ")"
+  | epsilon
+
+Some_Parameters
+  | Parameter  More_Parameters
+  | epsilon
+
+More_Parameters
+  | ","  Parameter  More_Parameters 
+  | epsilon
+      
+Parameters
+  | Direction
+  | "Opp" "(" Direction ")"
+  | Entity
+  |  "_"
+  
+Direction
+  | "N" | "S" | "O" | "E"
+  | "F" = Front
+  | "B" = Back
+  | "L" = Left
+  | "R" = Right
+  | "d" = variable of type direction
+
+Entity
+  | "V" = Void
+  | "T" = Team
+  | "E" = Ennemi
+  | "P" = Pickable
+  | "J" = Jumpable
+  | "D" = Danger
+  | "O" = Other 
+  | "e" = variable of type entity
+
+*/
+
+// THE PARSER
+
+/**
+ ** See Ast.java for the definitions of types returned by Parsers
+ **/
+
+/* Identifier */
+String P_Identifier():
+{ Token token; }
+{
+  token=<ID> { return token.image; }
+}
+
+
+/* Direction
+ * | "N" | "S" | "O" | "E" | "F" | "B" | "L" | "R"
+ * | "d"
+ */
+Direction P_Direction():
+{ Token token; }
+{
+  token=<DIRECTION> { return new Direction(new Constant(token.image)); }
+| token=<DIRVAR>    { return new Direction(new Variable(token.image)); }   
+}
+
+
+/* Entity
+ * | "V" | "T" | "E" | "P" | "J" | "D" | "O" 
+ * | "e"
+ */
+Entity P_Entity():
+{ Token token; }
+{
+  token=<ENTITY>  { return new Entity(new Constant(token.image)); }
+| token=<ENTVAR>  { return new Entity(new Variable(token.image)); }   
+}
+
+
+/* Run
+ * | Some_Automata <EOF>
+ */
+Ast Run():
+{ List<Automaton> automata ; }
+{ automata = P_Some_Automata( new LinkedList<Automaton>() )
+  <EOF>
+   	{ return new AI_Definitions(automata) ; }
+}
+
+
+/* Some_Automata
+ * | Automaton Some_Automata
+ * | epsilon
+ */
+List<Automaton> P_Some_Automata(List<Automaton> input_list):
+{
+  Automaton aut ;
+  List<Automaton> list ;
+}
+{ aut  = P_Automaton()
+  list = P_Some_Automata(input_list) 
+    	{ list.add(0,aut) ; return list ; }
+| /*epsilon*/
+	{ return input_list ; }
+}
+
+
+/* Automaton
+ * | Identifier "(" Identifier ")" "{" At_least_one_Behaviour "}"
+ */
+Automaton P_Automaton():
+{ String name ;
+  String entry_state ;
+  List<Behaviour> behaviours ; 
+}
+{
+  name = P_Identifier()
+  "("
+  entry_state = P_Identifier()
+  ")"
+  "{"
+  behaviours = P_At_least_one_Behaviour( new LinkedList<Behaviour>() ) 
+  "}"
+  { return new Automaton(name, new State(entry_state), behaviours) ; }
+}
+
+
+/* At_least_one_Behaviour
+ * | Behaviour  Some_Behaviour
+ */
+
+List<Behaviour> P_At_least_one_Behaviour(List<Behaviour> input_list):
+{
+  Behaviour behaviour ;
+  List<Behaviour> list ;
+}
+{ behaviour = P_Behaviour()
+  list = P_Some_Behaviour(input_list)
+  	{ list.add(0,behaviour) ; return list ; }
+}
+
+
+/* Some_Behaviour
+ * | At_least_one_Behaviour
+ * | epsilon
+ */
+
+List<Behaviour> P_Some_Behaviour(List<Behaviour> input_list):
+{
+  List<Behaviour> list ;
+}
+{ list = P_At_least_one_Behaviour(input_list)
+	{ return list ; }
+| /*epsilon*/
+	{ return input_list ; }
+}
+
+
+/* Behaviour
+ * | "*"  State Opt_points Some_Transitions
+ */
+Behaviour P_Behaviour():
+{
+  State state ;
+  List<Transition> list = new LinkedList<Transition>() ;
+}
+{ "*"
+  state = P_State()
+  P_Opt_Points()
+  list = P_Some_Transitions(list) 
+  	{ return new Behaviour(state,list) ; }
+}
+
+
+/* Opt_points
+ * | ":" 
+ * | epsilon
+ */
+Void P_Opt_Points():
+{}
+{ ":"         { return null; }
+| /*epsilon*/ { return null; }
+}
+
+
+/* State
+ * | "(" State_Identifier ")"
+ */
+State P_State():
+{
+  State state ;
+}
+{ "("
+  state = P_State_Identifier()
+  ")" 
+  	{ return state; }
+}
+
+
+/* State_Identifier
+ * | Identifier
+ * | "_"
+ * | epsilon
+ */
+State P_State_Identifier():
+{
+  String name ;
+}
+{ name = P_Identifier()  
+  	{ return new State(name); }
+| "_"
+   	{ return new State("_"); }
+| /*epsilon*/  
+   	{ return new State(""); } 
+}
+
+
+/* Some_Transitions
+ * | Transition  Some_Transitions 
+ * | epsilon
+ */
+List<Transition> P_Some_Transitions(List<Transition> input_list):
+{
+  Transition transition ; 
+  List<Transition> list ;
+}
+{
+  transition = P_Transition()
+  list = P_Some_Transitions(input_list)
+     { list.add(0,transition) ; return list ; } 
+| /*epsilon*/  
+   	{ return input_list ; }
+}
+
+  
+/* Transition
+ * | Opt_Bar  Condition "?" Action ":"  State
+ */
+Transition P_Transition():
+{
+	Condition condition ;
+	Action action ;
+	State state ;	
+}
+{
+  P_Opt_Bar()
+  condition = P_Condition() 
+  "?"
+  action = P_Action() 
+  ":"
+  state = P_State()
+  	{ return new Transition(condition,action,state) ; }
+}  
+
+
+/* Opt_Bar
+ * | "|"
+ * | epsilon
+ */
+Void P_Opt_Bar():
+{ }
+{ "|"         { return null; }
+| /*epsilon*/ { return null; }
+}  
+
+
+/* Condition
+   | Expression
+*/    
+Condition P_Condition():
+{
+  Expression expression ;
+}
+{ expression = P_Expression()
+	{ return new Condition(expression) ; }
+}
+
+
+/* Action
+   | Expression
+*/    
+Action P_Action():
+{
+  Expression expression ;
+}
+{ expression = P_Expression()
+	{ return new Action(expression) ; }
+}
+
+	   
+  
+/* Expression
+   | "(" Expression ")" 
+   | <UNARYOP> Expression 
+   | FunCall  Op_Expression
+*/
+Expression P_Expression():
+{
+  Expression expression ;
+  Token token ;
+  FunCall funcall ;
+}
+{ "("
+  expression = P_Expression()
+  ")"
+  	{ return expression ; } 	
+
+| token = <UNARY>
+  expression = P_Expression()  
+	{ return new UnaryOp(token.image,expression) ; }
+	
+| funcall = P_FunCall()
+  expression = P_Op_Expression(funcall)
+  	{ return expression ; }
+}
+
+
+/* Op_Expression
+   | <BINOP> Expression
+   | epsilon
+*/
+Expression P_Op_Expression(Expression e1):
+{
+  Token token ;
+  Expression e2 ;
+}
+{ token = <BINOP>
+  e2 = P_Expression()
+    { return new BinaryOp(e1,token.image,e2) ; }
+
+| /*epsilon*/
+  	{ return e1 ; }
+}
+
+
+/* FunCall
+ * | Identifier Opt_Parameters
+ */
+FunCall P_FunCall():
+{ String fun_name ;
+  List<Expression> parameters ;
+}
+{
+  fun_name = P_Identifier()
+  parameters = P_Opt_Parameters( new LinkedList<Expression>() )
+  	{ return new FunCall(fun_name, parameters) ; }
+}
+
+
+/* Opt_Parameters
+ * | "(" Some_Parameters ")"
+ * | epsilon
+ */
+List<Expression> P_Opt_Parameters(List<Expression> input_list):
+{
+  List<Expression> list ;
+}
+{
+  "("
+  list = P_Some_Parameters(input_list)
+  ")"
+  	{ return list ; }
+|  /*epsilon*/
+	{ return input_list ; }
+}
+
+
+/* Some_Parameters
+ * | Parameter  More_Parameters
+ * | epsilon
+ */
+List<Expression> P_Some_Parameters(List<Expression> input_list):
+{
+  Expression parameter ;
+  List<Expression> list ;
+}
+{
+  parameter = P_Parameter()
+  list = P_More_Parameters(input_list) 
+  	{ list.add(0,parameter) ; return list ; }
+
+|  /*epsilon*/
+	{ return input_list ; }
+}
+
+
+/* More_Parameters
+ * | ","  Parameter  More_Parameters 
+ * | epsilon
+ */
+List<Expression> P_More_Parameters(List<Expression> input_list):
+{
+  Expression parameter ;
+  List<Expression> list ;
+}
+{ ","
+  parameter = P_Parameter()
+  list = P_More_Parameters(input_list) 
+  	{ list.add(0,parameter) ; return list ; }
+
+|  /*epsilon*/
+	{ return input_list ; }
+}
+
+
+     
+/* Parameters
+ * | Direction
+ * | "Opp" "(" Direction ")"
+ * | Entity
+ * |  "_"
+ */
+Expression P_Parameter():
+{
+  Token token ;
+  Expression expression ;
+}
+{ expression = P_Direction()
+	{ return expression ; }
+
+| token = <UNARY>
+  "("
+  expression = P_Direction()
+  ")"
+	{ return new UnaryOp(token.image, expression) ; }  	
+
+| expression = P_Entity()
+	{ return expression ; }
+
+| "_"
+	{ return new Variable("_") ; }
+}
+
+
+	
+	  
