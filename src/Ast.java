@@ -14,17 +14,17 @@ public class Ast {
 	public String kind ; /* the name of the non-terminal node */
 	public int id = Id.fresh(); /* its unique id as a graph node */
 	
-	public String dot_edges() {
+	public String tree_edges() {
 		return "undefined" ;
 	}
-	public String as_son_of(Ast father) {
+	public String as_tree_son_of(Ast father) {
 		return Dot.edge(father.id,this.id) + as_dot_tree();
 	}
-	public String as_dot_node(){
+	public String as_tree_node(){
 		return Dot.non_terminal_node(this.id,this.kind);
 	}
 	public String as_dot_tree() {
-		return this.as_dot_node() + this.dot_edges() ;
+		return this.as_tree_node() + this.tree_edges() ;
 	}	
 	public String as_dot_automata() {
 		return "undefined" ;
@@ -41,7 +41,7 @@ class Terminal extends Ast {
 	Terminal(String string){
 		this.value = string ;
 	}
-	public String as_son_of(Ast father) {
+	public String as_tree_son_of(Ast father) {
 		return Dot.terminal_edge(father.id,value);
 	}
 }
@@ -56,8 +56,8 @@ class Constant extends Expression {
 		this.value = new Terminal(string) ;
 	}
 	
-	public String dot_edges() {
-		return value.as_son_of(this) ;
+	public String tree_edges() {
+		return value.as_tree_son_of(this) ;
 	}
 }
 
@@ -71,8 +71,8 @@ class Variable extends Expression {
 		this.name = new Terminal(string) ;
 	}
 
-	public String dot_edges(){
-		return name.as_son_of(this);
+	public String tree_edges(){
+		return name.as_tree_son_of(this);
 	}
 }
 
@@ -86,8 +86,8 @@ class Direction extends Expression {
 		this.value = expression ;
 	}
 	
-	public String dot_edges(){
-		return value.as_son_of(this);
+	public String tree_edges(){
+		return value.as_tree_son_of(this);
 	}
 }
 
@@ -101,8 +101,8 @@ class Entity extends Expression {
 		this.value = expression ;
 	}
 	
-	public String dot_edges(){
-		return value.as_son_of(this);
+	public String tree_edges(){
+		return value.as_tree_son_of(this);
 	}
 }
 
@@ -118,8 +118,8 @@ class UnaryOp extends Expression {
 		this.operand  = operand ;
 	}
 	
-	public String dot_edges() { 
-		return operator.as_son_of(this) + operand.as_son_of(this) ;
+	public String tree_edges() { 
+		return operator.as_tree_son_of(this) + operand.as_tree_son_of(this) ;
 	}
 }
 
@@ -137,8 +137,8 @@ class BinaryOp extends Expression {
 		this.right_operand = r;
 	}
 
-	public String dot_edges() { 
-		return left_operand.as_son_of(this) + operator.as_son_of(this) + right_operand.as_son_of(this);
+	public String tree_edges() { 
+		return left_operand.as_tree_son_of(this) + operator.as_tree_son_of(this) + right_operand.as_tree_son_of(this);
 	}
 /*	
  * class Interpreter {
@@ -172,13 +172,13 @@ class FunCall extends Expression {
 		this.parameters = parameters ;
 	}
 	
-	public String dot_edges() { 
+	public String tree_edges() { 
 		String output = new String();
-		output += name.as_son_of(this) ;
+		output += name.as_tree_son_of(this) ;
 		ListIterator<Expression> Iter = this.parameters.listIterator();
 		while(Iter.hasNext()){
 			Expression expression = Iter.next();
-			output += expression.as_son_of(this);
+			output += expression.as_tree_son_of(this);
 		}
 		return output ; 
 	}
@@ -194,8 +194,8 @@ class Condition extends Ast {
 		this.expression = expression ;
 	}
 	
-	public String dot_edges() {
-		return expression.as_son_of(this) ;
+	public String tree_edges() {
+		return expression.as_tree_son_of(this) ;
 	}
 }
 
@@ -209,8 +209,8 @@ class Action extends Ast {
 		this.expression = expression ;
 	}
 	
-	public String dot_edges() {
-		return expression.as_son_of(this) ;
+	public String tree_edges() {
+		return expression.as_tree_son_of(this) ;
 	}
 }
 
@@ -224,8 +224,8 @@ class State extends Ast {
 		this.name = new Terminal(string) ;
 	}
 	
-	public String dot_edges() {
-		return name.as_son_of(this) ;
+	public String tree_edges() {
+		return name.as_tree_son_of(this) ;
 	}
 }
 
@@ -239,22 +239,22 @@ class AI_Definitions extends Ast {
 		this.automata = list ;
 	}
 
-	public String dot_edges(){
+	public String tree_edges(){
 		String output = new String();
 		ListIterator<Automaton> Iter = this.automata.listIterator();
 		while(Iter.hasNext()){
 			Automaton automaton = Iter.next();
-			output += automaton.as_son_of(this) ;
+			output += automaton.as_tree_son_of(this) ;
 		}
 		return output ;
 	}
 	
 	public String as_dot_tree(){
-		return Dot.graph("AST", this.as_dot_node() + this.dot_edges() );
+		return Dot.graph("AST", this.as_tree_node() + this.tree_edges() );
 	}
 	
 	public String as_dot_automata(){
-		return Dot.graph("Automata", this.as_dot_node() );
+		return Dot.graph("Automata", this.as_tree_node() );
 	}
 }
 
@@ -272,14 +272,14 @@ class Automaton extends Ast {
 		this.behaviours = behaviours ;
 	}
 
-	public String dot_edges() {
+	public String tree_edges() {
 		String output = new String();
-		output += name.as_son_of(this) ;
-		output += entry.as_son_of(this) ;
+		output += name.as_tree_son_of(this) ;
+		output += entry.as_tree_son_of(this) ;
 		ListIterator<Behaviour> Iter = this.behaviours.listIterator();
 		while(Iter.hasNext()){
 			Behaviour behaviour = Iter.next() ;
-			output += behaviour.as_son_of(this) ;
+			output += behaviour.as_tree_son_of(this) ;
 		}
 		return output;
 	}
@@ -297,13 +297,13 @@ class Behaviour extends Ast {
 		this.transitions = transitions ;
 	}
 
-	public String dot_edges(){
+	public String tree_edges(){
 		String output = new String();
-		output += source.as_son_of(this) ;
+		output += source.as_tree_son_of(this) ;
 		ListIterator<Transition> Iter = this.transitions.listIterator();
 		while(Iter.hasNext()){
 			Transition transition = Iter.next();
-			output += transition.as_son_of(this) ;
+			output += transition.as_tree_son_of(this) ;
 		}
 		return output;
 	}
@@ -323,8 +323,8 @@ class Transition extends Ast {
 		this.target = target ;
 	}
 	
-	public String dot_edges(){
-		return condition.as_son_of(this) + action.as_son_of(this) + target.as_son_of(this);
+	public String tree_edges(){
+		return condition.as_tree_son_of(this) + action.as_tree_son_of(this) + target.as_tree_son_of(this);
 	}
 }
 
