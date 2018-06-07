@@ -37,16 +37,16 @@ A parser of Game Automata in Java CC
 # LES CONDITIONS
 
 ## Les conditions booléennes de base
-  True
-  Key(Touche) : la Touche est enfoncé
-  MyDir(Direction) : entité est orientée dans la Direction
-  Cell(Direction, Entité) : La cellule dans la Direction contient une Entité
-  Closest(Entité, Direction) : la plus proche Entité est dans la Direction
+-  True
+-  Key(Touche) : la Touche est enfoncé
+-  MyDir(Direction) : entité est orientée dans la Direction
+-  Cell(Direction, Entité) : La cellule dans la Direction contient une Entité
+-  Closest(Entité, Direction) : la plus proche Entité est dans la Direction
 
 ## Les opérateurs sur les conditions
-  - conjonction: Condition1 & Condition2
-  - disjunction: Condition1 / condition2
-  - negation:  not(Condition)
+- conjonction: Condition1 & Condition2
+- disjunction: Condition1 / condition2
+- negation:  not(Condition)
 
 
 # LES ACTIONS
@@ -57,8 +57,7 @@ A parser of Game Automata in Java CC
 alors vous interpréterait Wizz(U) comme Wizz.
 
 - Si, au contraire, l'action Wizz doit avoir une direction
-et que l'automate n'en donne pas. Vous intpreterez
-Wizz comme Wizz(F).
+et que l'automate n'en donne pas. Vous interpreterez Wizz comme Wizz(F).
 
 ## Deux actions essentielles pour votre jeu (direction optionnelle, par défaut F)
 -  Wizz(Direction) = ?
@@ -69,8 +68,8 @@ Wizz comme Wizz(F).
 -  Jump(Direction) = saut
 
 ## Rotation (direction optionnelle, par défaut R)
-  Turn(Direction) = changement de direction (sans déplacement)
-  Example:
+- Turn(Direction) = changement de direction (sans déplacement)
+- Example:
     - Turn(R) = +90 degree : clockwise
     - Turn(B) = 180 degree
     - Turn(L) = -90 degree : counter-clockwise
