@@ -1,3 +1,14 @@
+Player(Init){
+  * (Init):
+  | Key(FU) ? Move(N) :(Init)
+  | Key(FD) ? Move(S) :(Init)
+  | Key(f)  ? Move(F) :(Init)
+  | Key(b)  ? Move(B) :(Init)
+  | Key(0)  ? Pop     :(Init)
+  | Key(9)  ? Wizz    :(Init)
+  | True    ? Power   :(Init)
+}​​
+
 Kamikaze(Init){
   * (Init): True ? Kamikaze :(Init)
 }
