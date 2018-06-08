@@ -70,6 +70,8 @@ public class Ast {
 		}
 	}
 
+	// Value = Constant U Variable
+	
 	public static abstract class Value extends Ast {}
 
 	public static class Constant extends Value {
@@ -100,6 +102,9 @@ public class Ast {
 		}
 	}
 
+	// Parameter = Underscore U Key U Direction U Entity 
+	// Parameter are not Expression (no recursion) 
+	
 	public static abstract class Parameter extends Ast {}
 
 	public static class Underscore extends Parameter {
@@ -153,6 +158,8 @@ public class Ast {
 		}
 	}
 
+	// Expression = UnaryOp Expression U  Expression BinaryOp Expression U FunCall(Parameters) 
+	
 	public static abstract class Expression extends Ast {}
 	
 	public static class UnaryOp extends Expression {
