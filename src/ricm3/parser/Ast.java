@@ -52,8 +52,6 @@ public class Ast {
 		  return null; // TODO à définir dans la plupart des classes internes ci-dessous.
 	}
 	
-	public static abstract class Expression extends Ast {}
-
 	public static class Terminal extends Ast {
 		String value;
 
@@ -72,7 +70,11 @@ public class Ast {
 		}
 	}
 
-	public static class Constant extends Expression {
+	// Value = Constant U Variable
+	
+	public static abstract class Value extends Ast {}
+
+	public static class Constant extends Value {
 
 		Terminal value;
 
@@ -86,7 +88,7 @@ public class Ast {
 		}
 	}
 
-	public static class Variable extends Expression {
+	public static class Variable extends Value {
 
 		Terminal name;
 
@@ -102,13 +104,41 @@ public class Ast {
 		public String toString() { return name.toString() ; }
 	}
 
-	public static class Direction extends Expression {
+	// Parameter = Underscore U Key U Direction U Entity 
+	// Parameter are not Expression (no recursion) 
+	
+	public static abstract class Parameter extends Ast {}
 
-		Expression value;
+	public static class Underscore extends Parameter {
+		Underscore(){
+			this.kind = "Any" ;
+		}
+		public String tree_edges() {
+			return "" ;
+		}
+	}
+	
+	public static class Key extends Parameter {
 
-		Direction(Expression expression) {
+		Constant value;
+
+		Key(String string) {
+			this.kind = "Key";
+			this.value = new Constant(string);
+		}
+
+		public String tree_edges() {
+			return value.as_tree_son_of(this);
+		}
+	}
+
+	public static class Direction extends Parameter {
+
+		Value value;
+
+		Direction(Value value) {
 			this.kind = "Direction";
-			this.value = expression;
+			this.value = value;
 		}
 
 		public String tree_edges() {
@@ -120,11 +150,11 @@ public class Ast {
 		}
 	}
 
-	public static class Entity extends Expression {
+	public static class Entity extends Parameter {
 
-		Expression value;
+		Value value;
 
-		Entity(Expression expression) {
+		Entity(Value expression) {
 			this.kind = "Entity";
 			this.value = expression;
 		}
@@ -138,6 +168,10 @@ public class Ast {
 		}
 	}
 
+	// Expression = UnaryOp Expression U  Expression BinaryOp Expression U FunCall(Parameters) 
+	
+	public static abstract class Expression extends Ast {}
+	
 	public static class UnaryOp extends Expression {
 
 		Terminal operator;
@@ -183,9 +217,9 @@ public class Ast {
 	public static class FunCall extends Expression {
 
 		Terminal name;
-		List<Expression> parameters;
+		List<Parameter> parameters;
 
-		FunCall(String name, List<Expression> parameters) {
+		FunCall(String name, List<Parameter> parameters) {
 			this.kind = "FunCall";
 			this.name = new Terminal(name);
 			this.parameters = parameters;
@@ -194,10 +228,10 @@ public class Ast {
 		public String tree_edges() {
 			String output = new String();
 			output += name.as_tree_son_of(this);
-			ListIterator<Expression> Iter = this.parameters.listIterator();
+			ListIterator<Parameter> Iter = this.parameters.listIterator();
 			while (Iter.hasNext()) {
-				Expression expression = Iter.next();
-				output += expression.as_tree_son_of(this);
+				Parameter parameter = Iter.next();
+				output += parameter.as_tree_son_of(this);
 			}
 			return output;
 		}

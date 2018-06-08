@@ -47,35 +47,39 @@ PARSER_END(AutomataParser)
 
 SKIP:  { " " | "\t" | "\n" | "\r" }
 
-TOKEN: { < #LETTER: ["a"-"z"] | ["A"-"Z"] > }
+TOKEN: { < CONDITION: "True" | "Key" | "MyDir" | "Cell" | "Closest" | "GotPower" | "GotStuff" > }
 
-TOKEN: { < #DIGIT: ["0"-"9"] > }
+TOKEN: { < ACTION: "Get" | "Hit" | "Jump" | "Kamikaze" | "Move" | "Pick" | "Pop" | "Power" | "Protect" | "Store" | "Throw" | "Turn" | "Wizz" > }
+
+TOKEN : { < SPECIAL_KEY: "SPACE" | "ENTER" | "FU" | "FD" | "FL" | "FR" > }
+
+TOKEN: { < DIRVAR: "d" > }
+
+TOKEN: { < ENTVAR: "e" > }
+
+TOKEN: { < DIRECTION: "N" | "S" | "O" | "E" | "F" | "B" | "L" | "R" > }
+
+TOKEN: { < ENTITY: "A" | "D" | "G" | "J" | "M" | "O" | "P" | "T" | "V" > }
+
+TOKEN: { < #CAPITAL: ["A"-"Z"] > }
+
+TOKEN: { < LOWERCASE: ["a"-"z"] > }
+
+TOKEN: { < #LETTER: (<CAPITAL> | <LOWERCASE>) >  }
+
+TOKEN: { < DIGIT: ["0"-"9"] > }
 
 TOKEN:
-{ <  UNARY: "!" | "Opp" > }
+{ < UNARY: "!" > }
 
 TOKEN:
 { <  BINOP: "&" | "/" > }
 
 TOKEN:
-{ < DIRVAR: "d" > }
-
-TOKEN:
-{ <  DIRECTION: "N" | "S" | "O" | "E" | "F" | "B" | "L" | "R" > }
-
-TOKEN:
-{ < ENTVAR: "e" > }
-
-TOKEN:
-{ <  ENTITY: "V" | "T" | "A" | "P" | "J" | "D" | "O" | "G" | "M" > }
-
-TOKEN:
-{ < ID: <LETTER> (<LETTER>|<DIGIT>|"_")* > }
+{ < ID: <CAPITAL> (<LETTER>|<DIGIT>|"_")* > }
 
 TOKEN:
 { < INT: (<DIGIT>)+ > }
-
-
    
 /* == The grammar for writing automata
 
@@ -179,13 +183,15 @@ Direction
   | "d" = variable of type direction
 
 Entity
-  | "V" = Void
-  | "T" = Team
-  | "E" = Ennemi
-  | "P" = Pickable
+  | "A" = Adversary
+  | "D" = Danger 
+  | "G" = Gate
   | "J" = Jumpable
-  | "D" = Danger
+  | "M" = Missile
   | "O" = Other 
+  | "P" = Pickable
+  | "T" = Team
+  | "V" = Void
   | "e" = variable of type entity
 
 */
@@ -217,7 +223,7 @@ Direction P_Direction():
 
 
 /* Entity
- * | "V" | "T" | "E" | "P" | "J" | "D" | "O" 
+ * | "V" | "T" | "A" | "P" | "J" | "D" | "O" 
  * | "e"
  */
 Entity P_Entity():
@@ -485,26 +491,39 @@ Expression P_Op_Expression(Expression e1):
 
 
 /* FunCall
- * | Identifier Opt_Parameters
+ * | "Key(" KeyName ")"
+ * | CONDITION Opt_Parameters
+ * | ACTION    Opt_Parameters
  */
 FunCall P_FunCall():
-{ String fun_name ;
-  List<Expression> parameters ;
+{ Token token ;
+  List<Parameter> parameters = new LinkedList<Parameter>() ;
+  Key key ;
 }
 {
-  fun_name = P_Identifier()
-  parameters = P_Opt_Parameters( new LinkedList<Expression>() )
-  	{ return new FunCall(fun_name, parameters) ; }
+  "Key("
+  key = P_Key_Name()	
+  ")"
+   	{ parameters.add(key) ; return new FunCall("Key", parameters) ; }
+   	
+| token = <CONDITION>
+  parameters = P_Opt_Parameters( parameters )
+  	{ return new FunCall(token.image, parameters) ; }
+
+| token = <ACTION>
+  parameters = P_Opt_Parameters( parameters )
+  	{ return new FunCall(token.image, parameters) ; }
+
 }
 
-
+     
 /* Opt_Parameters
  * | "(" Some_Parameters ")"
  * | epsilon
  */
-List<Expression> P_Opt_Parameters(List<Expression> input_list):
+List<Parameter> P_Opt_Parameters(List<Parameter> input_list):
 {
-  List<Expression> list ;
+  List<Parameter> list ;
 }
 {
   "("
@@ -520,10 +539,10 @@ List<Expression> P_Opt_Parameters(List<Expression> input_list):
  * | Parameter  More_Parameters
  * | epsilon
  */
-List<Expression> P_Some_Parameters(List<Expression> input_list):
+List<Parameter> P_Some_Parameters(List<Parameter> input_list):
 {
-  Expression parameter ;
-  List<Expression> list ;
+  Parameter parameter ;
+  List<Parameter> list ;
 }
 {
   parameter = P_Parameter()
@@ -539,10 +558,10 @@ List<Expression> P_Some_Parameters(List<Expression> input_list):
  * | ","  Parameter  More_Parameters 
  * | epsilon
  */
-List<Expression> P_More_Parameters(List<Expression> input_list):
+List<Parameter> P_More_Parameters(List<Parameter> input_list):
 {
-  Expression parameter ;
-  List<Expression> list ;
+  Parameter parameter ;
+  List<Parameter> list ;
 }
 { ","
   parameter = P_Parameter()
@@ -554,32 +573,45 @@ List<Expression> P_More_Parameters(List<Expression> input_list):
 }
 
 
+/* Key
+ * | DIGIT
+ * | LETTER
+ * | SPECIAL_KEY
+ */
+Key P_Key_Name():
+{
+  Token token ;
+}
+{ token = <DIGIT>
+	{ return new Key(token.image) ; }
+
+| token = <LOWERCASE>
+	{ return new Key(token.image) ; }
+
+| token = <SPECIAL_KEY>
+	{ return new Key(token.image) ; }
+}
+
      
 /* Parameters
  * | Direction
- * | "Opp" "(" Direction ")"
  * | Entity
  * |  "_"
  */
-Expression P_Parameter():
+Parameter P_Parameter():
 {
   Token token ;
-  Expression expression ;
+  Parameter parameter ;
 }
-{ expression = P_Direction()
-	{ return expression ; }
+{ parameter = P_Direction()
+	{ return parameter ; }
 
-| token = <UNARY>
-  "("
-  expression = P_Direction()
-  ")"
-	{ return new UnaryOp(token.image, expression) ; }  	
-
-| expression = P_Entity()
-	{ return expression ; }
+| parameter = P_Entity()
+	{ return parameter ; }
 
 | "_"
-	{ return new Variable("_") ; }
+	{ return new Underscore() ; }
+		
 }
 
 
