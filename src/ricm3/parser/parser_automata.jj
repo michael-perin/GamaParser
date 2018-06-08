@@ -491,20 +491,20 @@ Expression P_Op_Expression(Expression e1):
 
 
 /* FunCall
- * | "Key("  KeyName ")"
+ * | "Key(" KeyName ")"
  * | CONDITION Opt_Parameters
  * | ACTION    Opt_Parameters
  */
 FunCall P_FunCall():
 { Token token ;
-  List<Expression> parameters = new LinkedList<Expression>() ;
+  List<Parameter> parameters = new LinkedList<Parameter>() ;
   Key key ;
 }
 {
   "Key("
   key = P_Key_Name()	
   ")"
-   	{  parameters.add(key) ; return new FunCall("Key", parameters) ; }
+   	{ parameters.add(key) ; return new FunCall("Key", parameters) ; }
    	
 | token = <CONDITION>
   parameters = P_Opt_Parameters( parameters )
@@ -521,9 +521,9 @@ FunCall P_FunCall():
  * | "(" Some_Parameters ")"
  * | epsilon
  */
-List<Expression> P_Opt_Parameters(List<Expression> input_list):
+List<Parameter> P_Opt_Parameters(List<Parameter> input_list):
 {
-  List<Expression> list ;
+  List<Parameter> list ;
 }
 {
   "("
@@ -539,10 +539,10 @@ List<Expression> P_Opt_Parameters(List<Expression> input_list):
  * | Parameter  More_Parameters
  * | epsilon
  */
-List<Expression> P_Some_Parameters(List<Expression> input_list):
+List<Parameter> P_Some_Parameters(List<Parameter> input_list):
 {
-  Expression parameter ;
-  List<Expression> list ;
+  Parameter parameter ;
+  List<Parameter> list ;
 }
 {
   parameter = P_Parameter()
@@ -558,10 +558,10 @@ List<Expression> P_Some_Parameters(List<Expression> input_list):
  * | ","  Parameter  More_Parameters 
  * | epsilon
  */
-List<Expression> P_More_Parameters(List<Expression> input_list):
+List<Parameter> P_More_Parameters(List<Parameter> input_list):
 {
-  Expression parameter ;
-  List<Expression> list ;
+  Parameter parameter ;
+  List<Parameter> list ;
 }
 { ","
   parameter = P_Parameter()
@@ -597,24 +597,20 @@ Key P_Key_Name():
  * | Direction
  * | Entity
  * |  "_"
- * | letter
  */
-Expression P_Parameter():
+Parameter P_Parameter():
 {
   Token token ;
-  Expression expression ;
+  Parameter parameter ;
 }
-{ expression = P_Direction()
-	{ return expression ; }
+{ parameter = P_Direction()
+	{ return parameter ; }
 
-| expression = P_Entity()
-	{ return expression ; }
+| parameter = P_Entity()
+	{ return parameter ; }
 
 | "_"
-	{ return new Variable("_") ; }
-
-| token = <LOWERCASE>
-	{ return new Variable(token.image) ; }
+	{ return new Underscore() ; }
 		
 }
 

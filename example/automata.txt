@@ -1,7 +1,10 @@
 
 
-Kamikazer(Init){
+Crazy(Init){
   * (Init): True ? Kamikaze :(Init)
+  * (Unreachable): MyDir(d) ? Move(d) :(Unreachable)
+  * (Useless): MyDir(_) ? Move :(Useless)
+  * (Dummy): Cell(F,e) ? Hit(e,F) :(Dummy)
 }
 
 Player(Init){

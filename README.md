@@ -59,6 +59,7 @@ java -cp ./bin ricm3.parser.AutomataParser example/automata.txt > ast.dot
 -  Cell(Direction, Entité) : La cellule dans la Direction contient une Entité
 -  Closest(Entité, Direction) : la plus proche Entité est dans la Direction
 -  GotPower : reste t'il de l'énergie à l'entité ?
+-  GotStuff : reste t'il des choses dans le store ?
 
 ## Les opérateurs sur les conditions
 - conjonction: Condition1 & Condition2
