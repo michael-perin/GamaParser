@@ -35,13 +35,13 @@ public class Ast {
 	}
 	
 	public String tree_edges() {
-		return "TO BE DEFINED in each internal class";
+		return "undefined: tree_edges" ; 
 	}
 
 	// AST as automata in .dot format
 	
 	public String as_dot_automata() {
-		return "undefined";
+		return "undefined: as_dot_automata";
 	}
 	
 
