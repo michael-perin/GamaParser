@@ -100,6 +100,20 @@ public class Ast {
 		}
 	}
 
+	public static class Key extends Expression {
+
+		Terminal value;
+
+		Key(String string) {
+			this.kind = "Key";
+			this.value = new Terminal(string);
+		}
+
+		public String tree_edges() {
+			return value.as_tree_son_of(this);
+		}
+	}
+
 	public static class Direction extends Expression {
 
 		Expression value;

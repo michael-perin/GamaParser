@@ -1,3 +1,9 @@
+
+
+Kamikazer(Init){
+  * (Init): True ? Kamikaze :(Init)
+}
+
 Player(Init){
   * (Init):
   | Key(FU) ? Move(N) :(Init)
@@ -7,11 +13,8 @@ Player(Init){
   | Key(0)  ? Pop     :(Init)
   | Key(9)  ? Wizz    :(Init)
   | True    ? Power   :(Init)
-}​​
-
-Kamikaze(Init){
-  * (Init): True ? Kamikaze :(Init)
 }
+
 
 Philosopher(Think){
   * (Think)
