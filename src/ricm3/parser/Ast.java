@@ -98,6 +98,8 @@ public class Ast {
 		public String tree_edges() {
 			return name.as_tree_son_of(this);
 		}
+		
+		public String toString() { return name.toString() ; }
 	}
 
 	public static class Direction extends Expression {
@@ -112,6 +114,10 @@ public class Ast {
 		public String tree_edges() {
 			return value.as_tree_son_of(this);
 		}
+		
+		public String toString() { 
+			return value.toString() ; 
+		}
 	}
 
 	public static class Entity extends Expression {
@@ -125,6 +131,10 @@ public class Ast {
 
 		public String tree_edges() {
 			return value.as_tree_son_of(this);
+		}
+		
+		public String toString() { 
+			return value.toString() ; 
 		}
 	}
 
@@ -141,6 +151,10 @@ public class Ast {
 
 		public String tree_edges() {
 			return operator.as_tree_son_of(this) + operand.as_tree_son_of(this);
+		}
+		
+		public String toString() { 
+			return operator + "(" + operand + ")" ; 
 		}
 	}
 
@@ -160,6 +174,9 @@ public class Ast {
 		public String tree_edges() {
 			return left_operand.as_tree_son_of(this) + operator.as_tree_son_of(this)
 					+ right_operand.as_tree_son_of(this);
+		}
+		public String toString() { 
+			return "(" + left_operand + " " + operator + " " + right_operand + ")" ; 
 		}
 	}
 
