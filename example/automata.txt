@@ -1,5 +1,27 @@
 
+Crazy(Init){
+  * (Init): True ? Kamikaze :(Init)
+  * (Unreachable): MyDir(d) ? Move(d) :(Unreachable)
+  * (Useless): MyDir(_) ? Move :(Useless)
+  * (Dummy): Cell(F,e) ? Hit(e,F) :(Dummy)
+}
 
+Player(Init){
+  * (Init):
+  | Key(FU) ? Move(N) :(Init)
+  | Key(FD) ? Move(S) :(Init)
+  | Key(FL) ? Move(O) :(Init)
+  | Key(FR) ? Move(E) :(Init)
+  | Key(SPACE) ? Hit  :(Init)
+  | Key(ENTER) ? Jump :(Init)
+  | Key(b)  ? Jump(B) :(Init)
+  | Key(f)  ? Turn(B) :(Init)
+  | Key(p)  ? Pop     :(Init)
+  | Key(w)  ? Wizz    :(Init)
+  | Key(g)  ? Get     :(Init)
+  | Key(t)  ? Throw   :(Init)
+  | True    ? Power   :(Init)
+}
 
 Philosopher(Think){
   * (Think)
@@ -47,29 +69,6 @@ Master(Think_0){
  * (X)
 }
 
-Player(Init){
-  * (Init):
-  | Key(FU) ? Move(N) :(Init)
-  | Key(FD) ? Move(S) :(Init)
-  | Key(FL) ? Move(O) :(Init)
-  | Key(FR) ? Move(E) :(Init)
-  | Key(SPACE) ? Hit  :(Init)
-  | Key(ENTER) ? Jump :(Init)
-  | Key(b)  ? Jump(B) :(Init)
-  | Key(f)  ? Turn(B) :(Init)
-  | Key(p)  ? Pop     :(Init)
-  | Key(w)  ? Wizz    :(Init)
-  | Key(g)  ? Get     :(Init)
-  | Key(t)  ? Throw   :(Init)
-  | True    ? Power   :(Init)
-}
-
-Crazy(Init){
-  * (Init): True ? Kamikaze :(Init)
-  * (Unreachable): MyDir(d) ? Move(d) :(Unreachable)
-  * (Useless): MyDir(_) ? Move :(Useless)
-  * (Dummy): Cell(F,e) ? Hit(e,F) :(Dummy)
-}
 
 Explorer(Explore_R){
 

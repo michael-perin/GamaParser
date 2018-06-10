@@ -116,10 +116,13 @@ public class Ast {
 
 	public static class Underscore extends Parameter {
 		Underscore(){
-			this.kind = "Any" ;
+			this.kind = "Underscore" ;
 		}
 		public String tree_edges() {
 			return "" ;
+		}
+		public String toString() {
+			return "_";
 		}
 	}
 	
@@ -254,6 +257,7 @@ public class Ast {
 			while (Iter.hasNext()) {
 				Parameter parameter = Iter.next();
 				string += parameter.toString();
+				if (Iter.hasNext()) { string += "," ;} 
 			}
 			return name + "(" + string + ")" ; 
 		}
