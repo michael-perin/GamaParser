@@ -119,7 +119,7 @@ public class Ast {
 			this.kind = "Any" ;
 		}
 		public String tree_edges() {
-			return null ;
+			return "" ;
 		}
 	}
 	
@@ -306,11 +306,6 @@ public class Ast {
 
 		public String tree_edges() {
 			return name.as_tree_son_of(this);
-		}
-		
-		public String dot_id() {
-			// Use dot_id_of_state_of(automaton)
-			return null ;
 		}
 		
 		public String dot_id_of_state_of(Automaton automaton){ 

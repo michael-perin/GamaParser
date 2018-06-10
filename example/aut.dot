@@ -1,0 +1,416 @@
+// THE PARSED AUTOMATA in DOT FORMAT 
+digraph Automata{
+node[shape=box, fontsize=16, color=gray];
+
+
+subgraph cluster186{
+
+"186" [label="Player", shape=box, fontcolor=red];
+"186" -> "186.Init";
+"186.Init" [label="Init", shape=circle, fontsize=4];
+"26" [label="Key(FU)? Move(N)", shape=box, fontcolor=blue, fontsize=6];
+"186.Init" -> "26";
+"26" -> "186.Init";
+"41" [label="Key(FD)? Move(S)", shape=box, fontcolor=blue, fontsize=6];
+"186.Init" -> "41";
+"41" -> "186.Init";
+"56" [label="Key(FL)? Move(O)", shape=box, fontcolor=blue, fontsize=6];
+"186.Init" -> "56";
+"56" -> "186.Init";
+"71" [label="Key(FR)? Move(E)", shape=box, fontcolor=blue, fontsize=6];
+"186.Init" -> "71";
+"71" -> "186.Init";
+"83" [label="Key(SPACE)? Hit()", shape=box, fontcolor=blue, fontsize=6];
+"186.Init" -> "83";
+"83" -> "186.Init";
+"95" [label="Key(ENTER)? Jump()", shape=box, fontcolor=blue, fontsize=6];
+"186.Init" -> "95";
+"95" -> "186.Init";
+"110" [label="Key(b)? Jump(B)", shape=box, fontcolor=blue, fontsize=6];
+"186.Init" -> "110";
+"110" -> "186.Init";
+"125" [label="Key(f)? Turn(B)", shape=box, fontcolor=blue, fontsize=6];
+"186.Init" -> "125";
+"125" -> "186.Init";
+"137" [label="Key(p)? Pop()", shape=box, fontcolor=blue, fontsize=6];
+"186.Init" -> "137";
+"137" -> "186.Init";
+"149" [label="Key(w)? Wizz()", shape=box, fontcolor=blue, fontsize=6];
+"186.Init" -> "149";
+"149" -> "186.Init";
+"161" [label="Key(g)? Get()", shape=box, fontcolor=blue, fontsize=6];
+"186.Init" -> "161";
+"161" -> "186.Init";
+"173" [label="Key(t)? Throw()", shape=box, fontcolor=blue, fontsize=6];
+"186.Init" -> "173";
+"173" -> "186.Init";
+"182" [label="True()? Power()", shape=box, fontcolor=blue, fontsize=6];
+"186.Init" -> "182";
+"182" -> "186.Init";
+}
+
+
+subgraph cluster257{
+
+"257" [label="Crazy", shape=box, fontcolor=red];
+"257" -> "257.Init";
+"257.Init" [label="Init", shape=circle, fontsize=4];
+"198" [label="True()? Kamikaze()", shape=box, fontcolor=blue, fontsize=6];
+"257.Init" -> "198";
+"198" -> "257.Init";
+"257.Unreachable" [label="Unreachable", shape=circle, fontsize=4];
+"216" [label="MyDir(d)? Move(d)", shape=box, fontcolor=blue, fontsize=6];
+"257.Unreachable" -> "216";
+"216" -> "257.Unreachable";
+"257.Useless" [label="Useless", shape=circle, fontsize=4];
+"229" [label="MyDir(ricm3.parser.Ast$Underscore@7852e922)? Move()", shape=box, fontcolor=blue, fontsize=6];
+"257.Useless" -> "229";
+"229" -> "257.Useless";
+"257.Dummy" [label="Dummy", shape=circle, fontsize=4];
+"253" [label="Cell(Fe)? Hit(eF)", shape=box, fontcolor=blue, fontsize=6];
+"257.Dummy" -> "253";
+"253" -> "257.Dummy";
+}
+
+
+subgraph cluster264{
+
+"264" [label="Philosopher", shape=box, fontcolor=red];
+"264" -> "264.Think";
+"264.Think" [label="Think", shape=circle, fontsize=4];
+}
+
+
+subgraph cluster282{
+
+"282" [label="Blocker", shape=box, fontcolor=red];
+"282" -> "282.Init";
+"282.Init" [label="Init", shape=circle, fontsize=4];
+"278" [label="!(True())? Power()", shape=box, fontcolor=blue, fontsize=6];
+"282.Init" -> "278";
+"278" -> "282.Init";
+}
+
+
+subgraph cluster298{
+
+"298" [label="Mover", shape=box, fontcolor=red];
+"298" -> "298.Init";
+"298.Init" [label="Init", shape=circle, fontsize=4];
+"294" [label="True()? Move()", shape=box, fontcolor=blue, fontsize=6];
+"298.Init" -> "294";
+"294" -> "298.Init";
+}
+
+
+subgraph cluster314{
+
+"314" [label="Popper", shape=box, fontcolor=red];
+"314" -> "314.Init";
+"314.Init" [label="Init", shape=circle, fontsize=4];
+"310" [label="True()? Pop()", shape=box, fontcolor=blue, fontsize=6];
+"314.Init" -> "310";
+"310" -> "314.Init";
+}
+
+
+subgraph cluster330{
+
+"330" [label="Wizzer", shape=box, fontcolor=red];
+"330" -> "330.Init";
+"330.Init" [label="Init", shape=circle, fontsize=4];
+"326" [label="True()? Wizz()", shape=box, fontcolor=blue, fontsize=6];
+"330.Init" -> "326";
+"326" -> "330.Init";
+}
+
+
+subgraph cluster409{
+
+"409" [label="Turner", shape=box, fontcolor=red];
+"409" -> "409.Turn_0";
+"409.Turn_0" [label="Turn_0", shape=circle, fontsize=4];
+"345" [label="True()? Turn(R)", shape=box, fontcolor=blue, fontsize=6];
+"409.Turn_0" -> "345";
+"345" -> "409.Turn_1";
+"409.Turn_1" [label="Turn_1", shape=circle, fontsize=4];
+"360" [label="True()? Turn(R)", shape=box, fontcolor=blue, fontsize=6];
+"409.Turn_1" -> "360";
+"360" -> "409.Turn_2";
+"409.Turn_2" [label="Turn_2", shape=circle, fontsize=4];
+"375" [label="True()? Turn(R)", shape=box, fontcolor=blue, fontsize=6];
+"409.Turn_2" -> "375";
+"375" -> "409.Turn_3";
+"409.Turn_3" [label="Turn_3", shape=circle, fontsize=4];
+"390" [label="True()? Turn(R)", shape=box, fontcolor=blue, fontsize=6];
+"409.Turn_3" -> "390";
+"390" -> "409.Turn_4";
+"409.Turn_4" [label="Turn_4", shape=circle, fontsize=4];
+"402" [label="True()? Kamikaze()", shape=box, fontcolor=blue, fontsize=6];
+"409.Turn_4" -> "402";
+"402" -> "409.";
+"409." [label="", shape=circle, fontsize=4];
+}
+
+
+subgraph cluster548{
+
+"548" [label="Master", shape=box, fontcolor=red];
+"548" -> "548.Think_0";
+"548.Think_0" [label="Think_0", shape=circle, fontsize=4];
+"421" [label="True()? Power()", shape=box, fontcolor=blue, fontsize=6];
+"548.Think_0" -> "421";
+"421" -> "548.Think_1";
+"548.Think_1" [label="Think_1", shape=circle, fontsize=4];
+"433" [label="True()? Power()", shape=box, fontcolor=blue, fontsize=6];
+"548.Think_1" -> "433";
+"433" -> "548.Think_2";
+"548.Think_2" [label="Think_2", shape=circle, fontsize=4];
+"445" [label="True()? Power()", shape=box, fontcolor=blue, fontsize=6];
+"548.Think_2" -> "445";
+"445" -> "548.Think_3";
+"548.Think_3" [label="Think_3", shape=circle, fontsize=4];
+"457" [label="True()? Power()", shape=box, fontcolor=blue, fontsize=6];
+"548.Think_3" -> "457";
+"457" -> "548.Think_4";
+"548.Think_4" [label="Think_4", shape=circle, fontsize=4];
+"469" [label="True()? Power()", shape=box, fontcolor=blue, fontsize=6];
+"548.Think_4" -> "469";
+"469" -> "548.Happy_0";
+"548.Happy_0" [label="Happy_0", shape=circle, fontsize=4];
+"481" [label="True()? Power()", shape=box, fontcolor=blue, fontsize=6];
+"548.Happy_0" -> "481";
+"481" -> "548.Happy_1";
+"548.Happy_1" [label="Happy_1", shape=circle, fontsize=4];
+"493" [label="True()? Power()", shape=box, fontcolor=blue, fontsize=6];
+"548.Happy_1" -> "493";
+"493" -> "548.Happy_2";
+"548.Happy_2" [label="Happy_2", shape=circle, fontsize=4];
+"505" [label="True()? Power()", shape=box, fontcolor=blue, fontsize=6];
+"548.Happy_2" -> "505";
+"505" -> "548.Happy_3";
+"548.Happy_3" [label="Happy_3", shape=circle, fontsize=4];
+"517" [label="True()? Power()", shape=box, fontcolor=blue, fontsize=6];
+"548.Happy_3" -> "517";
+"517" -> "548.Happy_4";
+"548.Happy_4" [label="Happy_4", shape=circle, fontsize=4];
+"529" [label="True()? Power()", shape=box, fontcolor=blue, fontsize=6];
+"548.Happy_4" -> "529";
+"529" -> "548.Happy_5";
+"548.Happy_5" [label="Happy_5", shape=circle, fontsize=4];
+"541" [label="True()? Kamikaze()", shape=box, fontcolor=blue, fontsize=6];
+"548.Happy_5" -> "541";
+"541" -> "548.X";
+"548.X" [label="X", shape=circle, fontsize=4];
+}
+
+
+subgraph cluster684{
+
+"684" [label="Explorer", shape=box, fontcolor=red];
+"684" -> "684.Explore_R";
+"684.Explore_R" [label="Explore_R", shape=circle, fontsize=4];
+"566" [label="Cell(FV)? Move()", shape=box, fontcolor=blue, fontsize=6];
+"684.Explore_R" -> "566";
+"566" -> "684.Explore_R";
+"584" [label="Cell(RV)? Turn(R)", shape=box, fontcolor=blue, fontsize=6];
+"684.Explore_R" -> "584";
+"584" -> "684.Explore_R";
+"602" [label="Cell(LV)? Turn(L)", shape=box, fontcolor=blue, fontsize=6];
+"684.Explore_R" -> "602";
+"602" -> "684.Explore_R";
+"614" [label="True()? Turn(B)", shape=box, fontcolor=blue, fontsize=6];
+"684.Explore_R" -> "614";
+"614" -> "684.Explore_L";
+"684.Explore_L" [label="Explore_L", shape=circle, fontsize=4];
+"632" [label="Cell(FV)? Move()", shape=box, fontcolor=blue, fontsize=6];
+"684.Explore_L" -> "632";
+"632" -> "684.Explore_L";
+"650" [label="Cell(LV)? Turn(L)", shape=box, fontcolor=blue, fontsize=6];
+"684.Explore_L" -> "650";
+"650" -> "684.Explore_L";
+"668" [label="Cell(RV)? Turn(R)", shape=box, fontcolor=blue, fontsize=6];
+"684.Explore_L" -> "668";
+"668" -> "684.Explore_L";
+"680" [label="True()? Turn(B)", shape=box, fontcolor=blue, fontsize=6];
+"684.Explore_L" -> "680";
+"680" -> "684.Explore_R";
+}
+
+
+subgraph cluster1641{
+
+"1641" [label="SuperHero", shape=box, fontcolor=red];
+"1641" -> "1641.Explore";
+"1641.Explore" [label="Explore", shape=circle, fontsize=4];
+"702" [label="Cell(FP)? Pick()", shape=box, fontcolor=blue, fontsize=6];
+"1641.Explore" -> "702";
+"702" -> "1641.Happy";
+"720" [label="Cell(FV)? Move(F)", shape=box, fontcolor=blue, fontsize=6];
+"1641.Explore" -> "720";
+"720" -> "1641.Run";
+"735" [label="Cell(FJ)? Jump()", shape=box, fontcolor=blue, fontsize=6];
+"1641.Explore" -> "735";
+"735" -> "1641.Explore";
+"747" [label="True()? Turn(L)", shape=box, fontcolor=blue, fontsize=6];
+"1641.Explore" -> "747";
+"747" -> "1641.Explore";
+"1641.Run" [label="Run", shape=circle, fontsize=4];
+"768" [label="Cell(FV)? Move(F)", shape=box, fontcolor=blue, fontsize=6];
+"1641.Run" -> "768";
+"768" -> "1641.Explore";
+"813" [label="(Cell(FA) / (Cell(BA) / (Cell(LA) / Cell(RA))))? Wizz()", shape=box, fontcolor=blue, fontsize=6];
+"1641.Run" -> "813";
+"813" -> "1641.Escape";
+"822" [label="True()? Pop()", shape=box, fontcolor=blue, fontsize=6];
+"1641.Run" -> "822";
+"822" -> "1641.Explore";
+"1641.Escape" [label="Escape", shape=circle, fontsize=4];
+"853" [label="(Cell(FA) & Cell(BV))? Move(B)", shape=box, fontcolor=blue, fontsize=6];
+"1641.Escape" -> "853";
+"853" -> "1641.Escape";
+"881" [label="(Cell(BA) & Cell(FV))? Move(F)", shape=box, fontcolor=blue, fontsize=6];
+"1641.Escape" -> "881";
+"881" -> "1641.Escape";
+"909" [label="(Cell(RA) & Cell(LV))? Move(L)", shape=box, fontcolor=blue, fontsize=6];
+"1641.Escape" -> "909";
+"909" -> "1641.Escape";
+"937" [label="(Cell(LA) & Cell(RV))? Move(R)", shape=box, fontcolor=blue, fontsize=6];
+"1641.Escape" -> "937";
+"937" -> "1641.Escape";
+"964" [label="(Cell(FA) & !(Cell(BV)))? Hit()", shape=box, fontcolor=blue, fontsize=6];
+"1641.Escape" -> "964";
+"964" -> "1641.Fight";
+"973" [label="True()? Power()", shape=box, fontcolor=blue, fontsize=6];
+"1641.Escape" -> "973";
+"973" -> "1641.Explore";
+"1641.Fight" [label="Fight", shape=circle, fontsize=4];
+"1023" [label="(Cell(FA) & (Cell(LA) & !((Cell(RV) / Cell(BV)))))? Hit()", shape=box, fontcolor=blue, fontsize=6];
+"1641.Fight" -> "1023";
+"1023" -> "1641.Angry";
+"1070" [label="(Cell(FA) & (Cell(RA) & !((Cell(LV) / Cell(BV)))))? Hit()", shape=box, fontcolor=blue, fontsize=6];
+"1641.Fight" -> "1070";
+"1070" -> "1641.Angry";
+"1117" [label="(Cell(FA) & (Cell(BA) & !((Cell(LV) / Cell(RV)))))? Hit()", shape=box, fontcolor=blue, fontsize=6];
+"1641.Fight" -> "1117";
+"1117" -> "1641.Angry";
+"1167" [label="(Cell(LA) & (Cell(RA) & !((Cell(FV) / Cell(BV)))))? Turn(R)", shape=box, fontcolor=blue, fontsize=6];
+"1641.Fight" -> "1167";
+"1167" -> "1641.Angry";
+"1176" [label="True()? Pop()", shape=box, fontcolor=blue, fontsize=6];
+"1641.Fight" -> "1176";
+"1176" -> "1641.Escape";
+"1641.Angry" [label="Angry", shape=circle, fontsize=4];
+"1188" [label="GotPower()? Hit()", shape=box, fontcolor=blue, fontsize=6];
+"1641.Angry" -> "1188";
+"1188" -> "1641.Angry_11";
+"1199" [label="!(GotPower())? Protect()", shape=box, fontcolor=blue, fontsize=6];
+"1641.Angry" -> "1199";
+"1199" -> "1641.Angry_11";
+"1641.Angry_11" [label="Angry_11", shape=circle, fontsize=4];
+"1214" [label="True()? Turn(B)", shape=box, fontcolor=blue, fontsize=6];
+"1641.Angry_11" -> "1214";
+"1214" -> "1641.Angry_12";
+"1641.Angry_12" [label="Angry_12", shape=circle, fontsize=4];
+"1226" [label="GotPower()? Hit()", shape=box, fontcolor=blue, fontsize=6];
+"1641.Angry_12" -> "1226";
+"1226" -> "1641.Angry_13";
+"1237" [label="!(GotPower())? Protect()", shape=box, fontcolor=blue, fontsize=6];
+"1641.Angry_12" -> "1237";
+"1237" -> "1641.Angry_13";
+"1641.Angry_13" [label="Angry_13", shape=circle, fontsize=4];
+"1252" [label="True()? Turn(R)", shape=box, fontcolor=blue, fontsize=6];
+"1641.Angry_13" -> "1252";
+"1252" -> "1641.Angry_14";
+"1641.Angry_14" [label="Angry_14", shape=circle, fontsize=4];
+"1264" [label="GotPower()? Hit()", shape=box, fontcolor=blue, fontsize=6];
+"1641.Angry_14" -> "1264";
+"1264" -> "1641.Angry_15";
+"1275" [label="!(GotPower())? Protect()", shape=box, fontcolor=blue, fontsize=6];
+"1641.Angry_14" -> "1275";
+"1275" -> "1641.Angry_15";
+"1641.Angry_15" [label="Angry_15", shape=circle, fontsize=4];
+"1290" [label="True()? Turn(B)", shape=box, fontcolor=blue, fontsize=6];
+"1641.Angry_15" -> "1290";
+"1290" -> "1641.Angry_16";
+"1641.Angry_16" [label="Angry_16", shape=circle, fontsize=4];
+"1302" [label="GotPower()? Hit()", shape=box, fontcolor=blue, fontsize=6];
+"1641.Angry_16" -> "1302";
+"1302" -> "1641.Angry_17";
+"1313" [label="!(GotPower())? Protect()", shape=box, fontcolor=blue, fontsize=6];
+"1641.Angry_16" -> "1313";
+"1313" -> "1641.Angry_17";
+"1641.Angry_17" [label="Angry_17", shape=circle, fontsize=4];
+"1328" [label="True()? Turn(R)", shape=box, fontcolor=blue, fontsize=6];
+"1641.Angry_17" -> "1328";
+"1328" -> "1641.Rest";
+"1641.Rest" [label="Rest", shape=circle, fontsize=4];
+"1376" [label="(Cell(FV) & (Cell(BV) & (Cell(LV) & Cell(RV))))? Power()", shape=box, fontcolor=blue, fontsize=6];
+"1641.Rest" -> "1376";
+"1376" -> "1641.Rest";
+"1385" [label="True()? Power()", shape=box, fontcolor=blue, fontsize=6];
+"1641.Rest" -> "1385";
+"1385" -> "1641.Run";
+"1641.Happy" [label="Happy", shape=circle, fontsize=4];
+"1403" [label="Cell(FP)? Pick()", shape=box, fontcolor=blue, fontsize=6];
+"1641.Happy" -> "1403";
+"1403" -> "1641.Happy";
+"1421" [label="Cell(BP)? Turn(B)", shape=box, fontcolor=blue, fontsize=6];
+"1641.Happy" -> "1421";
+"1421" -> "1641.Happy";
+"1439" [label="Cell(LP)? Turn(L)", shape=box, fontcolor=blue, fontsize=6];
+"1641.Happy" -> "1439";
+"1439" -> "1641.Happy";
+"1457" [label="Cell(RP)? Turn(R)", shape=box, fontcolor=blue, fontsize=6];
+"1641.Happy" -> "1457";
+"1457" -> "1641.Happy";
+"1469" [label="True()? Turn(L)", shape=box, fontcolor=blue, fontsize=6];
+"1641.Happy" -> "1469";
+"1469" -> "1641.Explore";
+"1641.Happy" [label="Happy", shape=circle, fontsize=4];
+"1481" [label="True()? Store()", shape=box, fontcolor=blue, fontsize=6];
+"1641.Happy" -> "1481";
+"1481" -> "1641.Crazy";
+"1641.Crazy" [label="Crazy", shape=circle, fontsize=4];
+"1493" [label="True()? Get()", shape=box, fontcolor=blue, fontsize=6];
+"1641.Crazy" -> "1493";
+"1493" -> "1641.Crazy_1";
+"1641.Crazy_1" [label="Crazy_1", shape=circle, fontsize=4];
+"1505" [label="True()? Get()", shape=box, fontcolor=blue, fontsize=6];
+"1641.Crazy_1" -> "1505";
+"1505" -> "1641.Crazy_2";
+"1641.Crazy_2" [label="Crazy_2", shape=circle, fontsize=4];
+"1520" [label="True()? Turn(B)", shape=box, fontcolor=blue, fontsize=6];
+"1641.Crazy_2" -> "1520";
+"1520" -> "1641.Crazy_3";
+"1641.Crazy_3" [label="Crazy_3", shape=circle, fontsize=4];
+"1532" [label="True()? Throw()", shape=box, fontcolor=blue, fontsize=6];
+"1641.Crazy_3" -> "1532";
+"1532" -> "1641.Think";
+"1641.Think" [label="Think", shape=circle, fontsize=4];
+"1550" [label="Cell(FJ)? Jump()", shape=box, fontcolor=blue, fontsize=6];
+"1641.Think" -> "1550";
+"1550" -> "1641.Build";
+"1568" [label="Cell(BJ)? Turn(B)", shape=box, fontcolor=blue, fontsize=6];
+"1641.Think" -> "1568";
+"1568" -> "1641.Think";
+"1586" [label="Cell(LJ)? Turn(L)", shape=box, fontcolor=blue, fontsize=6];
+"1641.Think" -> "1586";
+"1586" -> "1641.Think";
+"1604" [label="Cell(RJ)? Turn(R)", shape=box, fontcolor=blue, fontsize=6];
+"1641.Think" -> "1604";
+"1604" -> "1641.Think";
+"1641.Build" [label="Build", shape=circle, fontsize=4];
+"1616" [label="GotStuff()? Get()", shape=box, fontcolor=blue, fontsize=6];
+"1641.Build" -> "1616";
+"1616" -> "1641.Build_1";
+"1625" [label="True()? Wizz()", shape=box, fontcolor=blue, fontsize=6];
+"1641.Build" -> "1625";
+"1625" -> "1641.Explore";
+"1641.Build_1" [label="Build_1", shape=circle, fontsize=4];
+"1637" [label="True()? Throw()", shape=box, fontcolor=blue, fontsize=6];
+"1641.Build_1" -> "1637";
+"1637" -> "1641.Build";
+}
+
+}
