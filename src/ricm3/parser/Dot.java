@@ -12,10 +12,10 @@ public final class Dot {
 		}
 		public static String subgraph(int id, String content){
 			String output = new String();
-			output += "\nsubgraph cluster" + id ;
-			output += "{ style=filled ; color=lightgrey ;\n" ;
-			output += "\n" + content ;
-			output += "}\n" ;
+			output += "\n\nsubgraph cluster" + id ;
+			output += "{\n" ;
+			output += content ;
+			output += "\n}\n" ;
 			return output ;
 		}
 		public static String name(String string) {

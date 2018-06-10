@@ -2,12 +2,16 @@ Player(Init){
   * (Init):
   | Key(FU) ? Move(N) :(Init)
   | Key(FD) ? Move(S) :(Init)
+  | Key(FL) ? Move(O) :(Init)
+  | Key(FR) ? Move(E) :(Init)
   | Key(SPACE) ? Hit  :(Init)
-  | Key(ENTER) ? Jump(B) :(Init)
-  | Key(f)  ? Move(F) :(Init)
-  | Key(b)  ? Move(B) :(Init)
-  | Key(0)  ? Pop     :(Init)
-  | Key(9)  ? Wizz    :(Init)
+  | Key(ENTER) ? Jump :(Init)
+  | Key(b)  ? Jump(B) :(Init)
+  | Key(f)  ? Turn(B) :(Init)
+  | Key(p)  ? Pop     :(Init)
+  | Key(w)  ? Wizz    :(Init)
+  | Key(g)  ? Get     :(Init)
+  | Key(t)  ? Throw   :(Init)
   | True    ? Power   :(Init)
 }
 
@@ -16,17 +20,6 @@ Crazy(Init){
   * (Unreachable): MyDir(d) ? Move(d) :(Unreachable)
   * (Useless): MyDir(_) ? Move :(Useless)
   * (Dummy): Cell(F,e) ? Hit(e,F) :(Dummy)
-}
-
-Player(Init){
-  * (Init):
-  | Key(FU) ? Move(N) :(Init)
-  | Key(FD) ? Move(S) :(Init)
-  | Key(f)  ? Move(F) :(Init)
-  | Key(b)  ? Move(B) :(Init)
-  | Key(0)  ? Pop     :(Init)
-  | Key(9)  ? Wizz    :(Init)
-  | True    ? Power   :(Init)
 }
 
 
@@ -56,9 +49,10 @@ Turner(Turn_0){
   * (Turn_2): True ? Turn(R) :(Turn_3)
   * (Turn_3): True ? Turn(R) :(Turn_4)
   * (Turn_4): True ? Kamikaze :()
+  * ()
 }
 
-Master(Think){
+Master(Think_0){
  * (Think_0): True ? Power :(Think_1)
  * (Think_1): True ? Power :(Think_2)
  * (Think_2): True ? Power :(Think_3)
@@ -72,6 +66,7 @@ Master(Think){
  * (Happy_4): True ? Power :(Happy_5)
 
  * (Happy_5): True ? Kamikaze   :(X)
+ * (X)
 }
 
 
@@ -129,27 +124,26 @@ SuperHero(Explore){
   | GotPower ? Hit      :(Angry_13)
   | !GotPower ? Protect :(Angry_13)
 
-
 * (Angry_13): True ? Turn(R) :(Angry_14)
+
 * (Angry_14):
   | GotPower ? Hit      :(Angry_15)
   | !GotPower ? Protect :(Angry_15)
 
+* (Angry_15): True ? Turn(B) :(Angry_16)
 
-* (Angry_16): True ? Turn(B) :(Angry_17)
-* (Angry_17):
-  | GotPower ? Hit      :(Angry_18)
-  | !GotPower ? Protect :(Angry_18)
+* (Angry_16):
+  | GotPower ? Hit      :(Angry_17)
+  | !GotPower ? Protect :(Angry_17)
 
-
-* (Angry_18): True ? Turn(R) :(Rest)
+* (Angry_17): True ? Turn(R) :(Rest)
 
 * (Rest):
   | Cell(F,V) & Cell(B,V) & Cell(L,V) & Cell(R,V) ? Power : (Rest)
   | True ? Power :(Run)
 
 * (Happy):
-| Cell(F,P) ? Pick    :(Happy_2)
+| Cell(F,P) ? Pick    :(Happy)
 | Cell(B,P) ? Turn(B) :(Happy)
 | Cell(L,P) ? Turn(L) :(Happy)
 | Cell(R,P) ? Turn(R) :(Happy)

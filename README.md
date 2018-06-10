@@ -14,8 +14,20 @@ afin de générer un interpréteur de transitions. L'intepréteur doit posséder
 - *... exec()* pour les Actions (il est possible de rendre un booléen qui indique si l'action a pu s'effectuer ou non).
 
 
-## DEMO
-java -cp ./bin ricm3.parser.AutomataParser example/automata.txt > ast.dot
+## USAGE
+
+The parser can generate two graphical output in .dot format
+- with option: ``-ast`` it produces the Abstract Syntax Tree
+  (see example/ast.dot)
+- with option: ``-aut`` it produces the graphical representation of the parsed automata
+  (see example/aut.dot)
+
+The parser can take input
+- from a file
+  ``java -cp ./bin ricm3.parser.AutomataParser -aut -file example/automata.txt``
+- from a string
+  ``java -cp ./bin ricm3.parser.AutomataParser -aut -string "Aut(Idle){ * (Idle)}"
+
 
 # LES DIRECTIONS
 

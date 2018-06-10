@@ -33,11 +33,41 @@ public class AutomataParser {
   		return ast ;
    }
 
+   public static boolean option(String option, String[] args) {
+    		int i=0 ;
+     	while(i<args.length) { 
+     		if (args[i].equals(option)){ return true ; }
+     		i++;
+   		 }
+  	  return false ;
+  }
+
+  public static int index_of_input(String[] args) {
+    	int i = 0 ;
+    	while (i<args.length) {
+    	  if ( false == (
+    	    	       args[i].equals("-ast")
+    	  	 	|| args[i].equals("-string")
+    	  	 	|| args[i].equals("-aut")
+    	  	 	|| args[i].equals("-file") ))
+     	{ return i ; }
+     else
+     	{ i++ ; }
+   	}
+  	return 0 ;
+  }
+  
    public static void main(String[] args) throws Exception {
         Ast ast ;
-        // ast = from_string(args[0]) ;
-        ast = from_file(args[0]) ;
-        System.out.println("// THE AST of the PARSED AUTOMATA in DOT FORMAT \n" + ast.as_dot_tree()) ;
+        int i = index_of_input(args) ;
+        if ( option("-string",args) )
+            ast = from_string(args[i]) ;
+        else
+        		ast = from_file(args[i]) ;
+        if ( option("-ast",args) )
+        		System.out.println("// THE AST of the PARSED AUTOMATA in DOT FORMAT \n" + ast.as_dot_tree()) ;
+        	else
+        		System.out.println("// THE PARSED AUTOMATA in DOT FORMAT \n" + ast.as_dot_aut()) ;
     }
 	
 }
