@@ -1,0 +1,168 @@
+GhostVertical6(Line_U){
+	* (Line_U):
+	  | Cell(N,T) ? Move(N) :(Line_U)
+	  | Cell(S,T) ? Move(S) :(Line_U)
+	  | Cell(E,T) ? Move(E) :(Line_U)
+	  | Cell(O,T) ? Move(O) :(Line_U)
+	  | Closest(F,T) ? Move(F) :(Line_D)
+	  | Cell(N,V) ? Move(N) :(Line_U)
+	  | True ? Turn(B) / Pop() :(Line_D)
+
+	* (Line_D):
+	  | Cell(N,T) ? Move(N) :(Line_D)
+	  | Cell(S,T) ? Move(S) :(Line_D)
+	  | Cell(E,T) ? Move(E) :(Line_D)
+	  | Cell(O,T) ? Move(O) :(Line_D)
+	  | Closest(F,T) ? Move(F) :(Line_U)
+	  | Cell(S,V) ? Move(S) :(Line_D)
+	  | True ? Turn(B) / Wizz() :(Line_U)
+}
+
+
+GhostCarre6(Square_E){
+	* (Square_E):
+	  | Cell(S,T) ? Move(S) :(Square_E)
+	  | Cell(O,T) ? Move(O) :(Square_E)
+	  | Cell(N,T) ? Move(N) :(Square_E)
+	  | Cell(E,T) ? Move(E) :(Square_E)
+	  | Cell(E,V) ? Move(E) / Pop() :(Square_E)
+	  | Cell(S,V) ? Move(S) / Pop() :(Square_S)
+	  | Cell(O,V) ? Move(O) / Pop() :(Square_O)
+	  | Cell(N,V) ? Move(N) / Pop() :(Square_N)
+
+	* (Square_S):
+	  | Cell(S,T) ? Move(S) :(Square_S)
+	  | Cell(O,T) ? Move(O) :(Square_S)
+	  | Cell(N,T) ? Move(N) :(Square_S)
+	  | Cell(E,T) ? Move(E) :(Square_S)
+	  | Cell(S,V) ? Move(S) / Pop() :(Square_S)
+	  | Cell(O,V) ? Move(O) / Pop() :(Square_O)
+	  | Cell(N,V) ? Move(B) / Pop() :(Square_N)
+	  | Cell(E,V) ? Move(E) / Pop() :(Square_E)
+
+	* (Square_O):
+	  | Cell(S,T) ? Move(S) :(Square_O)
+	  | Cell(O,T) ? Move(O) :(Square_O)
+	  | Cell(N,T) ? Move(N) :(Square_O)
+	  | Cell(E,T) ? Move(E) :(Square_O)
+	  | Cell(O,V) ? Move(O) / Pop() :(Square_O)
+	  | Cell(N,V) ? Move(N) / Pop() :(Square_N)
+	  | Cell(E,V) ? Move(E) / Pop() :(Square_E)
+	  | Cell(S,V) ? Move(S) / Pop() :(Square_S)
+
+	* (Square_N):
+	  | Cell(S,T) ? Move(S) :(Square_N)
+	  | Cell(O,T) ? Move(O) :(Square_N)
+	  | Cell(N,T) ? Move(N) :(Square_N)
+	  | Cell(E,T) ? Move(E) :(Square_N)
+	  | Cell(N,V) ? Move(N) / Pop() :(Square_N)
+	  | Cell(E,V) ? Move(E) / Pop() :(Square_E)
+	  | Cell(S,V) ? Move(S) / Pop() :(Square_S)
+	  | Cell(O,V) ? Move(O) / Pop() :(Square_O)
+}
+
+Skeleton6(Lost){
+	* (Lost):
+	  | Cell(S,T) ? Hit(S) :(Attack)
+	  | Cell(O,T) ? Hit(O) :(Attack)
+	  | Cell(E,T) ? Hit(E) :(Attack)
+	  | Cell(N,T) ? Hit(N) :(Attack)
+	  | Closest(N,A) & Cell(N,V) ? Move(N) :(Lost)
+	  | Closest(N,T) & !Cell(N,V) ? Hit(N) :(Go)
+	  | Closest(S,A) & Cell(S,V) ? Move(S) / Hit(S) :(Lost)
+	  | Closest(S,T) & !Cell(S,V) ? Hit(S) :(Go)
+	  | Closest(E,A) & Cell(E,V) ? Move(E) :(Lost)
+	  | Closest(E,T) & !Cell(E,V) ? Hit(E) :(Go)
+	  | Closest(O,A) & Cell(O,V) ? Move(O) :(Lost)
+	  | Closest(O,T) & !Cell(O,V) ? Hit(O) :(Go)
+	  | True ? Pop() :(Turning)
+
+	*(Go):
+	  | Cell(O,V) ? Move(O) :(Attack)
+	  | Cell(N,V) ? Move(N) :(Attack)
+	  | Cell(S,V) ? Move(S) :(Attack)
+	  | Cell(E,V) ? Move(E) :(Attack)
+	  | True ? Pop :(Turning)
+
+	*(Turning):
+	  | True ? Turn(B) / Turn(N) / Turn(S) / Turn(E) / Turn(O) :(Lost)
+
+	*(Attack):
+	  | Cell(S,T) ? Hit(S) :(Attack)
+	  | Cell(O,T) ? Hit(O) :(Attack)
+	  | Cell(E,T) ? Hit(E) :(Attack)
+	  | Cell(N,T) ? Hit(N) :(Attack)
+	  | True ? Pop :(Lost)
+}
+
+
+Follower6(Chase){
+	* (Chase):
+	  | Cell(N,T) ? Hit(N) :(Chase)
+	  | Cell(S,T) ? Hit(S) :(Chase)
+	  | Cell(E,T) ? Hit(E) :(Chase)
+	  | Cell(O,T) ? Hit(O) :(Chase)
+	  | Closest(N,T) & Cell(N,V) ? Move(N) / Pop(N) :(Chase)
+	  | Closest(N,T) & Cell(E,V) ? Move(E) / Pop(E) :(Chase)
+	  | Closest(N,T) & Cell(O,V) ? Move(O) / Pop(O) :(Chase)
+	  | Closest(N,T) & Cell(S,V) ? Move(S) / Pop(S) :(Chase)
+	  | Closest(S,T) & Cell(S,V) ? Move(S) / Pop(S) :(Chase)
+	  | Closest(S,T) & Cell(O,V) ? Move(O) / Pop(O) :(Chase)
+	  | Closest(S,T) & Cell(E,V) ? Move(E) / Pop(E) :(Chase)
+	  | Closest(S,T) & Cell(N,V) ? Move(N) / Pop(N) :(Chase)
+	  | Closest(E,T) & Cell(E,V) ? Move(E) / Pop(E) :(Chase)
+	  | Closest(E,T) & Cell(N,V) ? Move(N) / Pop(N) :(Chase)
+	  | Closest(E,T) & Cell(S,V) ? Move(S) / Pop(S) :(Chase)
+	  | Closest(E,T) & Cell(O,V) ? Move(O) / Pop(O) :(Chase)
+	  | Closest(O,T) & Cell(O,V) ? Move(O) / Pop(O) :(Chase)
+	  | Closest(O,T) & Cell(S,V) ? Move(S) / Pop(S) :(Chase)
+	  | Closest(O,T) & Cell(N,V) ? Move(N) / Pop(N) :(Chase)
+	  | Closest(O,T) & Cell(E,V) ? Move(E) / Pop(E) :(Chase)
+	  | True ? Wizz() :(Chase)
+}
+
+FollowerRelative6(Chase){
+	* (Chase):
+	  | Cell(F,T) ? Hit(F) :(Chase)
+	  | Cell(B,T) ? Hit(B) :(Chase)
+	  | Cell(R,T) ? Hit(R) :(Chase)
+	  | Cell(L,T) ? Hit(L) :(Chase)
+	  | Closest(F,T) & Cell(F,V) ? Move(F) / Pop(F) :(Chase)
+	  | Closest(F,T) & Cell(R,V) ? Move(R) / Pop(R) :(Chase)
+	  | Closest(F,T) & Cell(L,V) ? Move(L) / Pop(L) :(Chase)
+	  | Closest(F,T) & Cell(B,V) ? Move(B) / Pop(B) :(Chase)
+	  | Closest(B,T) & Cell(B,V) ? Move(B) / Pop(B) :(Chase)
+	  | Closest(B,T) & Cell(L,V) ? Move(L) / Pop(L) :(Chase)
+	  | Closest(B,T) & Cell(R,V) ? Move(R) / Pop(R) :(Chase)
+	  | Closest(B,T) & Cell(F,V) ? Move(F) / Pop(F) :(Chase)
+	  | Closest(R,T) & Cell(R,V) ? Move(R) / Pop(R) :(Chase)
+	  | Closest(R,T) & Cell(F,V) ? Move(F) / Pop(F) :(Chase)
+	  | Closest(R,T) & Cell(B,V) ? Move(B) / Pop(B) :(Chase)
+	  | Closest(R,T) & Cell(L,V) ? Move(L) / Pop(L) :(Chase)
+	  | Closest(L,T) & Cell(L,V) ? Move(L) / Pop(L) :(Chase)
+	  | Closest(L,T) & Cell(B,V) ? Move(B) / Pop(B) :(Chase)
+	  | Closest(L,T) & Cell(F,V) ? Move(F) / Pop(F) :(Chase)
+	  | Closest(L,T) & Cell(R,V) ? Move(R) / Pop(R) :(Chase)
+	  | True ? Wizz() :(Chase)
+}
+
+
+PiecePassive6(Passive){
+	* (Passive):
+	  | True ? Move() / Turn() / Pop() / Wizz() :(Passive)
+}
+
+PieceTurner6(Turner){
+	* (Turner):
+	  | True ? Turn() / Move() / Pop() / Wizz() :(Turner)
+}
+
+PiecePopper6(Popper){
+	* (Popper):
+	  | True ? Pop() / Move() / Turn() / Wizz() :(Popper)
+}
+
+PieceWizzer6(Wizzer){
+	* (Wizzer):
+	  | True ? Wizz() / Move() / Turn() / Pop() :(Wizzer)
+}

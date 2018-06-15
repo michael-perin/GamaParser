@@ -1,0 +1,170 @@
+Virus1(Init){
+
+    *(Init):
+    |Key(o) ? Move(N) :(Init)
+
+    |Key(m) ? Move(E) :(Init)
+
+    |Key(l)? Move(S) :(Init)
+
+    |Key(k) ? Move(O) :(Init)
+
+    |Key(j) ? Pick() :(Init)
+    |Key(n) ? Get() :(Init)
+    |Key(p) ? Pop() :(Init)
+    |Key(i) ? Wizz() :(Init)
+    |Key(y) ? Hit() :(Init)
+    |True ? Jump() :(Init)
+
+}
+
+Antivirus1(Init){
+
+    *(Init):
+    |Key(z) ? Move(N) :(Init)
+    |Key(s)? Move(S) :(Init)
+    |Key(q) ? Move(O) :(Init)
+    |Key(f) ? Move(E) :(Init)
+
+    |Key(g) ? Pick() :(Init)
+    |Key(v) ? Get() :(Init)
+    |Key(r) ? Pop() :(Init)
+    |Key(a) ? Wizz() :(Init)
+    |Key(c) ? Hit() :(Init)
+    |True ? Jump() :(Init)
+
+}
+
+LaserPop1(Init){
+
+	*(Init): True ? Move(L) :(Left1)
+	*(Left1): True ? Move(F) :(Front1)
+	*(Front1): True ? Move(R) :(Right1)
+	*(Right1): True ? Move(R) :(Right2)
+	*(Right2): True ? Move(F) :(Front2)
+	*(Front2): True ? Move(L) :(Init2)
+	*(Init2): True ? Move(L) :(Left12)
+	*(Left12): True ? Move(F) :(Front12)
+	*(Front12): True ? Move(R) :(Right12)
+	*(Right12): True ? Move(R) :(Right22)
+	*(Right22): True ? Move(F) :(Front22)
+	*(Front22): True ? Pop() :(Init2)
+}
+
+
+Bloqueur1(Init){
+	*(Init): Closest(A,N) ? Move(N) : (Init)
+	| Closest(A,S) ? Move(S) : (Init)
+	| Closest(A,E) ? Move(E) : (Init)
+	| Closest(A,O) ? Move(O) : (Init)
+	| True ? Jump : (Init)
+}
+
+Recolteur1(Init){
+	*(Init): Cell(F,P) ? Move(F) : (Init)
+	| Cell(L,D) ? Move(L) : (Init)
+	| Cell(R,D) ? Move(R) : (Init)
+	| Cell(B,D) ? Move(B) : (Init)
+	| True ? Move(L) :(Left1)
+	*(Left1): Cell(F,P) ? Move(F) : (Init)
+	| Cell(L,D) ? Move(L) : (Init)
+	| Cell(R,D) ? Move(R) : (Init)
+	| Cell(B,D) ? Move(B) : (Init)
+	| True ? Move(F) :(Front1)
+	*(Front1): Cell(F,P) ? Move(F) : (Init)
+	| Cell(L,D) ? Move(L) : (Init)
+	| Cell(R,D) ? Move(R) : (Init)
+	| Cell(B,D) ? Move(B) : (Init)
+	| True ? Move(R) :(Right1)
+	*(Right1): Cell(F,P) ? Move(F) : (Init)
+	| Cell(L,D) ? Move(L) : (Init)
+	| Cell(R,D) ? Move(R) : (Init)
+	| Cell(B,D) ? Move(B) : (Init)
+	| True ? Move(R) :(Right2)
+	*(Right2): Cell(F,P) ? Move(F) : (Init)
+	| Cell(L,D) ? Move(L) : (Init)
+	| Cell(R,D) ? Move(R) : (Init)
+	| Cell(B,D) ? Move(B) : (Init)
+	| True ? Move(F) :(Front2)
+	*(Front2): Cell(F,P) ? Move(F) : (Init)
+	| Cell(L,D) ? Move(L) : (Init)
+	| Cell(R,D) ? Move(R) : (Init)
+	| Cell(B,D) ? Move(B) : (Init)
+	| True ? Move(L) :(Init)
+}
+
+KamikazAut1(Init){
+ 	*(Init): Cell(F,A) ? Pop : (Init)
+	| Cell(L,A) ? Pop : (Init)
+	| Cell(R,A) ? Pop : (Init)
+	| Cell(B,A) ? Pop : (Init)
+ 	| Closest(A,N) ? Move(N) : (Init)
+	| Closest(A,S) ? Move(S) : (Init)
+	| Closest(A,E) ? Move(E) : (Init)
+	| Closest(A,O) ? Move(O) : (Init)
+	| True ? Jump : (Init)
+}
+
+PortalMan1(Init){
+	*(Init): True ? Move(L) :(Left1)
+	*(Left1): True ? Move(F) :(Front1)
+	*(Front1): True ? Move(R) :(Right1)
+	*(Right1): True ? Move(R) :(Right2)
+	*(Right2): True ? Move(F) :(Front2)
+	*(Front2): True ? Move(L) :(Init2)
+	*(Init2): True ? Move(L) :(Left12)
+	*(Left12): True ? Move(F) :(Front12)
+	*(Front12): True ? Move(R) :(Right12)
+	*(Right12): True ? Move(R) :(Right22)
+	*(Right22): True ? Move(F) :(Front22)
+	*(Front22): True ? Wizz() :(Init2)
+}
+
+Tank1(Init){
+	*(Init): Cell(N,D) ? Move(N) : (Init)
+	| Cell(E,D) ? Move(E) : (Init)
+	| Cell(O,D) ? Move(O) : (Init)
+	| Cell(S,D) ? Move(S) : (Init)
+	| Closest(D,N) ? Move(N) : (Init)
+	| Closest(D,S) ? Move(S) : (Init)
+	| Closest(D,E) ? Move(E) : (Init)
+	| Closest(D,O) ? Move(O) : (Init)
+	| True ? Jump : (Init)
+}
+
+
+Tourelle1(Init){
+	*(Init): Cell(F,A) ? Hit : (Init)
+	| Cell(L,A) ? Hit : (Init)
+	| Cell(R,A) ? Hit : (Init)
+	| Cell(B,A) ? Hit : (Init)
+	| True ? Jump : (Init)
+}
+
+
+LaserWizz1(Init){
+
+	*(Init): True ? Move(L) :(Left1)
+	*(Left1): True ? Move(F) :(Front1)
+	*(Front1): True ? Move(R) :(Right1)
+	*(Right1): True ? Move(R) :(Right2)
+	*(Right2): True ? Move(F) :(Front2)
+	*(Front2): True ? Move(L) :(Init2)
+	*(Init2): True ? Move(L) :(Left12)
+	*(Left12): True ? Move(F) :(Front12)
+	*(Front12): True ? Move(R) :(Right12)
+	*(Right12): True ? Move(R) :(Right22)
+	*(Right22): True ? Move(F) :(Front22)
+	*(Front22): True ? Wizz() :(Init2)
+}
+
+
+Laser1(Init){
+
+	*(Init): True ? Move(L) :(Left1)
+	*(Left1): True ? Move(F) :(Front1)
+	*(Front1): True ? Move(R) :(Right1)
+	*(Right1): True ? Move(R) :(Right2)
+	*(Right2): True ? Move(F) :(Front2)
+	*(Front2): True ? Move(L) :(Init)
+}

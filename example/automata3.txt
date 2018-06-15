@@ -1,0 +1,147 @@
+Exploseur3(DEPL1){
+* (DEPL1):
+  | Cell(L, V) & GotPower() ? Move(L) : (DEPL2)
+  | Cell(R, V) & GotPower() ? Move(R) : (DEPL2)
+  | Cell(F, V) & GotPower() ? Move(F) : (DEPL2)
+  | Cell(B, V) & GotPower() ? Move(B) : (DEPL2)
+  | True ? Kamikaze : ()
+* (DEPL2):
+  | Cell(F, V) & GotPower() ? Move(F) : (DEPL3)
+  | Cell(R, V) & GotPower() ? Move(R) : (DEPL3)
+  | Cell(L, V) & GotPower() ? Move(L) : (DEPL3)
+  | Cell(B, V) & GotPower() ? Move(B) : (DEPL3)
+  | True ? Kamikaze : ()
+* (DEPL3):
+  | Cell(R, V) & GotPower() ? Move(R) : (DEPL1)
+  | Cell(F, V) & GotPower() ? Move(F) : (DEPL1)
+  | Cell(L, V) & GotPower() ? Move(L) : (DEPL1)
+  | Cell(B, V) & GotPower() ? Move(B) : (DEPL1)
+  | True ? Kamikaze : ()
+}
+
+Peintre3(DEPL1){
+* (DEPL1):
+  | Cell(L, V) & GotPower() ? Move(L) : (PEINT1)
+  | Cell(R, V) & GotPower() ? Move(R) : (PEINT1)
+  | Cell(F, V) & GotPower() ? Move(F) : (PEINT1)
+  | Cell(B, V) & GotPower() ? Move(B) : (PEINT1)
+  | True ? Pop : ()
+* (PEINT1): True ? Pop : (DEPL2)
+* (DEPL2):
+  | Cell(F, V) & GotPower() ? Move(F) : (PEINT2)
+  | Cell(R, V) & GotPower() ? Move(R) : (PEINT2)
+  | Cell(L, V) & GotPower() ? Move(L) : (PEINT2)
+  | Cell(B, V) & GotPower() ? Move(B) : (PEINT2)
+  | True ? Pop : ()
+* (PEINT2): True ? Pop : (DEPL3)
+* (DEPL3):
+  | Cell(R, V) & GotPower() ? Move(R) : (PEINT3)
+  | Cell(F, V) & GotPower() ? Move(F) : (PEINT3)
+  | Cell(L, V) & GotPower() ? Move(L) : (PEINT3)
+  | Cell(B, V) & GotPower() ? Move(B) : (PEINT3)
+  | True ? Pop : ()
+* (PEINT3): True ? Pop : (DEPL1)
+}
+
+Constructeur3(DEPL1){
+* (DEPL1):
+  | Cell(L, V) & GotPower() ? Move(L) : (MUR1)
+  | Cell(R, V) & GotPower() ? Move(R) : (MUR1)
+  | Cell(F, V) & GotPower() ? Move(F) : (MUR1)
+  | Cell(B, V) & GotPower() ? Move(B) : (MUR1)
+  | True ? Wizz : ()
+* (MUR1): True ? Wizz : (DEPL2)
+* (DEPL2):
+  | Cell(F, V) & GotPower() ? Move(F) : (MUR2)
+  | Cell(R, V) & GotPower() ? Move(R) : (MUR2)
+  | Cell(L, V) & GotPower() ? Move(L) : (MUR2)
+  | Cell(B, V) & GotPower() ? Move(B) : (MUR2)
+  | True ? Wizz : ()
+* (MUR2): True ? Wizz : (DEPL3)
+* (DEPL3):
+  | Cell(R, V) & GotPower() ? Move(R) : (MUR3)
+  | Cell(F, V) & GotPower() ? Move(F) : (MUR3)
+  | Cell(L, V) & GotPower() ? Move(L) : (MUR3)
+  | Cell(B, V) & GotPower() ? Move(B) : (MUR3)
+  | True ? Wizz : ()
+* (MUR3): True ? Wizz : (DEPL1)
+}
+
+Filou3(DEPL1){
+* (DEPL1):
+  | Cell(L, V) & GotPower() ? Move(L) : (FILOUTERIE1)
+  | Cell(R, V) & GotPower() ? Move(R) : (FILOUTERIE1)
+  | Cell(F, V) & GotPower() ? Move(F) : (FILOUTERIE1)
+  | Cell(B, V) & GotPower() ? Move(B) : (FILOUTERIE1)
+  | True ? Pop / Pick : ()
+* (FILOUTERIE1): True ? Pop / Pick : (DEPL2)
+* (DEPL2):
+  | Cell(F, V) & GotPower() ? Move(F) : (FILOUTERIE2)
+  | Cell(R, V) & GotPower() ? Move(R) : (FILOUTERIE2)
+  | Cell(L, V) & GotPower() ? Move(L) : (FILOUTERIE2)
+  | Cell(B, V) & GotPower() ? Move(B) : (FILOUTERIE2)
+  | True ? Pop / Pick: ()
+* (FILOUTERIE2): True ? Pop / Pick: (DEPL3)
+* (DEPL3):
+  | Cell(R, V) & GotPower() ? Move(R) : (FILOUTERIE3)
+  | Cell(F, V) & GotPower() ? Move(F) : (FILOUTERIE3)
+  | Cell(L, V) & GotPower() ? Move(L) : (FILOUTERIE3)
+  | Cell(B, V) & GotPower() ? Move(B) : (FILOUTERIE3)
+  | True ? Pop / Pick: ()
+* (FILOUTERIE3): True ? Pop / Pick: (DEPL1)
+}
+
+IA3 (DEPL){
+*(DEPL) :
+  |!GotPower ? Pop : (RECHERCHER_PEINTURE)
+  |Cell(F,G) ? Hit : (DEPL)
+  |Cell(F, V) / Cell(F, P) / Cell(F, J) / Cell(F, M) ? Move(F) : (DEPL2)
+  |Cell(L, V) / Cell(L, P) / Cell(L, J) / Cell(L, M) ? Move(L) : (DEPL3)
+  |Cell(R, V) / Cell(R, P) / Cell(R, J) / Cell(R, M) ? Move(R) : (DEPL4)
+  |Cell(L,G) ? Turn() : (DEPL)
+  |Cell(R,G) ? Turn() : (DEPL)
+*(DEPL2) :
+  |!GotPower ? Pop() : (RECHERCHER_PEINTURE)
+  |Cell(F,G) ? Hit : (DEPL2)
+  |Cell(F, V) / Cell(F, P) / Cell(F, J) / Cell(F, M) ? Move(F) : (DEPL3)
+  |Cell(R, V) / Cell(R, P) / Cell(R, J) / Cell(R, M) ? Move(R) : (DEPL4)
+  |Cell(L, V) / Cell(L, P) / Cell(L, J) / Cell(L, M) ? Move(L) : (DEPL)
+  |Cell(L,G) ? Turn() : (DEPL)
+  |Cell(R,G) ? Turn() : (DEPL)
+*(DEPL3) :
+  |!GotPower ? Pop() : (RECHERCHER_PEINTURE)
+  |Cell(F,G) ? Hit : (DEPL3)
+  |Cell(L, V) / Cell(L, P) / Cell(L, J) / Cell(L, M) ? Move(L) : (DEPL4)
+  |Cell(F, V) / Cell(F, P) / Cell(F, J) / Cell(F, M) ? Move(F) : (DEPL)
+  |Cell(R, V) / Cell(R, P) / Cell(R, J) / Cell(R, M) ? Move(R) : (DEPL2)
+  |Cell(L,G) ? Turn() : (DEPL)
+  |Cell(R,G) ? Turn() : (DEPL)
+*(DEPL4) :
+  |!GotPower ? Pop() : (RECHERCHER_PEINTURE)
+  |Cell(F,G) ? Hit : (DEPL4)
+  |Cell(R, V) / Cell(R, P) / Cell(R, J) / Cell(R, M) ? Move(R) : (DEPL)
+  |Cell(L, V) / Cell(L, P) / Cell(L, J) / Cell(L, M) ? Move(L) : (DEPL2)
+  |Cell(F, V) / Cell(F, P) / Cell(F, J) / Cell(F, M) ? Move(F) : (DEPL3)
+  |Cell(L,G) ? Turn() : (DEPL)
+  |Cell(R,G) ? Turn() : (DEPL)
+
+*(RECHERCHE_SBIRE) :
+	|Closest(P, L) & !(GotStuff()) ? Move(L) : (RECHERCHE_SBIRE)
+	|Closest(P, R) & !(GotStuff()) ? Move(R) : (RECHERCHE_SBIRE)
+	|Closest(P, F) & !(GotStuff()) ? Move(F) : (RECHERCHE_SBIRE)
+	|Closest(P, B) & !(GotStuff()) ? Move(B) : (RECHERCHE_SBIRE)
+	|GotStuff() ? Pop() : (LANCER_SBIRE)
+
+*(LANCER_SBIRE) :
+	|Cell(F,V) ? Throw(F) : (DEPL)
+	|!(Cell(F,V)) ? Move(R) / Move(L) : (LANCER_SBIRE)
+
+
+*(RECHERCHER_PEINTURE) :
+	|Cell(F,G) & !(GotPower()) ? Hit : (RECHERCHER_PEINTURE)
+	|Closest(L,J) & !(GotPower()) ? Move(L) : (RECHERCHER_PEINTURE)
+	|Closest(R,J) & !(GotPower()) ? Move(R) : (RECHERCHER_PEINTURE)
+	|Closest(F,J) & !(GotPower()) ? Move(F) : (RECHERCHER_PEINTURE)
+	|Closest(B,J) & !(GotPower()) ? Move(B) : (RECHERCHER_PEINTURE)
+	|GotPower() ? Pop() : (DEPL)
+}

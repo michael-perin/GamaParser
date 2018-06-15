@@ -1,0 +1,70 @@
+Player4(Init){
+  * (Init) :
+  | Key(FU) ? Turn(N) :(Move_N)
+  | Key(FL) ? Turn(O) :(Move_O)
+  | Key(FD) ? Turn(S) :(Move_S)
+  | Key(FR) ? Turn(E) :(Move_E)
+  | Key(p) ? Pop :(Init)
+  | Key(w) ? Wizz :(Init)
+  | Key(SPACE) ? Hit :(Init)
+  | Key(f) ? Pick :(Init)
+  | True ? Power :(Init)
+  * (Move_N): True ? Move(N) :(Init)
+  * (Move_O): True ? Move(O) :(Init)
+  * (Move_S): True ? Move(S) :(Init)
+  * (Move_E): True ? Move(E) :(Init)
+}
+
+Whale4(Init){
+  *(Init) :
+  | Cell(N,A) / Cell(S,A) / Cell(E,A) / Cell(O,A) ? Pop(F) :(Stop)
+  | Cell(N,T) / Cell(S,T) / Cell(E,T) / Cell(O,T) ? Pop(F) :(Stop)
+  | !Cell(N,T) & !Cell(S,T) & !Cell(E,T) & !Cell(O,T) & !Cell(N,T) & !Cell(S,T) & !Cell(E,T) & !Cell(O,T) ? Power :(Bouge)
+
+  *(Stop) : True ? Power :(Init)
+
+  *(Bouge) : True ? Move(N) / Move(E) / Move(O) / Move(S) :(Init)
+}
+
+Whaler4(Search){
+  *(Search) :
+  | Closest(A, N) ? Turn(N) : (MoveFront)
+  | Closest(A, S) ? Turn(S) : (MoveFront)
+  | Closest(A, E) ? Turn(E) : (MoveFront)
+  | Closest(A, O) ? Turn(O) : (MoveFront)
+  | Cell(N, A) ? Turn(N) : (Hit_F)
+  | Cell(S, A) ? Turn(S) : (Hit_F)
+  | Cell(E, A) ? Turn(E) : (Hit_F)
+  | Cell(O, A) ? Turn(O) : (Hit_F)
+  | True ? Power / Turn(L) / Turn(R) / Pop / Wizz :(MoveFront)
+
+  *(MoveFront): True ? Move(F) :(Search)
+
+  *(Hit_F): True ? Hit(F) :(Search)
+}
+
+Destroyer4(Search){
+  *(Search) :
+  | Closest(A, N) ? Turn(N) : (MoveAndHit)
+  | Closest(A, S) ? Turn(S) : (MoveAndHit)
+  | Closest(A, E) ? Turn(E) : (MoveAndHit)
+  | Closest(A, O) ? Turn(O) : (MoveAndHit)
+  | True ? Turn(N) / Turn(S) / Turn(E) / Pop / Wizz :(MoveFront)
+
+  *(MoveFront): True ? Move(F) :(Search)
+
+  *(MoveAndHit): True ? Move(F) :(Hit_F)
+
+  *(Hit_F): True ? Hit(F) :(Search)
+}
+
+Projectile4(Init){
+  * (Init) : True ? Move(F) :(Init)
+}
+
+Oil4(LastS){
+  *(LastS) : True ? Power / Pop / Move(E) / Power / Pop / Move(E) / Power / Pop / Move(E) / Wizz :(LastE)
+  *(LastN) : True ? Power / Pop / Move(O) / Power / Pop / Move(O) / Power / Pop / Move(O) / Wizz :(LastO)
+  *(LastE) : True ? Power / Pop / Move(N) / Power / Pop / Move(N) / Power / Pop / Move(N) / Wizz :(LastN)
+  *(LastO) : True ? Power / Pop / Move(S) / Power / Pop / Move(S) / Power / Pop / Move(S) / Wizz :(LastS)
+}
