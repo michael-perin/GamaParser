@@ -1,3 +1,15 @@
+Condition0(Init){
+  * (Init): (((((((True))))))) ? Power :(Init)
+  * (Init): !((!((!((!(!True))))))) ? Power :(Init)
+  * (Init): !( Key(a) / Key(b) / Key(c) / Key(d) ) ? Power :(Init)
+  * (Init): Key(a) & Key(b) & Key(c) & Key(d) ? Power :(Init)
+  * (Init): ( Key(a) & Key(b) & Key(c) & Key(d) ) ? Power :(Init)
+  * (Init): Key(a) / Key(b) / Key(c) / Key(d) ? Power :(Init)
+  * (Init): ( Key(a) / Key(b) / Key(c) / Key(d) ) ? Power :(Init)
+  * (Init): !( Key(a) / Key(b) / Key(c) / Key(d) ) ? Power :(Init)
+  * (Init): !Key(a) & !Key(b) & !Key(c) & !Key(d)  ? Power :(Init)
+  * (Init): !(Key(a) & !Key(b)) / (!Key(c) & !Key(d))  ? Power :(Init)
+}
 
 Crazy0(Init){
   * (Init): True ? Kamikaze :(Init)
@@ -15,6 +27,8 @@ Player0(Init){
   | Key(SPACE) ? Hit  :(Init)
   | Key(ENTER) ? Jump :(Init)
   | Key(b)  ? Jump(B) :(Init)
+  | Key(d)  ? Move(D) :(Init)
+  | Key(e)  ? Move(E) :(Init)
   | Key(f)  ? Turn(B) :(Init)
   | Key(p)  ? Pop     :(Init)
   | Key(w)  ? Wizz    :(Init)

@@ -477,7 +477,7 @@ Action P_Action():
 	   
   
 /* Expression
-   | "(" Expression ")" 
+   | "(" Expression ")" Op_Expression
    | <UNARYOP> Expression 
    | FunCall  Op_Expression
 */
@@ -490,10 +490,11 @@ Expression P_Expression():
 { "("
   expression = P_Expression()
   ")"
+  expression = P_Op_Expression(expression)
   	{ return expression ; } 	
 
 | token = <UNARY>
-  expression = P_Expression()  
+  expression = P_Expression()
 	{ return new UnaryOp(token.image,expression) ; }
 	
 | funcall = P_FunCall()
@@ -606,6 +607,7 @@ List<Parameter> P_More_Parameters(List<Parameter> input_list):
 /* Key
  * | DIGIT
  * | LETTER
+ * | DIRVAR | ENTVAR
  * | SPECIAL_KEY
  */
 Key P_Key_Name():
@@ -616,6 +618,12 @@ Key P_Key_Name():
 	{ return new Key(token.image) ; }
 
 | token = <LOWERCASE>
+	{ return new Key(token.image) ; }
+
+| token = <DIRVAR>
+	{ return new Key(token.image) ; }
+
+| token = <ENTVAR>
 	{ return new Key(token.image) ; }
 
 | token = <SPECIAL_KEY>
