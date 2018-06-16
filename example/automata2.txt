@@ -1,0 +1,87 @@
+Yannpd2(Init){
+	*(Init) : Closest(T, N) ? Protect(N) : (Init)
+}
+
+Joachimfdp2(Init){
+ *(Init) :
+	| Closest(T,F) ? Protect(F) : (M_R)
+	| Cell(F,V) ? Move(F) : (Bim)
+ 	| True ? Turn : (M_R)
+ *(M_R) :
+	| Closest(D,R) ? Protect(R) : (Bim)
+	| Cell(F,V) ? Move(R) : (Init)
+	| True ? Turn(B) : (M_B)
+ *(M_L) :
+	| Closest(T,L) ? Protect(L) : (Bim)
+	| Cell(L,V) ? Move(L) : (Init)
+	| True ? Turn(B) : (M_B)
+ *(M_B) :
+	| Closest(T,B) ? Protect(B) : (Bim)
+	| Cell(B,V) ? Move(B) : (Init)
+	| True ? Turn(B) : (M_R)
+
+ *(Bim) : True ? Protect(F) : (M_L)
+}
+
+Thief2(Stole){
+ * (Stole) :
+	| Cell(F,P) ? Pick(F) : (_)
+	| Cell(R,P) ? Pick(F) : (_)
+	| Cell(L,P) ? Pick(F) : (_)
+	| True ? Turn(B) : (_)
+ * (M_F) :
+	| Cell(F,V) ? Move(F) : (_)
+	| Cell(F,V) ? Turn(R) : (_)
+ * (M_R) :
+	| Cell(R,V) ? Move(R) : (_)
+	| Cell(R,V) ? Turn(R) : (_)
+ * (M_L) :
+	| Cell(L,V) ? Move(L) : (_)
+	| Cell(R,V) ? Turn(R) : (_)
+}
+
+Test2(Init){
+ *(Init) :
+ 	| Cell(F,V) ? Move(F) : (Init)
+ 	| Cell(F,P) ? Pick(F) : (Peu)
+ *(Peu) : GotStuff ? Move(F) : (Teub)
+ *(Teub) : True ? Get : (M_F)
+ *(M_F) : True ? Turn : (M_F)
+}
+
+Test12(Init){
+*(Init) :
+	| Cell(F,V) ? Move(O) : (Init)
+	| !True ? Protect(F) : (Init)
+}
+
+Test22(Init){
+ *(Init) True ? Kamikaze : (X)
+}
+
+Nathan2(Hangover){
+ *(Hangover) :
+	|GotStuff ? Get : (Good)
+	|Cell(F,P) ? Pick(F) : (Hangover)
+	|Closest(P,F) ? Turn(F) : (M_F)
+	|Closest(P,B) ? Turn(B) : (Hangover)
+	|Closest(P,R) ? Turn(R) : (Hangover)
+	|Closest(P,L) ? Move(L) : (Hangover)
+	|True ? Move(F) : (Good)
+ *(M_F) :
+	|Cell(F,P) ? Pick(F) : (Hangover)
+	|True ? Move(F) : (M_F)
+ *(Good) :
+	|Closest(E,F) ? Hit(F) : (Good)
+	|Closest(G,F) ? Hit(F) : (Discover)
+	|Closest(T,F) ? Turn(B) : (Spread)
+	|True ? Hit(L) : (Spread)
+ *(Discover) :
+	|Closest(G,F) ? Move(F) : (Discover)
+	|Closest(G,L) ? Move(L) : (Discover)
+	|Closest(G,R) ? Move(R) : (Discover)
+	|True ? Move(F) : (Good)
+ *(Spread) :
+	|Cell(F,V) ? Move(F) : (Spread)
+	|Cell(E,A) ? Move(R) : (Good)
+}
