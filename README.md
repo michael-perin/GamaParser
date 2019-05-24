@@ -65,13 +65,13 @@ The parser can take input
 # LES CONDITIONS
 
 ## Les conditions booléennes de base
--  True
--  Key(Touche) : la Touche est enfoncée
--  MyDir(Direction) : l'entité est orientée dans la Direction
--  Cell(Direction, Entité) : La cellule dans la Direction contient une Entité
--  Closest(Entité, Direction) : la plus proche Entité est dans la Direction
--  GotPower : reste t'il de l'énergie à l'entité ?
--  GotStuff : reste t'il des choses dans le store ?
+-  True : toujours vraie
+-  Key(Touche) : vraie si la Touche est enfoncée
+-  MyDir(Direction) : vraie si l'entité est orientée dans la Direction
+-  Cell(Direction, Entité) : vraie si la cellule dans la Direction contient une Entité
+-  Closest(Entité, Direction) : vraie si la plus proche Entité est dans la Direction
+-  GotPower : vraie s'il reste de l'énergie à l'entité
+-  GotStuff : vraie s'il reste des choses dans le store
 
 ## Les opérateurs sur les conditions
 - conjonction: Condition1 & Condition2
