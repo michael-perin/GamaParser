@@ -4,7 +4,7 @@
 Le parser fourni dans parser_automata.jj prend en paramètre de ligne de commande un nom de fichier et génére l'Abstract Syntaxe Tree (AST) au format .dot sur la sortie standard.
 
 
-Le fichier .dot décrit l'AST qu'on peut visualiser avec l'outil graphviz.
+Le fichier .dot décrit l'AST qu'on peut visualiser avec l'outil [graphviz](https://www.graphviz.org).
 
 ## TODO
 
@@ -57,7 +57,7 @@ The parser can take input
 - T = Team = une entité de mon équipe
 - A = un Adversaire
 - D = un Danger
-- P = un élément qu on peut Prendre,stocker,lancer,déposer
+- P = un élément qu on peut Prendre, stocker, lancer, déposer
 - J = un élément sur lequel on peut sauter
 - G = un Gate
 - M = un Missile
@@ -76,7 +76,7 @@ The parser can take input
 ## Les opérateurs sur les conditions
 - conjonction: Condition1 & Condition2
 - disjunction: Condition1 / condition2
-- negation:  not(Condition)
+- negation: not(Condition)
 
 
 # LES ACTIONS
