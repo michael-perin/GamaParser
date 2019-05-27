@@ -88,7 +88,7 @@ Escape(Init){
 }
 ```
 
-### Déterminisme ou Non-déterminisme ? à vous de choisir
+### Interprétation déterministe ou non-déterministe ? à vous de choisir
 
 Quelle transition prendre si plusieurs conditions sont satisfaites ?
 
