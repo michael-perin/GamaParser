@@ -4,14 +4,33 @@ La syntaxe vous est présentée sous forme d'exemples d'automates de plus en plu
 
 ## Caractéristiques d'une entité 
 
-- Une entité est orientée dans une direction de déplacement 
+* Une entité est orientée dans une direction de déplacement
+  - Up, Down, Right, Left
+  
 
-## Format 
+## Formats
+
+* **automate**
 ```ascii
-<Nom de l'automate> (<état initial>){ 
+<nom de l'automate> (<état initial>){ 
  <transitions>
 }
 ```
+
+* **une transition** 
+```
+* (<nom état source>): <condition> ? <action optionnelle> :(<nom état cible>)
+```
+
+* **transitions multiples**
+```
+* (<nom état source>):
+    | <condition 1> ? <action 1> :(<état cible 1>)
+      ...
+    | <condition n> ? <action n> :(<état cible n>)
+```
+* **état spécifique sans nom** `* ()` = destruction de l'automate
+
 
 ### Un automate qui ne fait rien
 Un seul état, pas de transition.
