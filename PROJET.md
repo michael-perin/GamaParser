@@ -153,7 +153,9 @@ Les conditions permettent de tester la présence ou l'absence d'une entités dan
 - Kind = { T = Team, E = Ennemi, N = Nothing, O = Obstacle, U = Unkwnon, A = Any means any kind of entity}
 
 
-### Interpréteur d'automates
+## UN INTERPRETEUR D'AUTOMATES
+
+
 
 Afin de prendre en main le langage de descriptiont d'automates et de tester votre interpréteur de comportement, on vous conseille de réaliser les automates suivants :
 
@@ -163,6 +165,28 @@ Afin de prendre en main le langage de descriptiont d'automates et de tester votr
   4. deux entités synchronisées qui font les actions uniquement si les deux peuvent le faire.
   5. une entité qui suit une autre
   6. une entité qui suit l'entité du joueur se déplaçant au clavier
+
+
+### Réalisation de l'interpréteur d'automates
+
+Le parser fournit un AST (Arbre de Syntaxe Abstraite) qui correspond à l'ordre de lecture du fichier.
+Ce n'est pas la représentation la plus adaptée pour faire fonctionner l'automate.
+
+On vous conseille de définir une méthode *make* dans chaque classe interne de Ast afin de générer une représentation  de l'automate qui facilitera son interprétation.
+
+L'intepréteur ainsi construit devra posséder une méthode `step` qui fait faire un pas à l'automate.
+
+- Les sous-classes Conditions devront fournir une méthode 
+```java 
+boolean eval(...)
+```
+- Les sous-classes Actions devront fournir une méthode 
+```java
+boolean exec(...)
+```
+(il est possible de retourner un booléen indiquant si l'action a pu s'effectuer ou non).
+
+
 
 
 
