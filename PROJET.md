@@ -42,22 +42,52 @@ L'objectif pédagoqique est de vous amener à réfléchir à un structure de cla
 
 
 
-## Format d'animation graphique
+## Format d'animation graphique `fichier.ani`
 
 Pour pouvoir s'échanger les graphismes entre jeux il faut **fournir par personnage** :
 * un sprite sheet *32 pixels x 32 pixels* au format `.png` 
 
-     Un sprite sheet est une grande image découpée en carrés de 32 pixels de côté qui représente plusieurs illustration d'un personnage.
-     Une animation correspond à un enchainement d'images sélectionnées dans le sprit sheet.
+Un sprite sheet est une grande image découpée en carrés de 32 pixels de côté qui représente plusieurs illustration d'un personnage. Une animation correspond à un enchainement d'images sélectionnées dans le sprit sheet.
      
-     Par exemple : JUMP = 1;3;4;5;6;9;12;1
+Par exemple : JUMP = 1;3;4;5;6;9;12;1
 
- * un fichier d'animation sous la forme : 
-     ```ascii
-     <ACTION 1> = <SÉQUENCE D'ENTIERS> 
-     ...
-     <ACTION n> = <SÉQUENCE D'ENTIERS>
-     ```
+* un fichier d'animation `.ani` sous la forme : 
+```ascii
+sprite_sheet = nom_du_fichier
+<ACTION 1> = <SÉQUENCE D'ENTIERS> 
+...
+<ACTION n> = <SÉQUENCE D'ENTIERS>
+```
+
+
+## Menu de configuration du jeu
+
+* Un menu permet d'attribuer un comportement (automate chargé depuis un fichier) à chaque entités du jeu.
+
+* L'apparence d'une entité est définie dans un fichier `.ani`
+```ascii
+  Ghost.animation := ghost.ani
+  Wall.animation := wall.ani
+  PacMan.animation := pacman.ani
+ ```
+* Sauvegarde de la configuration dans un fichier pour ne pas avoir à le donner à chaque partie.
+
+  Ghost.behaviour  := autamate0.aut
+  PacMan.behaviour := automate1.aut 
+
+* Possibilité d'attribuer l'automate player à toute entité et inversement possiblité de jouer avec n'importe quelle entité (un mur par exemple ;-)
+
+  Mur.behaviour := automate_Player.aut  // tous les murs sont contrôlés par le joueur
+  Mur.animation := mur.ani
+  
+**** L'entité associée au joueur est définie dans le fichier de config
+
+  Player1 := Ghost 
+  Player1.behaviour := automate_Player1
+   
+
+**** l'entité contrôlée par le joueur est distinguée de manière graphique (un halo autour de lui ?).
+
 
 ## Comportements des entités
 
@@ -106,32 +136,6 @@ L'objectif pédagogique est de vous faire coder une gestion dynamique du nombre 
    La catégorie "Other" donne la liberté de définir des entités propres à sa variante :
    chose à ramasser, autre équipe (ni ennemie, ni amie), porte, ...
 
-
-** Configuration du jeu
-
-*** Un menu qui permet d'attribuer un comportement (automate chargé depuis un fichier) à toutes les entités du jeu
-
-
-*** Sauvegarde de la configuration dans un fichier pour ne pas avoir à le donner à chaque partie.
-
-  Ghost.behaviour  := autamate0
-  PacMan.behaviour := automate1 
-
-
-*** Possibilité d'attribuer l'automate player à toute entité et inversement possiblité de jouer avec n'importe quelle entité (un mur par exemple ;-)
-
-  Mur.behaviour   := automate_Player  // tous les murs sont contrôlés par le joueur
-  
-
-*** Le(s) joueur(s)
-
-**** L'entité associée au joueur est définie dans le fichier de config
-
-  Player1 := Ghost 
-  Player1.behaviour := automate_Player1
-   
-
-**** l'entité contrôlée par le joueur est distinguée de manière graphique (un halo autour de lui ?).
 
 
 
