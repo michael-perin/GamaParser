@@ -23,23 +23,23 @@ import ricm3.parser.Ast.*;
 
 public class AutomataParser {
 
-	public static Ast from_file(String path_file) throws Exception {
-  		Ast ast = new AutomataParser(new BufferedReader(new FileReader(path_file))).Run();
-  		return ast; 
+   public static Ast from_file(String path_file) throws Exception {
+  	Ast ast = new AutomataParser(new BufferedReader(new FileReader(path_file))).Run();
+  	return ast; 
    }
 
    public static Ast from_string(String input) throws Exception {
         Ast ast = new AutomataParser(new java.io.StringReader(input)).Run() ;
-  		return ast ;
+  	return ast ;
    }
 
    public static boolean option(String option, String[] args) {
-    		int i=0 ;
+    	int i=0 ;
      	while(i<args.length) { 
-     		if (args[i].equals(option)){ return true ; }
-     		i++;
-   		 }
-  	  return false ;
+     	  if (args[i].equals(option)){ return true ; }
+     	  i++;
+   	}
+  	return false ;
   }
 
   public static int index_of_input(String[] args) {
@@ -50,25 +50,25 @@ public class AutomataParser {
     	  	 	|| args[i].equals("-string")
     	  	 	|| args[i].equals("-aut")
     	  	 	|| args[i].equals("-file") ))
-     	{ return i ; }
-     else
-     	{ i++ ; }
+     	    { return i ; }
+          else
+     	    { i++ ; }
    	}
   	return 0 ;
   }
   
-   public static void main(String[] args) throws Exception {
+  public static void main(String[] args) throws Exception {
         Ast ast ;
         int i = index_of_input(args) ;
         if ( option("-string",args) )
             ast = from_string(args[i]) ;
         else
-        		ast = from_file(args[i]) ;
+            ast = from_file(args[i]) ;
         if ( option("-ast",args) )
-        		System.out.println("// THE AST of the PARSED AUTOMATA in DOT FORMAT \n" + ast.as_dot_tree()) ;
-        	else
-        		System.out.println("// THE PARSED AUTOMATA in DOT FORMAT \n" + ast.as_dot_aut()) ;
-    }
+            System.out.println("// THE AST of the PARSED AUTOMATA in DOT FORMAT \n" + ast.as_dot_tree()) ;
+        else
+            System.out.println("// THE PARSED AUTOMATA in DOT FORMAT \n" + ast.as_dot_aut()) ;
+   }
 	
 }
 
@@ -184,7 +184,6 @@ Atomic_Action
 
 Available_Action
   |  Identifier 
-
     
 Opt_Parameters
   | "(" Some_Parameters ")"
@@ -280,10 +279,7 @@ Ast Run():
  * | epsilon
  */
 List<Automaton> P_Some_Automata(List<Automaton> input_list):
-{
-  Automaton aut ;
-  List<Automaton> list ;
-}
+{ Automaton aut ; List<Automaton> list ; }
 { aut  = P_Automaton()
   list = P_Some_Automata(input_list) 
     	{ list.add(0,aut) ; return list ; }
@@ -296,10 +292,7 @@ List<Automaton> P_Some_Automata(List<Automaton> input_list):
  * | Identifier "(" Identifier ")" "{" At_least_one_Behaviour "}"
  */
 Automaton P_Automaton():
-{ String name ;
-  String entry_state ;
-  List<Behaviour> behaviours ; 
-}
+{ String name ; String entry_state ; List<Behaviour> behaviours ; }
 {
   name = P_Identifier()
   "("
@@ -308,7 +301,7 @@ Automaton P_Automaton():
   "{"
   behaviours = P_At_least_one_Behaviour( new LinkedList<Behaviour>() ) 
   "}"
-  { return new Automaton(name, new State(entry_state), behaviours) ; }
+  	{ return new Automaton(name, new State(entry_state), behaviours) ; }
 }
 
 
@@ -317,10 +310,7 @@ Automaton P_Automaton():
  */
 
 List<Behaviour> P_At_least_one_Behaviour(List<Behaviour> input_list):
-{
-  Behaviour behaviour ;
-  List<Behaviour> list ;
-}
+{ Behaviour behaviour ; List<Behaviour> list ; }
 { behaviour = P_Behaviour()
   list = P_Some_Behaviour(input_list)
   	{ list.add(0,behaviour) ; return list ; }
@@ -333,9 +323,7 @@ List<Behaviour> P_At_least_one_Behaviour(List<Behaviour> input_list):
  */
 
 List<Behaviour> P_Some_Behaviour(List<Behaviour> input_list):
-{
-  List<Behaviour> list ;
-}
+{ List<Behaviour> list ; }
 { list = P_At_least_one_Behaviour(input_list)
 	{ return list ; }
 | /*epsilon*/
@@ -344,13 +332,10 @@ List<Behaviour> P_Some_Behaviour(List<Behaviour> input_list):
 
 
 /* Behaviour
- * | "*"  State Opt_points Some_Transitions
+ * | "*"  State Opt_Points Some_Transitions
  */
 Behaviour P_Behaviour():
-{
-  State state ;
-  List<Transition> list = new LinkedList<Transition>() ;
-}
+{ State state ; List<Transition> list = new LinkedList<Transition>() ; }
 { "*"
   state = P_State()
   P_Opt_Points()
@@ -374,9 +359,7 @@ Void P_Opt_Points():
  * | "(" State_Identifier ")"
  */
 State P_State():
-{
-  State state ;
-}
+{ State state ; }
 { "("
   state = P_State_Identifier()
   ")" 
@@ -390,9 +373,7 @@ State P_State():
  * | epsilon
  */
 State P_State_Identifier():
-{
-  String name ;
-}
+{ String name ; }
 { name = P_Identifier()  
   	{ return new State(name); }
 | "_"
@@ -407,14 +388,11 @@ State P_State_Identifier():
  * | epsilon
  */
 List<Transition> P_Some_Transitions(List<Transition> input_list):
-{
-  Transition transition ; 
-  List<Transition> list ;
-}
+{ Transition transition ; List<Transition> list ; }
 {
   transition = P_Transition()
   list = P_Some_Transitions(input_list)
-     { list.add(0,transition) ; return list ; } 
+   	{ list.add(0,transition) ; return list ; } 
 | /*epsilon*/  
    	{ return input_list ; }
 }
@@ -424,11 +402,7 @@ List<Transition> P_Some_Transitions(List<Transition> input_list):
  * | Opt_Bar  Condition "?" Action ":"  State
  */
 Transition P_Transition():
-{
-	Condition condition ;
-	Action action ;
-	State state ;	
-}
+{ Condition condition ; Action action ; State state ; }
 {
   P_Opt_Bar()
   condition = P_Condition() 
@@ -455,9 +429,7 @@ Void P_Opt_Bar():
    | Expression
 */    
 Condition P_Condition():
-{
-  Expression expression ;
-}
+{ Expression expression ; }
 { expression = P_Expression()
 	{ return new Condition(expression) ; }
 }
@@ -467,26 +439,19 @@ Condition P_Condition():
    | Expression
 */    
 Action P_Action():
-{
-  Expression expression ;
-}
+{ Expression expression ; }
 { expression = P_Expression()
 	{ return new Action(expression) ; }
 }
-
 	   
   
 /* Expression
    | "(" Expression ")" Op_Expression
    | <UNARYOP> Expression 
-   | FunCall  Op_Expression
+   | FunCall Op_Expression
 */
 Expression P_Expression():
-{
-  Expression expression ;
-  Token token ;
-  FunCall funcall ;
-}
+{ Expression expression ; Token token ; FunCall funcall ; }
 { "("
   expression = P_Expression()
   ")"
@@ -508,13 +473,10 @@ Expression P_Expression():
    | epsilon
 */
 Expression P_Op_Expression(Expression e1):
-{
-  Token token ;
-  Expression e2 ;
-}
+{ Token token ; Expression e2 ; }
 { token = <BINOP>
   e2 = P_Expression()
-    { return new BinaryOp(e1,token.image,e2) ; }
+ 	{ return new BinaryOp(e1,token.image,e2) ; }
 
 | /*epsilon*/
   	{ return e1 ; }
@@ -522,15 +484,12 @@ Expression P_Op_Expression(Expression e1):
 
 
 /* FunCall
- * | "Key(" KeyName ")"
+ * | "Key(" KeyName ")"  // The "Key" condition has a fixed arity
  * | CONDITION Opt_Parameters
  * | ACTION    Opt_Parameters
  */
 FunCall P_FunCall():
-{ Token token ;
-  List<Parameter> parameters = new LinkedList<Parameter>() ;
-  Key key ;
-}
+{ Token token ; List<Parameter> parameters = new LinkedList<Parameter>() ; Key key ; }
 {
   "Key("
   key = P_Key_Name()	
@@ -553,9 +512,7 @@ FunCall P_FunCall():
  * | epsilon
  */
 List<Parameter> P_Opt_Parameters(List<Parameter> input_list):
-{
-  List<Parameter> list ;
-}
+{ List<Parameter> list ; }
 {
   "("
   list = P_Some_Parameters(input_list)
@@ -571,10 +528,7 @@ List<Parameter> P_Opt_Parameters(List<Parameter> input_list):
  * | epsilon
  */
 List<Parameter> P_Some_Parameters(List<Parameter> input_list):
-{
-  Parameter parameter ;
-  List<Parameter> list ;
-}
+{ Parameter parameter ; List<Parameter> list ; }
 {
   parameter = P_Parameter()
   list = P_More_Parameters(input_list) 
@@ -590,10 +544,7 @@ List<Parameter> P_Some_Parameters(List<Parameter> input_list):
  * | epsilon
  */
 List<Parameter> P_More_Parameters(List<Parameter> input_list):
-{
-  Parameter parameter ;
-  List<Parameter> list ;
-}
+{ Parameter parameter ; List<Parameter> list ; }
 { ","
   parameter = P_Parameter()
   list = P_More_Parameters(input_list) 
@@ -637,10 +588,7 @@ Key P_Key_Name():
  * |  "_"
  */
 Parameter P_Parameter():
-{
-  Token token ;
-  Parameter parameter ;
-}
+{ Token token ; Parameter parameter ; }
 { parameter = P_Direction()
 	{ return parameter ; }
 
