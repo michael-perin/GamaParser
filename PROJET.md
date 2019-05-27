@@ -149,13 +149,11 @@ L'objectif pédagogique est de vous faire coder une gestion dynamique du nombre 
 
 Les conditions permettent de tester la présence ou l'absence d'une entités dans une direction.
 
-- Direction = {Up, Down, Left, Right} : pas de déplacement en diagonale
-- Kind = { T = Team, E = Ennemi, N = Nothing, O = Obstacle, U = Unkwnon, A = Any means any kind of entity}
+## Un interpréteur d'automates
 
+**L'interprétation des actions et des conditions** est définie dans le fichier [interpretation.md](intepretation.md)
 
-## UN INTERPRETEUR D'AUTOMATES
-
-
+### Des automates simples qui serviront à tester votre interpréteur
 
 Afin de prendre en main le langage de descriptiont d'automates et de tester votre interpréteur de comportement, on vous conseille de réaliser les automates suivants :
 
@@ -165,7 +163,6 @@ Afin de prendre en main le langage de descriptiont d'automates et de tester votr
   4. deux entités synchronisées qui font les actions uniquement si les deux peuvent le faire.
   5. une entité qui suit une autre
   6. une entité qui suit l'entité du joueur se déplaçant au clavier
-
 
 ### Réalisation de l'interpréteur d'automates
 
