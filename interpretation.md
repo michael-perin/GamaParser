@@ -1,7 +1,7 @@
 # INTERPRÉTATION DES ACTIONS ET CONDITIONS
 
 
-## Caractéristiques d'une entité 
+## Caractéristiques des entités 
 
 * Une entité est orientée dans une direction Up, Down, Right, Left
 
@@ -24,52 +24,32 @@ PopWiz(Init){
 }
 ```
 
-### L'automate du joueur
 
-```
-Player(Init){
-  * (Init):
-  | Key(FU) ? Move(N) :(Init)
-  | Key(FD) ? Move(S) :(Init)
-  | Key(FL) ? Move(O) :(Init)
-  | Key(FR) ? Move(E) :(Init)
-  | Key(SPACE) ? Hit  :(Init)
-  | Key(ENTER) ? Jump :(Init)
-  | Key(b)  ? Jump(B) :(Init)
-  | Key(d)  ? Move(D) :(Init)
-  | Key(e)  ? Move(E) :(Init)
-  | Key(f)  ? Turn(B) :(Init)
-  | Key(p)  ? Pop     :(Init)
-  | Key(w)  ? Wizz    :(Init)
-  | Key(g)  ? Get     :(Init)
-  | Key(t)  ? Throw   :(Init)
-  | True    ? Power   :(Init)
-}
-```
 
-# LES DIRECTIONS
+## LES DIRECTIONS
 
-## Absolue
+### Absolue
 - N = North
 - S = South
 - E = East
 - O = Ouest
 
-## Relative
+### Relative
 - F = front
 - B = back
 - L = on my left
 - R = on my right
 
 
-# LES TOUCHES
+## LES TOUCHES
+
 - les lettres a,...,z
 - les chiffres 0...9
 - SPACE, ENTER,
 - les flêches: FU, FD, FR, FL
 
 
-# LES ENTITÉS
+## LES ENTITÉS
 
 - V = Void
 - T = Team = une entité de mon équipe
@@ -81,9 +61,9 @@ Player(Init){
 - M = un Missile
 
 
-# LES CONDITIONS
+## LES CONDITIONS
 
-## Les conditions booléennes de base
+### Les conditions booléennes de base
 -  True : toujours vraie
 -  Key(Touche) : vraie si la Touche est enfoncée
 -  MyDir(Direction) : vraie si l'entité est orientée dans la Direction
@@ -92,15 +72,15 @@ Player(Init){
 -  GotPower : vraie s'il reste de l'énergie à l'entité
 -  GotStuff : vraie s'il reste des choses dans le store
 
-## Les opérateurs sur les conditions
+### Les opérateurs sur les conditions
 - conjonction: Condition1 & Condition2
 - disjunction: Condition1 / condition2
 - negation: not(Condition)
 
 
-# LES ACTIONS
+## LES ACTIONS
 
-## Les actions peuvent avoir ou non une direction.
+### Les actions peuvent avoir ou non une direction.
 
 - Si dans votre jeu une action Wizz n'a pas de direction.
 alors vous interpréterait Wizz(U) comme Wizz.
@@ -108,33 +88,36 @@ alors vous interpréterait Wizz(U) comme Wizz.
 - Si, au contraire, l'action Wizz doit avoir une direction
 et que l'automate n'en donne pas. Vous interpreterez Wizz comme Wizz(F).
 
-## Deux actions essentielles pour votre jeu (direction optionnelle, par défaut F)
+### Deux actions essentielles pour votre jeu (direction optionnelle, par défaut F)
 -  Wizz(Direction) = ?
 -  Pop(Direction)  = ?
 
-## Déplacements (direction optionnelle, par défaut F)
+### Déplacements (direction optionnelle, par défaut F)
 -  Move(Direction) = déplacement
 -  Jump(Direction) = saut
 
-## Rotation (direction optionnelle, par défaut R)
+### Rotation (direction optionnelle, par défaut R)
 - Turn(Direction) = changement de direction (sans déplacement)
 - Example:
     - Turn(R) = +90 degree : clockwise
     - Turn(B) = 180 degree
     - Turn(L) = -90 degree : counter-clockwise
 
-## Affrontements (direction optionnelle, par défaut F)
+### Affrontements (direction optionnelle, par défaut F)
 -  Hit(Direction) = frapper
 -  Protect(Direction) = protection
 
-## Collecte (direction optionnelle, par défaut F)
+### Collecte (direction optionnelle, par défaut F)
 -  Pick(Direction) = ramasser une chose
 -  Throw(Direction) = lancer/déposer ce que l entité a dans la main.
 
-## Stockage (action sans argument)
+### Stockage (action sans argument)
 -  Store = mettre en réserve (dans son sac)
 -  Get   = prendre une entité dans sa réserve si aucune en main, changer d'entité si une en main (elle est remise dans le sac)
 
-## Power (action sans argument)
+### Power (action sans argument)
 -  Power = pas d'action, mais récupération d'énergie.
 -  Kamikaze =  disparition, suicide, explosion, tranformation en autre chose, ...
+
+### Reproduction (action sans argument)
+-  Egg = crée une nouvelle entité de même nature que l'entité qui a effectué l'action
