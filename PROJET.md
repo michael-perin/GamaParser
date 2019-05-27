@@ -182,7 +182,25 @@ boolean exec(...)
 ```
 (il est possible de retourner un booléen indiquant si l'action a pu s'effectuer ou non).
 
+### Interprétation déterministe ou non-déterministe ?
 
+Quelle transition prendre si plusieurs conditions sont satisfaites ?
+
+À vous de choisir parmi les deux possibilités :
+
+* Si les transitions sont évaluées dans l'ordre. La première transition dont la condition est satisfaite sera sélectionnée.
+  Dans ce cas les transitions située après une condition "True" ne seront jamais prises.
+
+* Vous pouvez opter pour un interpréteur non-déterministe qui tire au sort parmi toutes les transitions dont les conditions sont satisfaites. 
+
+```ascii
+PowPopWiz(Init){
+* (Init): 
+    | True ? Pop   :(Init)
+    | True ? Wizz  :(Init)
+    | True ? Power :(Init)  
+}
+```
 
 
 
