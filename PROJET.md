@@ -112,9 +112,7 @@ sprite_sheet = nom_du_fichier
 * on peut attribuer un comportement (ne rien faire) aux obstacles, mais ils ont un automate.
 * le contrôle au clavier est réalisé via un automate controle-clavier
    
-### Le langage de description des automates est fourni et fixé. 
-
-Les fonctionnalités du parser sont décrites dans le fichier [README.md](README.md). 
+### Le langage de description des automates est fourni et fixé
    
 ### Les actions
 
@@ -161,7 +159,7 @@ Afin de prendre en main le langage de descriptiont d'automates et de tester votr
   2. l'automate du joueur qui effectue l'action correspondant à une touche clavier 
   3. une entité qui parcourt une ligne et fait demi-tour quand elle touche un bord
   4. deux entités synchronisées qui font les actions uniquement si les deux peuvent le faire.
-  5. une entité qui suit une autre
+  5. une entité qui en suit une autre
   6. une entité qui suit l'entité du joueur se déplaçant au clavier
 
 ### Réalisation de l'interpréteur d'automates
