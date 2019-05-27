@@ -20,9 +20,13 @@ The parser can take input
 - from a string
   ``java -cp ./bin ricm3.parser.AutomataParser -aut -string "Aut(Idle){ * (Idle)}"
 
-## LA [SYNTAX](SYNTAX.md)
+## LA SYNTAXE 
 
-## DES [EXEMPLES D'AUTOMATES](example/automata0.txt)
+voir [SYNTAX.md](SYNTAX.md)
+
+## DES EXEMPLES D'AUTOMATES
+
+voir [automate0.txt](example/automata0.txt)
 
 ## INTERPRETATION des conditions et des actions
 
