@@ -4,10 +4,8 @@ La syntaxe vous est présentée sous forme d'exemples d'automates de plus en plu
 
 ## Caractéristiques d'une entité 
 
-* Une entité est orientée dans une direction de déplacement
-  - Up, Down, Right, Left
+* Une entité est orientée dans une direction Up, Down, Right, Left
   
-
 ## Formats
 
 * **automate**
@@ -17,9 +15,14 @@ La syntaxe vous est présentée sous forme d'exemples d'automates de plus en plu
 }
 ```
 
-* **une transition** 
+* **une transition avec action** 
 ```
-* (<nom état source>): <condition> ? <action optionnelle> :(<nom état cible>)
+* (<nom état source>): <condition> ? <action> :(<nom état cible>)
+```
+
+* **une transition sans action** 
+```
+* (<nom état source>): <condition> :(<nom état cible>)
 ```
 
 * **transitions multiples**
@@ -119,4 +122,4 @@ Player(Init){
 
 ## La grammaire (voir [parser_automata](src/ricm3/parser/parser_automata.jj))
 
-## Des exemples d'[automates](example/automata0.txt)
+## Des exemples d'[automates simples](example/automata0.txt)
