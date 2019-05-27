@@ -14,11 +14,17 @@ L'intérêt étant de pouvoir importer et échanger des comportements et des gra
 
 * **Jeu en 2D** : plateforme ou carte vue du dessus
 
-* absolument *TOUTES les entités* du jeu ont un **comportement défini par un automate**
+* absolument **Toutes les entités* du jeu ont un comportement défini par un automate**
 
   - un/deux entités joueurs controlées au clavier via un automate "contrôle-clavier" 
   - des adversaires dont le comportements est défini par des automates
   - des obstacels dont le comportement est un automate "ne rien faire"
+
+* **Fenêtre de visualisation (Viewport)**
+
+- le monde virtuel est plus grande que le viewport
+- le viewport centré sur l'entité contrôlée au clavier 
+- deux joueurs = deux viewports 
 
 * **Univers sans bord (dans au moins une dimension)**, deux solutions : 
   - génération aléatoire au fur et à mesure qu'on avance
@@ -29,6 +35,12 @@ L'intérêt étant de pouvoir importer et échanger des comportements et des gra
    - un jeu de stratégie : 
       le(s) joueur(s) sont accompagnés d'entités aux comportements automatiques 
       définis au moyen du langage de description de comportements
+
+* **2 univers** avec des effets différents associées aux actions 
+
+L'objectif pédagoqique est de vous amener à réfléchir à un structure de classe où les actions ne sont fixées dans le personnage mais dépendent de l'univers dans lequel il évolue.
+
+
 
 ## Format d'animation graphique
 
@@ -93,16 +105,6 @@ L'objectif pédagogique est de vous faire coder une gestion dynamique du nombre 
 
    La catégorie "Other" donne la liberté de définir des entités propres à sa variante :
    chose à ramasser, autre équipe (ni ennemie, ni amie), porte, ...
-
-
-** Deux univers : chaque jeu comporte deux univers avec des effets différents associées aux actions  
-
-
-** Fenetre de visualisation = Viewport  
-
-   - le monde virtuel est plus grande que le viewport
-
-   - viewport centré sur l'entité contrôlée au clavier et deux joueurs = deux viewports 
 
 
 ** Configuration du jeu
