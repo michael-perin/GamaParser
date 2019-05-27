@@ -2,7 +2,7 @@
 
 ## PARSER 
 
-Le parser [parser_automata.jj](src/ricm3/parser/parser_automata.jj)) écrit en JavaCC prend en paramètre de ligne de commande un nom de fichier et génére l'Abstract Syntaxe Tree (AST) au format `.dot` sur la sortie standard.
+Le parser [parser_automata.jj](src/ricm3/parser/parser_automata.jj) écrit en JavaCC prend en paramètre de ligne de commande un nom de fichier et génére l'Abstract Syntaxe Tree (AST) au format `.dot` sur la sortie standard.
 
 Le fichier `.dot` décrit l'AST qu'on peut visualiser avec l'outil [graphviz](https://www.graphviz.org).
 
@@ -20,19 +20,26 @@ The parser can take input
 - from a string
   ``java -cp ./bin ricm3.parser.AutomataParser -aut -string "Aut(Idle){ * (Idle)}"
 
-## [SYNTAX](SYNTAX.md)
+## LA [SYNTAX](SYNTAX.md)
 
-## [EXEMPLES D'AUTOMATES](example/automata0.txt)
+## DES [EXEMPLES D'AUTOMATES](example/automata0.txt)
 
-## [INTERPRETATION](INTEPRETATION.md)
+## INTERPRETATION des conditions et des actions
+
+L'inteprétation des conditions et des actions est donnée dans [INTERPRETATION.md](INTEPRETATION.md) 
+
+## À RÉALISER : UN INTERPRETEUR D'AUTOMATES
 
 Votre tâche consiste à créer une méthode *make* pour chaque classe interne de Ast afin de générer un interpréteur de transitions. 
 
 L'intepréteur doit posséder une méthode qui fait faire un pas à l'automate.
 
-- Les conditions doivent fournir une méthode ```java 
-boolean eval()```
+- Les conditions doivent fournir une méthode 
+```java 
+boolean eval()
+```
 - *... exec()* pour les Actions (il est possible de rendre un booléen qui indique si l'action a pu s'effectuer ou non).
+
 
 
 
