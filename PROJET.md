@@ -42,6 +42,35 @@ L'intérêt étant de pouvoir importer et échanger des comportements et des gra
 L'objectif pédagoqique est de vous amener à réfléchir à un structure de classe où les actions ne sont fixées dans le personnage mais dépendent de l'univers dans lequel il évolue.
 
 
+## Créativité
+
+Ces contraintes pédagogiques sont imposées, par contre... 
+
+### Le thème du jeu est libre 
+
+### Le but du jeu est non spécifié
+- tuer l'adversaire ?
+- récupérer des éléments sur la carte ?
+- survivre un certain temps ?
+- se multiplier ?
+- bloquer les issues ?
+- gagner du terrain ?
+- marquer des points ?
+- temps limité vs durée illimitée ? 
+- ...
+
+### Les paramètres des entités et leur gestion sont non specifiés
+- puissance de frappe en fonction de l'énergie
+- vitesse de déplacement en fonction de l'énergie
+- inertie en fonction de l'énergie
+- résistance en fonction de l'énergie
+- au dessous de 0 points d'énergie, on devient un zombie ?
+- au delà de 100 points d'énergie, on explose ?
+- Lorsque l'entité du joueur meurt, le joueur se réincarne dans l'entité la plus proche qui se tranforme temporairement en fantôme (indesctrucible et inoffensif). Le joueur prend le contrôle de l'entité.  À vous de trouver une manière pour que le joueur puisse changer d'entité.
+- ...
+
+
+
 ## Format d'animation graphique : fichier `.ani`
 
 Pour pouvoir s'échanger les graphismes entre jeux il faut **fournir par personnage** :
@@ -135,33 +164,6 @@ Afin de prendre en main le langage de descriptiont d'automates et de tester votr
   5. une entité qui suit une autre
   6. une entité qui suit l'entité du joueur se déplaçant au clavier
 
-
-## Créativité
-
-Ces contraintes pédagogiques sont imposées, par contre... 
-
-### Le thème du jeu est libre 
-
-### Le but du jeu est non spécifié
-- tuer l'adversaire ?
-- récupérer des éléments sur la carte ?
-- survivre un certain temps ?
-- se multiplier ?
-- bloquer les issues ?
-- gagner du terrain ?
-- marquer des points ?
-- temps limité vs durée illimitée ? 
-- ...
-
-### Les paramètres des entités et leur gestion sont non specifiés
-- puissance de frappe en fonction de l'énergie
-- vitesse de déplacement en fonction de l'énergie
-- inertie en fonction de l'énergie
-- résistance en fonction de l'énergie
-- au dessous de 0 points d'énergie, on devient un zombie ?
-- au delà de 100 points d'énergie, on explose ?
-- Lorsque l'entité du joueur meurt, le joueur se réincarne dans l'entité la plus proche qui se tranforme temporairement en fantôme (indesctrucible et inoffensif). Le joueur prend le contrôle de l'entité.  À vous de trouver une manière pour que le joueur puisse changer d'entité.
-- ...
 
 
 
