@@ -1,4 +1,4 @@
-# Syntaxe du langage de description d'automate
+# Syntaxe du langage de description d'automates
 
 La syntaxe vous est présentée sous forme d'exemples d'automates de plus en plus complexes
 
