@@ -52,9 +52,12 @@ La syntaxe vous est présentée sous forme d'exemples d'automates de plus en plu
     - Turn(B) fait demi-tour par rapport à l'orientation actuelle de l'entité
     - Turn(S) tourne l'entité vers le sud
   
-* **Les conditions**
-  - La condition `True` est toujours satisfaite.
+* **Les opérateurs sur les conditions**
+  - conjonction: Condition1 & Condition2
+  - disjunction: Condition1 / condition2
+  - negation: not(Condition) ou bien ! Condition
 
+## Des exemples
 
 ### Un automate qui ne fait rien
 Un seul état, pas de transition.
