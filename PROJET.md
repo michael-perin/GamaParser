@@ -161,7 +161,8 @@ Afin de prendre en main le langage de descriptiont d'automates et de tester votr
   4. deux entités synchronisées qui font les actions uniquement si les deux peuvent le faire.
   5. une entité qui en suit une autre
   6. une entité qui suit l'entité du joueur se déplaçant au clavier
-
+  7. une entité qui se réplique et remplit les cases vides autour d'elle.
+  
 ### Réalisation de l'interpréteur d'automates
 
 Le parser fournit un AST (Arbre de Syntaxe Abstraite) qui correspond à l'ordre de lecture du fichier.
