@@ -124,6 +124,18 @@ Les conditions permettent de tester la présence ou l'absence d'une entités dan
 - Kind = { T = Team, E = Ennemi, N = Nothing, O = Obstacle, U = Unkwnon, A = Any means any kind of entity}
 
 
+### Interpréteur d'automates
+
+Afin de prendre en main le langage de descriptiont d'automates et de tester votre interpréteur de comportement, on vous conseille de réaliser les automates suivants :
+
+  1. une entité qui tourne sur elle même et frappe
+  2. l'automate du joueur qui effectue l'action correspondant à une touche clavier 
+  3. une entité qui parcourt une ligne et fait demi-tour quand elle touche un bord
+  4. deux entités synchronisées qui font les actions uniquement si les deux peuvent le faire.
+  5. une entité qui suit une autre
+  6. une entité qui suit l'entité du joueur se déplaçant au clavier
+
+
 ## Créativité
 
 Ces contraintes pédagogiques sont imposées, par contre... 
@@ -152,17 +164,4 @@ Ces contraintes pédagogiques sont imposées, par contre...
 - ...
 
 
-
-* V. AUTOMATES à réaliser en phase de test pour prendre en main le sujet
-
-  1. une entité qui tourne sur elle même et frappe
-
-  2. une entité qui parcourt une ligne et fait demi-tour quand elle touche un bord
-
-  3. deux entités synchronisées qui font les actions uniquement si les deux peuvent le faire.
-
-  4. une entité qui suit une autre
-
-  5. une entité qui suit l'entité du joueur se déplaçant au clavier
-   
 
