@@ -34,15 +34,22 @@ L'inteprétation des conditions et des actions est donnée dans [INTERPRETATION.
 
 ## À RÉALISER : UN INTERPRETEUR D'AUTOMATES
 
-Votre tâche consiste à créer une méthode *make* pour chaque classe interne de Ast afin de générer un interpréteur de transitions. 
+Le parser fournit un AST (Arbre de Syntaxe Abstraite) qui correspond à l'ordre de lecture du fichier.
+Ce n'est pas la représentation la plus adaptée pour faire fonctionner l'automate.
 
-L'intepréteur doit posséder une méthode qui fait faire un pas à l'automate.
+On vous conseille de définir une méthode *make* dans chaque classe interne de Ast afin de générer une représentation  de l'automate qui facilitera son interprétation.
 
-- Les conditions doivent fournir une méthode 
+L'intepréteur ainsi construit devra posséder une méthode `step` qui fait faire un pas à l'automate.
+
+- Les sous-classes Conditions devront fournir une méthode 
 ```java 
-boolean eval()
+boolean eval(...)
 ```
-- *... exec()* pour les Actions (il est possible de rendre un booléen qui indique si l'action a pu s'effectuer ou non).
+- Les sous-classes Actions devront fournir une méthode 
+```java
+boolean exec(...)
+```
+(il est possible de retourner un booléen indiquant si l'action a pu s'effectuer ou non).
 
 
 
