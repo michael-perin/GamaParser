@@ -1,5 +1,11 @@
 # INTERPRÉTATION DES ACTIONS ET CONDITIONS
 
+
+## Caractéristiques d'une entité 
+
+* Une entité est orientée dans une direction Up, Down, Right, Left
+
+
 ### Interprétation déterministe ou non-déterministe ? à vous de choisir
 
 Quelle transition prendre si plusieurs conditions sont satisfaites ?
