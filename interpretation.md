@@ -1,7 +1,7 @@
 # INTERPRÉTATION DES ACTIONS ET CONDITIONS
 
 
-Une entité est orientée dans une direction Up, Down, Right, Left
+Une entité est forcément orientée dans une direction Up, Down, Right, Left
 
 ## LES DIRECTIONS
 
@@ -100,22 +100,3 @@ et que l'automate n'en donne pas. Vous interpreterez Wizz comme Wizz(F).
 -  Egg = crée une nouvelle entité de même nature que l'entité qui a effectué l'action
 
 
-## INTEPRÉTATION DÉTERMINISE ou NON-DÉTERMINISTE ? 
-
-Quelle transition prendre si plusieurs conditions sont satisfaites ?
-
-À vous de choisir parmi les deux possibilités :
-
-* Si les transitions sont évaluées dans l'ordre. La première transition dont la condition est satisfaite sera sélectionnée.
-  Dans ce cas les transitions située après une condition "True" ne seront jamais prises.
-
-* Vous pouvez opter pour un interpréteur non-déterministe qui tire au sort parmi toutes les transitions dont les conditions sont satisfaites. 
-
-```ascii
-PopWiz(Init){
-* (Init): 
-    | Cell(F,E) ? Pop(F)  :(Init)
-    | Cell(B,E) ? Wizz(B) :(Init)
-    | True ? Power        :(Init)  
-}
-```
