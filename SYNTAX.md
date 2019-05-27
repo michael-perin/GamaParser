@@ -52,6 +52,9 @@ La syntaxe vous est présentée sous forme d'exemples d'automates de plus en plu
     - Turn(B) fait demi-tour par rapport à l'orientation actuelle de l'entité
     - Turn(S) tourne l'entité vers le sud
   
+* **Les conditions**
+  - La condition `True` est toujours satisfaite.
+
 
 ### Un automate qui ne fait rien
 Un seul état, pas de transition.
@@ -85,15 +88,21 @@ Escape(Init){
 }
 ```
 
-### Si condition FAIRE action SINON ...
+### Déterminisme ou Non-déterminisme ? à vous de choisir
 
-Les transitions sont évaluées dans l'ordre. La condition `True` est toujours satisfaite et joue le rôle de *sinon*.
+Quelle transition prendre si plusieurs conditions sont satisfaites ?
+
+* Si les transitions sont évaluées dans l'ordre. La première transition dont la condition est satisfaite sera sélectionnée.
+  Dans ce cas les transitions située après une condition "True" ne seront jamais prises.
+
+* Vous pouvez opter pour un interpréteur non-déterministe qui tire au sort parmi toutes les transitions dont les conditions sont satisfaites. 
 
 ```ascii
 PopWiz(Init){
 * (Init): 
-    | Cell(F,V) ? Pop(F) :(Init)
-    | True ? Wizz        :(Init)  
+    | Cell(F,E) ? Pop(F)  :(Init)
+    | Cell(B,E) ? Wizz(B) :(Init)
+    | True ? Power        :(Init)  
 }
 ```
 
