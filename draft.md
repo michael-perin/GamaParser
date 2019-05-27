@@ -1,8 +1,4 @@
-# SYNTAX OF THE GAME AUTOMATA
-
-
-
-* IV. SPECIFICATIONS DU LANGAGE DE DESCRIPTION D'AUTOMATES
+# DRAFT & THOUGHTS
 
 ** Direction = {Up, Down, Left, Right} : no diagonal
 
@@ -27,7 +23,7 @@
    Thus it is possible to do many test transition during one round.
    
 
-*** [#B] At each round, each active entity tries to perform transitions
+*** At each round, each active entity tries to perform transitions
 
    The number of possible transitions is limited to avoid infinite loop.
 
