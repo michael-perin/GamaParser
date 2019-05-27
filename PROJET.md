@@ -42,7 +42,7 @@ L'intérêt étant de pouvoir importer et échanger des comportements et des gra
 L'objectif pédagoqique est de vous amener à réfléchir à un structure de classe où les actions ne sont fixées dans le personnage mais dépendent de l'univers dans lequel il évolue.
 
 
-## Format d'animation graphique `fichier.ani`
+## Format d'animation graphique : fichier `.ani`
 
 Pour pouvoir s'échanger les graphismes entre jeux il faut **fournir par personnage** :
 * un sprite sheet *32 pixels x 32 pixels* au format `.png` 
@@ -78,7 +78,7 @@ sprite_sheet = nom_du_fichier
   PacMan.animation := pacman.ani
  ```
 
-## Comportements des entités
+## Comportements des entités : fichier `.aut`
 
 * ABSOLUMENT TOUTES les entités du jeu ont un comportement défini par un automate
 * on peut attribuer un comportement (ne rien faire) aux obstacles, mais ils ont un automate.
