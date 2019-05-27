@@ -31,13 +31,31 @@ La syntaxe vous est présentée sous forme d'exemples d'automates de plus en plu
 ```
 * **état spécifique sans nom** `* ()` = destruction de l'automate
 
+* **les directions**
+  - N,S,E,O sont des directions absolues
+  - F,B,L,R sont des directions relatives à l'orientation de l'entité
+
+* **Les paramètres des actions sont optionnels**
+  + Move
+    - Move sans paramètre avance suivant l'orientation actuelle de l'entité
+    - Move(d) avance dans la direction d
+  + Hit
+    - Hit frappe selon l'orientation actuelle de l'entité
+    - Hit(B) donne un coup en arrière
+    - Hit(N) donne un coup au nord
+  + Turn
+    - Turn = Turn(R) tourne dans le sens horaire
+    - Turn(L) tourne dans le sens anti-horaire
+    - Turn(B) fait demi-tour par rapport à l'orientation actuelle de l'entité
+    - Turn(S) tourne l'entité vers le sud
+  
 
 ### Un automate qui ne fait rien
 Un seul état, pas de transition.
 
 ```ascii
-Dead(Stuck){
- * (Stuck)
+Philosopher0(Think){
+  * (Think)
 }
 ```
 
@@ -45,7 +63,7 @@ Dead(Stuck){
 ```ascii
 Blocker(GoLeft){
 * (GoLeft):
-    | Cell(L,V) ? Step :(GoLeft)
+    | Cell(L,V) ? Move :(GoLeft)
     | True             :(Block)
 * (Block)
 }
@@ -86,6 +104,30 @@ Aut4(ENTRY){
 * (GoRight):
   | Free(R) ? Step :(GoRight)
   | True           :(TurnLeft)
+}
+```
+
+### L'automate du joueur
+
+
+```
+Player(Init){
+  * (Init):
+  | Key(FU) ? Move(N) :(Init)
+  | Key(FD) ? Move(S) :(Init)
+  | Key(FL) ? Move(O) :(Init)
+  | Key(FR) ? Move(E) :(Init)
+  | Key(SPACE) ? Hit  :(Init)
+  | Key(ENTER) ? Jump :(Init)
+  | Key(b)  ? Jump(B) :(Init)
+  | Key(d)  ? Move(D) :(Init)
+  | Key(e)  ? Move(E) :(Init)
+  | Key(f)  ? Turn(B) :(Init)
+  | Key(p)  ? Pop     :(Init)
+  | Key(w)  ? Wizz    :(Init)
+  | Key(g)  ? Get     :(Init)
+  | Key(t)  ? Throw   :(Init)
+  | True    ? Power   :(Init)
 }
 ```
 
