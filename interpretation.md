@@ -100,9 +100,11 @@ et que l'automate n'en donne pas. Vous interpreterez Wizz comme Wizz(F).
 -  Egg = crée une nouvelle entité de même nature que l'entité qui a effectué l'action
 
 
-## Interprétation déterministe ou non-déterministe ? à vous de choisir
+## INTEPRÉTATION DÉTERMINISE ou NON-DÉTERMINISTE ? 
 
 Quelle transition prendre si plusieurs conditions sont satisfaites ?
+
+À vous de choisir parmi les deux possibilités :
 
 * Si les transitions sont évaluées dans l'ordre. La première transition dont la condition est satisfaite sera sélectionnée.
   Dans ce cas les transitions située après une condition "True" ne seront jamais prises.
