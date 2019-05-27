@@ -41,7 +41,6 @@ L'intérêt étant de pouvoir importer et échanger des comportements et des gra
 L'objectif pédagoqique est de vous amener à réfléchir à un structure de classe où les actions ne sont fixées dans le personnage mais dépendent de l'univers dans lequel il évolue.
 
 
-
 ## Format d'animation graphique `fichier.ani`
 
 Pour pouvoir s'échanger les graphismes entre jeux il faut **fournir par personnage** :
@@ -62,18 +61,21 @@ sprite_sheet = nom_du_fichier
 
 ## Menu de configuration du jeu
 
-* Un menu permet d'attribuer un comportement (automate chargé depuis un fichier) à chaque entités du jeu.
+* Un menu permet d'attribuer à chaque entités du jeu 
+  - un comportement (un fichier `.aut`) et 
+  - une animation  (un fichier `.ani`)
 
-* L'apparence d'une entité est définie dans un fichier `.ani`
+* La configuration peut-être sauvegarder dans un fichier `.cfg` pour ne pas avoir à la redonner à chaque partie
+
 ```ascii
-  Ghost.animation := ghost.ani
-  Wall.animation := wall.ani
+  Ghost.behaviour  := ghost.aut
+  Wall.behaviour   := idle.aut
+  PacMan.behaviour := player1.aut 
+
+  Ghost.animation  := ghost.ani
+  Wall.animation   := wall.ani
   PacMan.animation := pacman.ani
  ```
-* Sauvegarde de la configuration dans un fichier pour ne pas avoir à le donner à chaque partie.
-
-  Ghost.behaviour  := autamate0.aut
-  PacMan.behaviour := automate1.aut 
 
 * Possibilité d'attribuer l'automate player à toute entité et inversement possiblité de jouer avec n'importe quelle entité (un mur par exemple ;-)
 
