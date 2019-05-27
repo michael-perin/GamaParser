@@ -1,19 +1,10 @@
 # GamaParser = A parser of Game Automata in Java CC
 
-## PARSER
+## PARSER 
 
-Le parser fourni dans parser_automata.jj prend en paramètre de ligne de commande un nom de fichier et génére l'Abstract Syntaxe Tree (AST) au format .dot sur la sortie standard.
+Le parser [parser_automata.jj](src/ricm3/parser/parser_automata.jj)) écrit en JavaCC prend en paramètre de ligne de commande un nom de fichier et génére l'Abstract Syntaxe Tree (AST) au format `.dot` sur la sortie standard.
 
-
-Le fichier .dot décrit l'AST qu'on peut visualiser avec l'outil [graphviz](https://www.graphviz.org).
-
-## TODO
-
-Votre tâche consiste à créer une méthode *make* pour chaque classe interne de Ast
-afin de générer un interpréteur de transitions. L'intepréteur doit posséder une méthode qui lance le calcul. Par exemple
-- *boolean eval()* pour les Conditions
-- *... exec()* pour les Actions (il est possible de rendre un booléen qui indique si l'action a pu s'effectuer ou non).
-
+Le fichier `.dot` décrit l'AST qu'on peut visualiser avec l'outil [graphviz](https://www.graphviz.org).
 
 ## USAGE
 
@@ -29,8 +20,20 @@ The parser can take input
 - from a string
   ``java -cp ./bin ricm3.parser.AutomataParser -aut -string "Aut(Idle){ * (Idle)}"
 
-## GRAMMAR (voir [parser_automata](src/ricm3/parser/parser_automata.jj))
+## [SYNTAX](SYNTAX.md)
 
-## EXAMPLES (voir [automata](example/automata0.txt))
+## [EXEMPLES D'AUTOMATES](example/automata0.txt)
+
+## [INTERPRETATION](INTEPRETATION.md)
+
+Votre tâche consiste à créer une méthode *make* pour chaque classe interne de Ast afin de générer un interpréteur de transitions. 
+
+L'intepréteur doit posséder une méthode qui fait faire un pas à l'automate.
+
+- Les conditions doivent fournir une méthode ```java 
+boolean eval()```
+- *... exec()* pour les Actions (il est possible de rendre un booléen qui indique si l'action a pu s'effectuer ou non).
+
+
 
 
