@@ -128,7 +128,3 @@ Player(Init){
   | True    ? Power   :(Init)
 }
 ```
-
-## La grammaire (voir [parser_automata](src/ricm3/parser/parser_automata.jj))
-
-## Des exemples d'[automates simples](example/automata0.txt)
