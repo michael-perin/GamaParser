@@ -119,4 +119,4 @@ Player(Init){
 
 ## La grammaire (voir [parser_automata](src/ricm3/parser/parser_automata.jj))
 
-## Des exemples d'[automates](examples/automata0.aut)
+## Des exemples d'[automates](example/automata0.txt)
