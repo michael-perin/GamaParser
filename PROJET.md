@@ -59,7 +59,6 @@ sprite_sheet = nom_du_fichier
 <ACTION n> = <SÉQUENCE D'ENTIERS>
 ```
 
-
 ## Menu de configuration du jeu
 
 * Un menu permet d'attribuer à chaque entités du jeu 
@@ -117,48 +116,40 @@ On obtient différente variante en interprétant différent l'action *Hit* :
 L'interprétation est libre mais doit aboutir à la création d'entité : par duplication immédiate, par dépôt d'un oeuf, ...
 L'objectif pédagogique est de vous faire coder une gestion dynamique du nombre d'entités actives.
 
-
 ### Les conditions
 
-#### entités et conditions non totalement spécifiées
+Les conditions permettent de tester la présence ou l'absence d'une entités dans une direction.
 
-   La catégorie "Other" donne la liberté de définir des entités propres à sa variante :
-   chose à ramasser, autre équipe (ni ennemie, ni amie), porte, ...
-
-
+- Direction = {Up, Down, Left, Right} : pas de déplacement en diagonale
+- Kind = { T = Team, E = Ennemi, N = Nothing, O = Obstacle, U = Unkwnon, A = Any means any kind of entity}
 
 
+## Créativité
 
+Ces contraintes pédagogiques sont imposées, par contre... 
 
+### Le thème du jeu est libre 
 
-* III. LIBERTÉ D'EXPRESSION
+### Le but du jeu est non spécifié
+- tuer l'adversaire ?
+- récupérer des éléments sur la carte ?
+- survivre un certain temps ?
+- se multiplier ?
+- bloquer les issues ?
+- gagner du terrain ?
+- marquer des points ?
+- temps limité vs durée illimitée ? 
+- ...
 
-** Le thème du jeu est libre 
-
-** But du jeu non spécifié
-
-   - tuer l'adversaire ?
-   - récupérer des éléments sur la carte ?
-   - survivre un certain temps ?
-   - se multiplier ?
-   - bloquer les issues ?
-   - gagner du terrain ?
-   - marquer des points ?
-   - temps limiter ?
-   - jeu infini ? 
-
-
-** Les paramètres des entités et leur gestion sont non specifiés
-
-   - puissance de frappe en fonction de l'énergie
-   - vitesse de déplacement en fonction de l'énergie
-   - inertie en fonction de l'énergie
-   - résistance en fonction de l'énergie
-   - au dessous de 0 points d'énergie, on devient un zombie
-   - au delà de 100 points d'énergie, on explose
-   - Jeu sans fin : Lorsque l'entité du joueur meurt. Le joueur se réincarne dans l'entité la plus proche qui se tranforme temporairement en fantôme (indesctrucible et inoffensif). 
-     Le joueur prend le contrôle de l'entité.  À vous de trouver une manière pour que le joueur puisse changer d'entité.
-
+### Les paramètres des entités et leur gestion sont non specifiés
+- puissance de frappe en fonction de l'énergie
+- vitesse de déplacement en fonction de l'énergie
+- inertie en fonction de l'énergie
+- résistance en fonction de l'énergie
+- au dessous de 0 points d'énergie, on devient un zombie ?
+- au delà de 100 points d'énergie, on explose ?
+- Lorsque l'entité du joueur meurt, le joueur se réincarne dans l'entité la plus proche qui se tranforme temporairement en fantôme (indesctrucible et inoffensif). Le joueur prend le contrôle de l'entité.  À vous de trouver une manière pour que le joueur puisse changer d'entité.
+- ...
 
 
 
