@@ -193,6 +193,7 @@ Quelle transition prendre si plusieurs conditions sont satisfaites ?
 
 * Vous pouvez opter pour un interpréteur non-déterministe qui tire au sort parmi toutes les transitions dont les conditions sont satisfaites. 
 
+Considérez par exemple l'automate suivant :
 ```ascii
 PowPopWiz(Init){
 * (Init): 
@@ -201,7 +202,6 @@ PowPopWiz(Init){
     | True ? Power :(Init)  
 }
 ```
-
 
 
 
