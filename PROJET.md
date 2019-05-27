@@ -23,8 +23,9 @@ L'intérêt étant de pouvoir importer et échanger des comportements et des gra
 * **Fenêtre de visualisation (Viewport)**
 
 - le monde virtuel est plus grande que le viewport
-- le viewport centré sur l'entité contrôlée au clavier 
 - deux joueurs = deux viewports 
+- le viewport est centré sur l'entité contrôlée au clavier 
+- l'entité contrôlée par le joueur est distinguée de manière graphique. Par exemple par un halo autour de lui.
 
 * **Univers sans bord (dans au moins une dimension)**, deux solutions : 
   - génération aléatoire au fur et à mesure qu'on avance
@@ -76,20 +77,6 @@ sprite_sheet = nom_du_fichier
   Wall.animation   := wall.ani
   PacMan.animation := pacman.ani
  ```
-
-* Possibilité d'attribuer l'automate player à toute entité et inversement possiblité de jouer avec n'importe quelle entité (un mur par exemple ;-)
-
-  Mur.behaviour := automate_Player.aut  // tous les murs sont contrôlés par le joueur
-  Mur.animation := mur.ani
-  
-**** L'entité associée au joueur est définie dans le fichier de config
-
-  Player1 := Ghost 
-  Player1.behaviour := automate_Player1
-   
-
-**** l'entité contrôlée par le joueur est distinguée de manière graphique (un halo autour de lui ?).
-
 
 ## Comportements des entités
 
