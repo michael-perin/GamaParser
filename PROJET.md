@@ -149,7 +149,7 @@ Les conditions permettent de tester la présence ou l'absence d'une entités dan
 
 ## Un interpréteur d'automates
 
-**L'interprétation des actions et des conditions** est définie dans le fichier [interpretation.md](intepretation.md)
+**L'interprétation des actions et des conditions** est définie dans le fichier [interpretation.md](interpretation.md)
 
 ### Des automates simples qui serviront à tester votre interpréteur
 
