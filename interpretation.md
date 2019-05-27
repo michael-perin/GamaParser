@@ -97,6 +97,6 @@ et que l'automate n'en donne pas. Vous interpreterez Wizz comme Wizz(F).
 -  Kamikaze =  disparition, suicide, explosion, tranformation en autre chose, ...
 
 ### Reproduction (action sans argument)
--  Egg = crée une nouvelle entité de même nature que l'entité qui a effectué l'action
+-  Egg = crée une nouvelle entité de même nature que l'entité qui a effectué l'action.
 
 
