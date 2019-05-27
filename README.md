@@ -28,7 +28,3 @@ voir [SYNTAX.md](SYNTAX.md)
 
 voir [automate0.txt](example/automata0.txt)
 
-## INTERPRETATION des conditions et des actions
-
-L'inteprétation des conditions et des actions est donnée dans [INTERPRETATION.md](INTEPRETATION.md) 
-
