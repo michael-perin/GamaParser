@@ -32,26 +32,3 @@ voir [automate0.txt](example/automata0.txt)
 
 L'inteprétation des conditions et des actions est donnée dans [INTERPRETATION.md](INTEPRETATION.md) 
 
-## À RÉALISER : UN INTERPRETEUR D'AUTOMATES
-
-Le parser fournit un AST (Arbre de Syntaxe Abstraite) qui correspond à l'ordre de lecture du fichier.
-Ce n'est pas la représentation la plus adaptée pour faire fonctionner l'automate.
-
-On vous conseille de définir une méthode *make* dans chaque classe interne de Ast afin de générer une représentation  de l'automate qui facilitera son interprétation.
-
-L'intepréteur ainsi construit devra posséder une méthode `step` qui fait faire un pas à l'automate.
-
-- Les sous-classes Conditions devront fournir une méthode 
-```java 
-boolean eval(...)
-```
-- Les sous-classes Actions devront fournir une méthode 
-```java
-boolean exec(...)
-```
-(il est possible de retourner un booléen indiquant si l'action a pu s'effectuer ou non).
-
-
-
-
-
