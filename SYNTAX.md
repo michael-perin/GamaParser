@@ -69,19 +69,16 @@ Blocker(GoLeft){
 }
 ```
 
-### Tester les différentes directions et enchainer 3 actions
+### Examiner le contenu des cases autour de soi
 
 ```ascii
-Guerrier(ENTRY){
-* (ENTRY): Pop :(TURN)
-* (TURN):
-  | MyDir(U) ? Turn(R) :(HIT1)
-  | MyDir(R) ? Turn(D) :(HIT1)
-  | MyDir(D) ? Turn(L) :(HIT1)
-  | MyDir(L) ? Turn(U) :(HIT1)
-* (HIT1): Take :(HIT2)
-* (HIT2): Hit :(HIT3)
-* (HIT3): Bag :(TURN)
+Escape(Init){
+* (Init):
+  | Cell(N,V) & Cell(S,V) & Cell(E,V) & Cell(O,V) :(Init)
+  | Cell(F,V) ? Move(F) :(Init)
+  | Cell(L,V) ? Turn(L) :(Init)
+  | Cell(R,V) ? Turn(R) :(Init)
+  | Cell(B,V) ? Move(B) :(Init)
 }
 ```
 
@@ -90,25 +87,14 @@ Guerrier(ENTRY){
 Les transitions sont évaluées dans l'ordre. La condition `True` est toujours satisfaite et joue le rôle de *sinon*.
 
 ```ascii
-Aut4(ENTRY){
-* (ENTRY): Wizz :(TurnLeft)
-
-* (TurnLeft): Turn(L) :(GoLeft)
-
-* (GoLeft):
-  | Free(L) ? Step :(GoLeft)
-  | True           :(TurnRight)
-
-* (TurnRight): Turn(R) :(GoRight)
-
-* (GoRight):
-  | Free(R) ? Step :(GoRight)
-  | True           :(TurnLeft)
+PopWiz(Init){
+* (Init): 
+    | Cell(F,V) ? Pop(F) :(Init)
+    | True ? Wizz        :(Init)  
 }
 ```
 
 ### L'automate du joueur
-
 
 ```
 Player(Init){
@@ -131,19 +117,6 @@ Player(Init){
 }
 ```
 
-### Synchronisation avec d'autres entités
-```ascii
-Aut5(Synchro){
-
-* (Synchro):
-  | All_My_Team_Can_Do( Step ) ? Step            :(Synchro)
-  | All_My_Team_Can_Do( Hit  ) ? Hit             :(Synchro)
-  | All_My_Team_Can_Do( Jump ) ? Jump            :(Synchro)
-  | In_Front_Of_Me( N )        ? Pop             :(Synchro)
-  | True                       ? Turn(ClockWise) :(Synchro)
-}
-```
-
-
 ## La grammaire (voir [parser_automata](src/ricm3/parser/parser_automata.jj))
 
+## Des exemples d'[automates](src/ricm3/parser/examples/automata0.aut)
