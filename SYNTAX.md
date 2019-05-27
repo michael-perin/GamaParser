@@ -45,8 +45,8 @@ Dead(Stuck){
 ```ascii
 Blocker(GoLeft){
 * (GoLeft):
-    | Free(L) ? Step :(GoLeft)
-    | Otherwise      :(Block)
+    | Cell(L,V) ? Step :(GoLeft)
+    | True             :(Block)
 * (Block)
 }
 ```
