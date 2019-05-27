@@ -32,7 +32,7 @@ Blocker(GoLeft){
 }
 ```
 
-### Teste les différentes directions et s'oriente
+### Tester les différentes directions et enchainer 3 actions
 
 ```ascii
 Guerrier(ENTRY){
@@ -48,8 +48,12 @@ Guerrier(ENTRY){
 }
 ```
 
-Aut4(ENTRY){
+### Si condition FAIRE action SINON ...
 
+Les transitions sont évaluées dans l'ordre. La condition `True` est toujours satisfaite et joue le rôle de *sinon*.
+
+```ascii
+Aut4(ENTRY){
 * (ENTRY): Wizz :(TurnLeft)
 
 * (TurnLeft): Turn(L) :(GoLeft)
@@ -64,8 +68,10 @@ Aut4(ENTRY){
   | Free(R) ? Step :(GoRight)
   | True           :(TurnLeft)
 }
+```
 
-
+### Synchronisation avec d'autres entités
+```ascii
 Aut5(Synchro){
 
 * (Synchro):
@@ -75,6 +81,7 @@ Aut5(Synchro){
   | In_Front_Of_Me( N )        ? Pop             :(Synchro)
   | True                       ? Turn(ClockWise) :(Synchro)
 }
+```
 
   <SKIP> ::= "." "|"
 
