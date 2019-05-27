@@ -1,6 +1,7 @@
 # GamaParser = A parser of Game Automata in Java CC
 
 ## PARSER
+
 Le parser fourni dans parser_automata.jj prend en paramètre de ligne de commande un nom de fichier et génére l'Abstract Syntaxe Tree (AST) au format .dot sur la sortie standard.
 
 
@@ -31,7 +32,7 @@ The parser can take input
 
 # LES DIRECTIONS
 
-## Absolute
+## Absolue
 - N = North
 - S = South
 - E = East
@@ -61,6 +62,7 @@ The parser can take input
 - J = un élément sur lequel on peut sauter
 - G = un Gate
 - M = un Missile
+
 
 # LES CONDITIONS
 
@@ -114,9 +116,8 @@ et que l'automate n'en donne pas. Vous interpreterez Wizz comme Wizz(F).
 
 ## Stockage (action sans argument)
 -  Store = mettre en réserve (dans son sac)
--  Get   = prendre une entité dans sa réserve si aucune en main,
-        changer d entité si une en main (elle est remise dans le sac)
+-  Get   = prendre une entité dans sa réserve si aucune en main, changer d'entité si une en main (elle est remise dans le sac)
 
 ## Power (action sans argument)
 -  Power = pas d'action, mais récupération d'énergie.
--  Kamikaze   =  disparition, suicide, explosion, tranformation en autre chose, ...
+-  Kamikaze =  disparition, suicide, explosion, tranformation en autre chose, ...
