@@ -103,7 +103,7 @@ Aut5(Synchro){
 ```
 
 
-## La grammaire (voir [parser_automata](GamaParser/src/ricm3/parser/parser_automata.jj))
+## La grammaire (voir [parser_automata](src/ricm3/parser/parser_automata.jj))
 
 ## OLD
 
