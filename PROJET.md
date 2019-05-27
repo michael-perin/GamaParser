@@ -165,8 +165,8 @@ Afin de prendre en main le langage de descriptiont d'automates et de tester votr
   
 ### Réalisation de l'interpréteur d'automates
 
-Le parser fournit un AST (Arbre de Syntaxe Abstraite) qui correspond à l'ordre de lecture du fichier.
-Ce n'est pas la représentation la plus adaptée pour faire fonctionner l'automate.
+Le parser construit un AST (Arbre de Syntaxe Abstraite) défini dans [Ast.java](src/ricm3/parser/Ast.java). 
+L'AST produit correspond à l'ordre de lecture du fichier. Ce n'est pas la représentation la plus adaptée pour faire fonctionner l'automate.
 
 On vous conseille de définir une méthode *make* dans chaque classe interne de Ast afin de générer une représentation  de l'automate qui facilitera son interprétation.
 
