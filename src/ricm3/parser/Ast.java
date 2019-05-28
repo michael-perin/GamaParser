@@ -1,5 +1,4 @@
 package ricm3.parser;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
 
@@ -63,7 +62,7 @@ public class Ast {
 			return value ;
 		}
 		
-		public String tree_edges(){
+		public String tree_edges() {
 			String value_id = Dot.node_id( -this.id) ;
 			return Dot.declare_node( value_id, value, "shape=none, fontsize=10, fontcolor=blue" ) + Dot.edge(this.dot_id(), value_id) ;
 		}
@@ -123,6 +122,23 @@ public class Ast {
 		}
 		public String toString() {
 			return "_";
+		}
+	}
+	
+	public static class Number_as_String extends Parameter {
+		
+		Constant value;
+		
+		Number_as_String(String string){
+			this.kind = "Number" ;
+			this.value = new Constant(string);
+		}
+		public String tree_edges() {
+			return value.as_tree_son_of(this);
+		}
+		
+		public String toString() { 
+			return value.toString() ; 
 		}
 	}
 	

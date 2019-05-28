@@ -1,22 +1,8 @@
-Condition0(Init){
-  * (Init): (((((((True))))))) ? Power :(Init)
-  * (Init): !((!((!((!(!True))))))) ? Power :(Init)
-  * (Init): !( Key(a) / Key(b) / Key(c) / Key(d) ) ? Power :(Init)
-  * (Init): Key(a) & Key(b) & Key(c) & Key(d) ? Power :(Init)
-  * (Init): ( Key(a) & Key(b) & Key(c) & Key(d) ) ? Power :(Init)
-  * (Init): Key(a) / Key(b) / Key(c) / Key(d) ? Power :(Init)
-  * (Init): ( Key(a) / Key(b) / Key(c) / Key(d) ) ? Power :(Init)
-  * (Init): !( Key(a) / Key(b) / Key(c) / Key(d) ) ? Power :(Init)
-  * (Init): !Key(a) & !Key(b) & !Key(c) & !Key(d)  ? Power :(Init)
-  * (Init): !(Key(a) & !Key(b)) / (!Key(c) & !Key(d))  ? Power :(Init)
+Spawn(Init){
+  * (Init): Cell(F,V) ? Egg(F) :(Turn0)
+  * (Turn0): True ? Turn(R) :(Init)
 }
 
-Crazy0(Init){
-  * (Init): True ? Kamikaze :(Init)
-  * (Unreachable): MyDir(d) ? Move(d) :(Unreachable)
-  * (Useless): MyDir(_) ? Move :(Useless)
-  * (Dummy): Cell(F,e) ? Hit(e,F) :(Dummy)
-}
 
 Player0(Init){
   * (Init):
@@ -181,4 +167,26 @@ SuperHero0(Explore){
   | True ? Wizz    :(Explore)
 
 * (Build_1): True ? Throw :(Build)
+}
+
+
+TEST_Parsing_Condition(Init){
+  * (Init): (((((((True))))))) ? Power :(Init)
+  * (Init): !((!((!((!(!True))))))) ? Power :(Init)
+  * (Init): !( Key(a) / Key(b) / Key(c) / Key(d) ) ? Power :(Init)
+  * (Init): Key(a) & Key(b) & Key(c) & Key(d) ? Power :(Init)
+  * (Init): ( Key(a) & Key(b) & Key(c) & Key(d) ) ? Power :(Init)
+  * (Init): Key(a) / Key(b) / Key(c) / Key(d) ? Power :(Init)
+  * (Init): ( Key(a) / Key(b) / Key(c) / Key(d) ) ? Power :(Init)
+  * (Init): !( Key(a) / Key(b) / Key(c) / Key(d) ) ? Power :(Init)
+  * (Init): !Key(a) & !Key(b) & !Key(c) & !Key(d)  ? Power :(Init)
+  * (Init): !(Key(a) & !Key(b)) / (!Key(c) & !Key(d))  ? Power :(Init)
+}
+
+
+TEST_parsing_variable(Init){
+  * (Init): True ? Kamikaze :(Init)
+  * (Unreachable): MyDir(d) ? Move(d) :(Unreachable)
+  * (Useless): MyDir(_) ? Move :(Useless)
+  * (Dummy): Cell(F,e) ? Hit(e,F) :(Dummy)
 }

@@ -23,23 +23,30 @@ import ricm3.parser.Ast.*;
 
 public class AutomataParser {
 
-   public static Ast from_file(String path_file) throws Exception {
-  	Ast ast = new AutomataParser(new BufferedReader(new FileReader(path_file))).Run();
-  	return ast; 
-   }
+  public static Ast from_file(String path_file) throws Exception
+  {
+    Ast ast = new AutomataParser(new BufferedReader(new FileReader(path_file))).Run();
+    return ast;
+  }
 
-   public static Ast from_string(String input) throws Exception {
-        Ast ast = new AutomataParser(new java.io.StringReader(input)).Run() ;
-  	return ast ;
-   }
+  public static Ast from_string(String input) throws Exception
+  {
+    Ast ast = new AutomataParser(new java.io.StringReader(input)).Run();
+    return ast;
+  }
 
-   public static boolean option(String option, String[] args) {
-    	int i=0 ;
-     	while(i<args.length) { 
-     	  if (args[i].equals(option)){ return true ; }
-     	  i++;
-   	}
-  	return false ;
+  public static boolean option(String option, String [] args)
+  {
+    int i = 0;
+    while (i < args.length)
+    {
+      if (args [i].equals(option))
+      {
+        return true;
+      }
+      i++;
+    }
+    return false;
   }
 
   public static int index_of_input(String[] args) {
@@ -79,7 +86,7 @@ SKIP:  { " " | "\t" | "\n" | "\r" }
 
 TOKEN: { < CONDITION: "True" | "Key" | "MyDir" | "Cell" | "Closest" | "GotPower" | "GotStuff" > }
 
-TOKEN: { < ACTION: "Get" | "Hit" | "Jump" | "Kamikaze" | "Move" | "Pick" | "Pop" | "Power" | "Protect" | "Store" | "Throw" | "Turn" | "Wizz" > }
+TOKEN: { < ACTION: "Egg" | "Get" | "Hit" | "Jump" | "Kamikaze" | "Move" | "Pick" | "Pop" | "Power" | "Protect" | "Store" | "Throw" | "Turn" | "Wizz" > }
 
 TOKEN : { < SPECIAL_KEY: "SPACE" | "ENTER" | "FU" | "FD" | "FL" | "FR" > }
 
@@ -89,7 +96,7 @@ TOKEN: { < ENTVAR: "e" > }
 
 TOKEN: { < DIRECTION: "N" | "S" | "O" | "E" | "F" | "B" | "L" | "R" > }
 
-TOKEN: { < ENTITY: "A" | "D" | "G" | "J" | "M" | "O" | "P" | "T" | "V" > }
+TOKEN: { < ENTITY: "A" | "D" | "G" | "J" | "M" | "O" | "P" | "T" | "V" | "@" > }
 
 TOKEN: { < #CAPITAL: ["A"-"Z"] > }
 
@@ -97,7 +104,7 @@ TOKEN: { < LOWERCASE: ["a"-"z"] > }
 
 TOKEN: { < #LETTER: (<CAPITAL> | <LOWERCASE>) >  }
 
-TOKEN: { < DIGIT: ["0"-"9"] > }
+TOKEN: { < #DIGIT: ["0"-"9"] > } 
 
 TOKEN:
 { < UNARY: "!" > }
@@ -506,6 +513,35 @@ FunCall P_FunCall():
 
 }
 
+
+
+/* Key
+ * | DIGIT
+ * | LETTER
+ * | DIRVAR | ENTVAR
+ * | SPECIAL_KEY
+ */
+Key P_Key_Name():
+{
+  Token token ;
+}
+{ token = <INT>
+	{ return new Key(token.image) ; }
+
+| token = <LOWERCASE>
+	{ return new Key(token.image) ; }
+
+| token = <DIRVAR>
+	{ return new Key(token.image) ; }
+
+| token = <ENTVAR>
+	{ return new Key(token.image) ; }
+
+| token = <SPECIAL_KEY>
+	{ return new Key(token.image) ; }
+}
+
+
      
 /* Opt_Parameters
  * | "(" Some_Parameters ")"
@@ -518,6 +554,7 @@ List<Parameter> P_Opt_Parameters(List<Parameter> input_list):
   list = P_Some_Parameters(input_list)
   ")"
   	{ return list ; }
+
 |  /*epsilon*/
 	{ return input_list ; }
 }
@@ -555,48 +592,26 @@ List<Parameter> P_More_Parameters(List<Parameter> input_list):
 }
 
 
-/* Key
- * | DIGIT
- * | LETTER
- * | DIRVAR | ENTVAR
- * | SPECIAL_KEY
- */
-Key P_Key_Name():
-{
-  Token token ;
-}
-{ token = <DIGIT>
-	{ return new Key(token.image) ; }
-
-| token = <LOWERCASE>
-	{ return new Key(token.image) ; }
-
-| token = <DIRVAR>
-	{ return new Key(token.image) ; }
-
-| token = <ENTVAR>
-	{ return new Key(token.image) ; }
-
-| token = <SPECIAL_KEY>
-	{ return new Key(token.image) ; }
-}
-
      
 /* Parameters
  * | Direction
  * | Entity
  * |  "_"
+ * | Integer 
  */
 Parameter P_Parameter():
 { Token token ; Parameter parameter ; }
 { parameter = P_Direction()
 	{ return parameter ; }
-
+ 
 | parameter = P_Entity()
 	{ return parameter ; }
 
 | "_"
 	{ return new Underscore() ; }
+
+| token = <INT>
+	{ return new Number_as_String(token.image) ; }
 		
 }
 

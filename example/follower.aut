@@ -1,0 +1,9 @@
+Follower(Init){
+
+ * (Init):
+ | Cell(F,@,2) & Cell(F,V) ? Move :(Init)
+ | Cell(L,@,2) ? Turn(L) :(Init)
+ | Cell(R,@,2) ? Turn(R) :(Init)
+ | Cell(B,@,2) ? Turn(B) :(Init)
+ 
+}

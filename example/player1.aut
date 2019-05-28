@@ -1,0 +1,18 @@
+Player1(Init){
+  * (Init):
+  | Key(FU) ? Move(N) :(Init)
+  | Key(FD) ? Move(S) :(Init)
+  | Key(FL) ? Move(O) :(Init)
+  | Key(FR) ? Move(E) :(Init)
+  | Key(SPACE) ? Hit  :(Init)
+  | Key(ENTER) ? Jump :(Init)
+  | Key(b)  ? Jump(B) :(Init)
+  | Key(d)  ? Move(D) :(Init)
+  | Key(e)  ? Move(E) :(Init)
+  | Key(f)  ? Turn(B) :(Init)
+  | Key(p)  ? Pop     :(Init)
+  | Key(w)  ? Wizz    :(Init)
+  | Key(g)  ? Get     :(Init)
+  | Key(t)  ? Throw   :(Init)
+  | True    ? Power   :(Init)
+}
