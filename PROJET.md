@@ -39,7 +39,37 @@ L'intérêt étant de pouvoir importer et échanger des comportements et des gra
 
 * **2 univers** avec des effets différents associées aux actions 
 
-L'objectif pédagoqique est de vous amener à réfléchir à un structure de classe où les actions ne sont fixées dans le personnage mais dépendent de l'univers dans lequel il évolue.
+L'objectif pédagoqique est de vous amener à réfléchir à un structure de classe où les actions ne sont pas définies 
+directement dans l'entité. Considérons le cas concret d'un personnage qui se déplace via une action Move dans deux mondes différents : 
+  - un monde terrestre où move signifie marcher
+  - un monde aquatique où Move signifie nager et donc le déplacement est moins rapide et consomme plus d'énergie. 
+
+```java
+class Personnage{
+  void move(){ if aqua then ... else ...} 
+```       
+n'est pas le codage qu'on vous recommande. On vous conseille de définir deux doublures : l'un pour le monde aquatique, l'autre pour le monde terrestre et de changer de doublure en fonction du monde.
+
+```java
+class Aquaman extends Stunt{
+   void move(){ // nage lentement en se fatiquant }
+}
+
+class Groundman extends Stunt{
+   void Move(){ // marche vite sans se fatiguer }
+}   
+
+class Personnage{
+  Stunt stunt ; 
+  // on change de doublure selon le monde 
+  //   stunt = new Groundman(); // quand le personnage est sur terre
+  //   stunt = new Aquaman();   // quand le personnage est dans l'eau
+  
+  // l'action move est définie une fois pour toute indépendamment du nombre de monde.
+  void move(){ actor.move() } 
+}
+```
+
 
 
 ## Créativité
@@ -118,9 +148,13 @@ sprite_sheet = nom_du_fichier
 
 Les actions et conditions qui permettant de définir des automates sont fixées *mais leur interprétation est libre.*
 
+#### Chaque entité doit définir des actions visibles pour les actions : Move, Pop et Wizz
+
 #### Deux actions non spécifiées: Pop et Wizz
 
-* Chaque automate doit contenir au moins une action Pop ou une action Wizz.
+* Chaque automate doit contenir **au moins une action Pop ou une action Wizz**.
+  La seule exception est l'automate qui code le comportement "ne rien faire".
+
 * Chaque équipe décidera de l'effet des actions Pop et Wizz et l'implantera dans son moteur de jeu.
 
   Exemples:
