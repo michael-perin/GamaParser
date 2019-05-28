@@ -56,7 +56,7 @@ class Aquaman extends Stunt{
 }
 
 class Groundman extends Stunt{
-   void Move(){ // marche vite sans se fatiguer }
+   void move(){ // marche vite sans se fatiguer }
 }   
 
 class Personnage{
