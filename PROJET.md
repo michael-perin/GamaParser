@@ -68,7 +68,7 @@ class Personnage{
   //   stunt = new Aquaman();   // quand le personnage est dans l'eau
   
   // l'action move est définie une fois pour toute indépendamment du nombre de monde.
-  void move(){ stunt.move() } 
+  void move(){ this.stunt.move(); } 
 }
 ```
 
