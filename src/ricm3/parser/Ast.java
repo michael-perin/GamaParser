@@ -43,10 +43,9 @@ public class Ast {
 		return "undefined " + this.kind + ".as_dot_aut";
 	}
 	
-	
 	// AST as active automata (interpreter of transitions)
 	
-	public Object  make() {
+	public Object make() {
 		  return null; // TODO à définir dans la plupart des classes internes ci-dessous.
 	}
 	
