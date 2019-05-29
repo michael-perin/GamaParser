@@ -10,7 +10,7 @@
 
 PARSER_BEGIN(AutomataParser)
 
-package ricm3.parser;
+package parser;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -19,7 +19,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
 
-import ricm3.parser.Ast.*;
+import parser.Ast.*;
 
 public class AutomataParser {
 
@@ -37,7 +37,7 @@ public class AutomataParser {
 
   public static boolean option(String option, String [] args)
   {
-    int i = 0;
+    int i = 0 ;
     while (i < args.length)
     {
       if (args [i].equals(option))
@@ -86,7 +86,7 @@ SKIP:  { " " | "\t" | "\n" | "\r" }
 
 TOKEN: { < CONDITION: "True" | "Key" | "MyDir" | "Cell" | "Closest" | "GotPower" | "GotStuff" > }
 
-TOKEN: { < ACTION: "Egg" | "Get" | "Hit" | "Jump" | "Kamikaze" | "Move" | "Pick" | "Pop" | "Power" | "Protect" | "Store" | "Throw" | "Turn" | "Wizz" > }
+TOKEN: { < ACTION: "Egg" | "Get" | "Hit" | "Jump" | "Kamikaze" | "Move" | "Pick" | "Pop" | "Power" | "Protect" | "Store" | "Throw" | "Turn" | "Wizz" | "Wait"> }
 
 TOKEN : { < SPECIAL_KEY: "SPACE" | "ENTER" | "FU" | "FD" | "FL" | "FR" > }
 
@@ -259,8 +259,9 @@ Direction P_Direction():
 
 
 /* Entity
- * | "V" | "T" | "A" | "P" | "J" | "D" | "O" 
+ * | "A" | "D" | "G" | "J" | "M" | "O" | "P" | "T" | "V" | "@"  
  * | "e"
+ * | "_"
  */
 Entity P_Entity():
 { Token token; }
@@ -269,7 +270,7 @@ Entity P_Entity():
 | token=<ENTVAR>  { return new Entity(new Variable(token.image)); }   
 }
 
-
+ 
 /* Run
  * | Some_Automata <EOF>
  */
@@ -515,16 +516,15 @@ FunCall P_FunCall():
 
 
 
-/* Key
- * | DIGIT
- * | LETTER
+/* KeyName
+ * | INT
+ * | LOWERCASE
  * | DIRVAR | ENTVAR
  * | SPECIAL_KEY
+ * | "_"
  */
 Key P_Key_Name():
-{
-  Token token ;
-}
+{ Token token ; }
 { token = <INT>
 	{ return new Key(token.image) ; }
 
@@ -539,6 +539,10 @@ Key P_Key_Name():
 
 | token = <SPECIAL_KEY>
 	{ return new Key(token.image) ; }
+
+| "_"
+	{ return new Key("_") ; }
+	
 }
 
 
@@ -596,8 +600,8 @@ List<Parameter> P_More_Parameters(List<Parameter> input_list):
 /* Parameters
  * | Direction
  * | Entity
- * |  "_"
- * | Integer 
+ * | Integer
+ * | "_"
  */
 Parameter P_Parameter():
 { Token token ; Parameter parameter ; }
@@ -607,12 +611,12 @@ Parameter P_Parameter():
 | parameter = P_Entity()
 	{ return parameter ; }
 
-| "_"
-	{ return new Underscore() ; }
-
 | token = <INT>
 	{ return new Number_as_String(token.image) ; }
-		
+
+| "_"
+	{ return new Underscore() ; }
+	   
 }
 
 

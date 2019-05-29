@@ -1,4 +1,6 @@
-package ricm3.parser;
+package interpreter;
+
+/* Michael PÉRIN, Verimag / Univ. Grenoble Alpes, may 2019 */
 
 public class Condition {
 

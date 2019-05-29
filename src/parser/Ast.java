@@ -1,4 +1,4 @@
-package ricm3.parser;
+package parser;
 import java.util.List;
 import java.util.ListIterator;
 
@@ -370,7 +370,6 @@ public class Ast {
 		}
 		
 	}
-
 	
 	public static class Automaton extends Ast {
 
@@ -444,7 +443,6 @@ public class Ast {
 		}
 	}
 
-	
 	public static class Transition extends Ast {
 
 		Condition condition;

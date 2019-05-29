@@ -28,14 +28,17 @@ Une entité est forcément orientée dans une direction Up, Down, Right, Left
 
 ## LES ENTITÉS
 
-- V = Void
-- T = Team = une entité de mon équipe
 - A = un Adversaire
 - D = un Danger
-- P = un élément qu on peut Prendre, stocker, lancer, déposer
-- J = un élément sur lequel on peut sauter
 - G = un Gate
+- J = un élément sur lequel on peut sauter
 - M = un Missile
+- O = Obstacle
+- P = un élément qu on peut Prendre, stocker, lancer, déposer
+- T = Team = une entité de mon équipe
+- V = Void
+- @ = Joueur
+- _ = Anything
 
 
 ## LES CONDITIONS
@@ -59,15 +62,18 @@ Une entité est forcément orientée dans une direction Up, Down, Right, Left
 
 ### Les actions peuvent avoir ou non une direction.
 
-- Si dans votre jeu une action Wizz n'a pas de direction.
-alors vous interpréterait Wizz(U) comme Wizz.
-
-- Si, au contraire, l'action Wizz doit avoir une direction
-et que l'automate n'en donne pas. Vous interpreterez Wizz comme Wizz(F).
+### Rest
+- Rest = se reposer activement, ça prend du temps
 
 ### Deux actions essentielles pour votre jeu (direction optionnelle, par défaut F)
 -  Wizz(Direction) = ?
 -  Pop(Direction)  = ?
+
+**Remarque importante**
+  - Si dans votre jeu une action Wizz n'a pas de direction.
+    alors vous interpréterait Wizz(d) comme Wizz.
+  - Si, au contraire, l'action Wizz doit avoir une direction
+    et que l'automate n'en donne pas. Vous interpreterez Wizz comme Wizz(F).
 
 ### Déplacements (direction optionnelle, par défaut F)
 -  Move(Direction) = déplacement

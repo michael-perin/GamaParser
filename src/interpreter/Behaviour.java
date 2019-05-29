@@ -1,6 +1,8 @@
-package ricm3.parser;
+package intepreter;
 import java.util.List;
 import java.util.ListIterator;
+
+/* Michael PÉRIN, Verimag / Univ. Grenoble Alpes, may 2019 */
 
 public class Behaviour {
 	State source ;

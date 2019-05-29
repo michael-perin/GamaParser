@@ -1,4 +1,6 @@
-package ricm3.parser;
+package parser;
+
+/* Michael PÉRIN, Verimag / Univ. Grenoble Alpes, may 2018 */
 
 public final class Dot {
 

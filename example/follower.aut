@@ -1,9 +1,12 @@
-Follower(Init){
+Follower(Follow){
+ * (Following):
+   | Key(_) ? Wait                     :(Waiting)
+   | Cell(F,@,2) & Cell(F,V) ? Move(F) :(Following)
+   | Cell(L,@,2) ? Turn(L)             :(Following)
+   | Cell(R,@,2) ? Turn(R)             :(Following)
+   | Cell(B,@,2) ? Turn(B)             :(Following)
 
- * (Init):
- | Cell(F,@,2) & Cell(F,V) ? Move :(Init)
- | Cell(L,@,2) ? Turn(L) :(Init)
- | Cell(R,@,2) ? Turn(R) :(Init)
- | Cell(B,@,2) ? Turn(B) :(Init)
+ * (Waiting):
+   | Key(_) ? Wait :(Following)
  
 }
