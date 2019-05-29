@@ -40,15 +40,17 @@ L'intérêt étant de pouvoir importer et échanger des comportements et des gra
 * **2 univers** avec des effets différents associées aux actions 
 
 L'objectif pédagoqique est de vous amener à réfléchir à un structure de classe où les actions ne sont pas définies 
-directement dans l'entité. Considérons le cas concret d'un personnage qui se déplace via une action Move dans deux mondes différents : 
-  - un monde terrestre où move signifie marcher
-  - un monde aquatique où Move signifie nager et donc le déplacement est moins rapide et consomme plus d'énergie. 
+directement dans l'entité. Considérons le cas concret d'un personnage qui se déplace via une action `move` dans deux mondes différents : 
+  - **un monde terrestre** où `move` signifie marcher
+  - **un monde aquatique** où `move` signifie nager et donc le déplacement est moins rapide et consomme plus d'énergie. 
 
 ```java
 class Personnage{
-  void move(){ if aqua then ... else ...} 
+  void move(){ 
+     if (aquatique) {...} else {...} 
+  }
 ```       
-n'est pas le codage qu'on vous recommande. On vous conseille de définir deux doublures : l'un pour le monde aquatique, l'autre pour le monde terrestre et de changer de doublure en fonction du monde.
+n'est pas le codage qu'on vous recommande. On vous conseille de définir deux doublures, *stunt* en anglais, l'une pour le monde aquatique, l'autre pour le monde terrestre, et de changer de doublure en fonction du monde.
 
 ```java
 class Aquaman extends Stunt{
@@ -66,7 +68,7 @@ class Personnage{
   //   stunt = new Aquaman();   // quand le personnage est dans l'eau
   
   // l'action move est définie une fois pour toute indépendamment du nombre de monde.
-  void move(){ actor.move() } 
+  void move(){ this.stunt.move(); } 
 }
 ```
 
