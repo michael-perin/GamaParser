@@ -62,8 +62,8 @@ Une entité est forcément orientée dans une direction Up, Down, Right, Left
 
 ### Les actions peuvent avoir ou non une direction.
 
-### Rest
-- Rest = se reposer activement, ça prend du temps
+### Wait
+- Wait = attente active, c'est une action qui prend du temps
 
 ### Deux actions essentielles pour votre jeu (direction optionnelle, par défaut F)
 -  Wizz(Direction) = ?
