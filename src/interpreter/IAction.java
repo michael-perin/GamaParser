@@ -2,9 +2,9 @@ package interpreter;
 
 /* Michael PÉRIN, Verimag / Univ. Grenoble Alpes, may 2019 */
 
-public class Action {
+public class IAction {
 	
-	Action(){}
+	IAction(){}
 	... exec(Entity e){}
 	
 	
@@ -12,7 +12,7 @@ public class Action {
 		Direction direction ;
 		Integer power;
 		
-		Hit(Direction, Integer power){
+		Hit(Direction direction, Integer power){
 			this.direction = direction ;
 			this.power = power;
 		}

@@ -384,6 +384,13 @@ public class Ast {
 			this.behaviours = behaviours;
 		}
 
+	/*	IAutomaton make() {
+			List<IBehaviour> iBehaviours = new List<IBehaviour>() ;
+			// construction de la liste des IBehaviours
+			IState istate_initial = entry.make();
+			return new IAutomaton(istate_initial, iBehaviours) ;
+		}
+	*/	
 		public String tree_edges() {
 			String output = new String();
 			output += name.as_tree_son_of(this);

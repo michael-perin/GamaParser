@@ -2,9 +2,9 @@ package interpreter;
 
 /* Michael PÉRIN, Verimag / Univ. Grenoble Alpes, may 2019 */
 
-public class Condition {
+public class ICondition {
 
-	Condition(){}
+	ICondition(){}
 	boolean eval(Entity e) { return true; } // à redéfinir dans chaque sous-classe
 
 	public class True extends Condition {

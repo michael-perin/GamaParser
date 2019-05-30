@@ -4,11 +4,11 @@ import java.util.ListIterator;
 
 /* Michael PÉRIN, Verimag / Univ. Grenoble Alpes, may 2019 */
 
-public class Automaton {
-	State current ;
-	List<Behaviour> behaviours ;
+public class IAutomaton {
+	IState current ;
+	List<IBehaviour> behaviours ;
 	
-	Automaton(State initial, List<Behaviour> behaviours){
+	IAutomaton(IState initial, List<IBehaviour> behaviours){
 		this.current = initial ;
 		this.behaviours = behaviours ;
 	}
