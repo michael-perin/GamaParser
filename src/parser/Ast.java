@@ -1,6 +1,7 @@
 package parser;
 import java.util.List;
 import java.util.ListIterator;
+import interpreter.ITransition;
 
 /* Michael PÉRIN, Verimag / Univ. Grenoble Alpes, june 2018
  *
@@ -463,6 +464,12 @@ public class Ast {
 			this.target = target;
 		}
 
+		/*
+		public ITransition make() {
+			return new ITransition(condition.make(), action.make(), target.make());
+		}
+		*/
+		
 		public String tree_edges() {
 			return condition.as_tree_son_of(this) + action.as_tree_son_of(this) + target.as_tree_son_of(this);
 		}
