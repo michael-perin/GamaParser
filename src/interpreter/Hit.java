@@ -1,5 +1,7 @@
 package interpreter;
 
+/* Michael PÉRIN, Verimag / Univ. Grenoble Alpes, may 2019 */
+
 public class Hit extends IAction {
 	Direction direction ;
 	int power;
