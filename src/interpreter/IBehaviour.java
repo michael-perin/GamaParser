@@ -1,4 +1,4 @@
-package intepreter;
+package interpreter;
 import java.util.List;
 import java.util.ListIterator;
 
@@ -8,7 +8,7 @@ public class IBehaviour {
 	IState source ;
 	List<ITransition> transitions ;
 	
-	IBehaviour(State source, List<Transition> transitions){
+	IBehaviour(IState source, List<ITransition> transitions){
 		this.source = source ; 
 		this.transitions = transitions ;
 	}
