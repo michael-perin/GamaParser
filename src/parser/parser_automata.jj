@@ -94,7 +94,7 @@ TOKEN: { < DIRVAR: "d" > }
 
 TOKEN: { < ENTVAR: "e" > }
 
-TOKEN: { < DIRECTION: "N" | "S" | "O" | "E" | "F" | "B" | "L" | "R" > }
+TOKEN: { < DIRECTION: "N" | "S" | "E" | "W" | "F" | "B" | "L" | "R" > }
 
 TOKEN: { < ENTITY: "A" | "D" | "G" | "J" | "M" | "O" | "P" | "T" | "V" | "@" > }
 
@@ -211,7 +211,7 @@ Parameters
   |  "_"
   
 Direction
-  | "N" | "S" | "O" | "E"
+  | "N" | "S" | "W" | "E"
   | "F" = Front
   | "B" = Back
   | "L" = Left
@@ -247,7 +247,7 @@ String P_Identifier():
 
 
 /* Direction
- * | "N" | "S" | "O" | "E" | "F" | "B" | "L" | "R"
+ * | "N" | "S" | "W" | "E" | "F" | "B" | "L" | "R"
  * | "d"
  */
 Direction P_Direction():
@@ -407,7 +407,7 @@ List<Transition> P_Some_Transitions(List<Transition> input_list):
 
   
 /* Transition
- * | Opt_Bar  Condition "?" Action ":"  State
+ * | Opt_Bar  Condition "?" Opt_Action ":"  State
  */
 Transition P_Transition():
 { Condition condition ; Action action ; State state ; }
@@ -415,7 +415,7 @@ Transition P_Transition():
   P_Opt_Bar()
   condition = P_Condition() 
   "?"
-  action = P_Action() 
+  action = P_Opt_Action() 
   ":"
   state = P_State()
   	{ return new Transition(condition,action,state) ; }
@@ -443,13 +443,15 @@ Condition P_Condition():
 }
 
 
-/* Action
+/* Opt_Action
    | Expression
 */    
-Action P_Action():
+Action P_Opt_Action():
 { Expression expression ; }
 { expression = P_Expression()
 	{ return new Action(expression) ; }
+| /*epsilon*/
+	{ return new Action() ; } 
 }
 	   
   

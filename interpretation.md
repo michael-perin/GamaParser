@@ -9,7 +9,8 @@ Une entité est forcément orientée dans une direction Up, Down, Right, Left
 - N = North
 - S = South
 - E = East
-- O = Ouest
+- W = West
+
 
 ### Relative
 - F = front
@@ -45,7 +46,7 @@ Une entité est forcément orientée dans une direction Up, Down, Right, Left
 
 ### Les conditions booléennes de base
 -  True : toujours vraie
--  Key(Touche) : vraie si la Touche est enfoncée
+-  Key(Touche) : vrai si une <touche> est enfoncée et c'est Touche
 -  MyDir(Direction) : vraie si l'entité est orientée dans la Direction
 -  Cell(Direction, Entité) : vraie si la cellule dans la Direction contient une Entité
 -  Closest(Entité, Direction) : vraie si la plus proche Entité est dans la Direction

@@ -16,9 +16,9 @@ The parser can generate two graphical output in .dot format
 
 The parser can take input
 - from a file
-  ``java -cp ./bin ricm3.parser.AutomataParser -aut -file example/automata.txt``
+  ``java -cp ./bin parser.AutomataParser -aut -file example/automata.txt``
 - from a string
-  ``java -cp ./bin ricm3.parser.AutomataParser -aut -string "Aut(Idle){ * (Idle)}"
+  ``java -cp ./bin parser.AutomataParser -aut -string "Aut(Idle){ * (Idle)}"
 
 ## LA SYNTAXE 
 

@@ -202,6 +202,12 @@ public class Ast {
 		public abstract String toString();
 	}
 	
+	public static class None extends Expression {
+		None(){}
+		public final String toString() { return "none" ; }
+		public String tree_edges() { return "" ; } 
+	}
+	
 	public static class UnaryOp extends Expression {
 
 		Terminal operator;
@@ -301,6 +307,10 @@ public class Ast {
 
 		Expression expression;
 
+		Action(){
+			this.kind = "Action" ;
+			this.expression = new None();
+		}
 		Action(Expression expression) {
 			this.kind = "Action";
 			this.expression = expression;
