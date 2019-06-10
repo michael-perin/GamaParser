@@ -1,0 +1,27 @@
+Maincharacter(Init){
+ * (Init):
+ | Key(ENTER) ? Kamikaze :()
+ | Key(FR)    ? Turn(E)  :(TurnR)
+ | Key(FL)    ? Turn(O)  :(TurnL)
+ | Key(FD)    ? Turn(S)  :(TurnD)
+ | Key(FU)    ? Turn(N)  :(TurnU)
+ | Key(SPACE) ? Pop      :(Init)
+ | Key(z)     ? Wizz     :(Init)
+ | Key(v)     ? Get      :(Init)
+
+* (TurnR):
+ |  Key(FR) ? Move(E) :(TurnR)
+ | !Key(FR) ?         :(Init)
+
+* (TurnL):
+ |  Key(FL) ? Move(O) :(TurnL)
+ | !Key(FL) ?         :(Init)
+
+* (TurnU):
+ |  Key(FU) ? Move(N) :(TurnU)
+ | !Key(FU) ?         :(Init)
+
+* (TurnD):
+ |  Key(FD) ? Move(S) :(TurnD)
+ | !Key(FD) ?         :(Init)
+}
