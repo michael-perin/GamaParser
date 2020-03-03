@@ -4,38 +4,40 @@
 
 Le projet consiste à réaliser un moteur de jeu à base d'automates.
 
-Ce fichier décrit les contraintes imposées et des formats de description 
-- des comportements sous forme d'automates.
-- des animations graphiques sous forme de sprite sheet + séquence d'animation
+Ce document décrit les contraintes imposées du projet et le format ds description 
+- des comportements: sous forme d'automates
+- des animations graphiques: sous forme de sprite sheet + séquence d'animation
 
-L'intérêt étant de pouvoir importer et échanger des comportements et des graphismes entre différents jeux.
+L'intérêt de ces formats imposés étant de pouvoir importer et échanger des comportements et des graphismes entre des équipes réalisant des jeux différents mais avec une base commune.
 
 ## Game Play  
 
+On impose un type de jeu qui va vous obliger à vous confronter à des problèmes classiques de programmation de jeux.
+
 * **Jeu en 2D** : plateforme ou carte vue du dessus
 
-* absolument **Toutes les entités* du jeu ont un comportement défini par un automate**
-
+* **absolument toutes les entités du jeu ont un comportement défini par un automate**
+En particulier votre jeu comportera
   - un/deux entités joueurs controlées au clavier via un automate "contrôle-clavier" 
   - des adversaires dont le comportements est défini par des automates
-  - des obstacels dont le comportement est un automate "ne rien faire"
+  - des obstacles dont le comportement est un automate "ne rien faire"
 
 * **Fenêtre de visualisation (Viewport)**
 
-- le monde virtuel est plus grande que le viewport
+- le monde virtuel est plus grand que le viewport
 - deux joueurs = deux viewports 
 - le viewport est centré sur l'entité contrôlée au clavier 
-- l'entité contrôlée par le joueur est distinguée de manière graphique. Par exemple par un halo autour de lui.
+- l'entité contrôlée par le joueur est distinguée de manière graphique (par exemple par un halo autour de lui).
 
-* **Univers sans bord (dans au moins une dimension)**, deux solutions : 
+* **L'Univers est sans bord (dans au moins une dimension)**, deux solutions : 
   - génération aléatoire au fur et à mesure qu'on avance
-  - retour du côté droit quand on arrive au bord du côté gauche (ex: PacMan vit sur un tore)
+  - retour du côté droit quand on arrive au bord du côté gauche (comme dans Pac Man, qui vit sur un tore)
 
 * **Un jeu d'action et de stratégie**
    - un jeu d'action : le(s) joueur(s) contrôle des entités
    - un jeu de stratégie : 
       le(s) joueur(s) sont accompagnés d'entités aux comportements automatiques 
-      définis au moyen du langage de description de comportements
+      définis au moyen du langage de description de comportements sous forme d'automates (voir [GamaParser](README.md))
 
 * **2 univers** avec des effets différents associées aux actions 
 
@@ -44,6 +46,7 @@ directement dans l'entité. Considérons le cas concret d'un personnage qui se d
   - **un monde terrestre** où `move` signifie marcher
   - **un monde aquatique** où `move` signifie nager et donc le déplacement est moins rapide et consomme plus d'énergie. 
 
+L'extrait de code suivant
 ```java
 class Personnage{
   void move(){ 
