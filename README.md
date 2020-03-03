@@ -1,30 +1,34 @@
-# GamaParser = A parser of Game Automata in Java CC
+# GamaParser = Un parser d'automates en Java CC
 
 ## PARSER 
 
-Le parser [parser_automata.jj](src/ricm3/parser/parser_automata.jj) écrit en JavaCC prend en paramètre de ligne de commande un nom de fichier et génére l'Abstract Syntaxe Tree (AST) au format `.dot` sur la sortie standard.
+Le parser [parser_automata.jj](src/ricm3/parser/parser_automata.jj) écrit en JavaCC prend en paramètre de ligne de commande un nom de fichier et construit l'Abstract Syntaxe Tree (AST). Il peut exporter sur la sortie standard l'AST et/ou le graphe de l'automate au format `.dot`. 
 
-Le fichier `.dot` décrit l'AST qu'on peut visualiser avec l'outil [graphviz](https://www.graphviz.org).
+Le fichier `.dot` peut être visualisé avec l'outil [graphviz](https://www.graphviz.org).
 
 ## USAGE
 
-The parser can generate two graphical output in .dot format
-- with option: ``-ast`` it produces the Abstract Syntax Tree
-  (see example/ast.dot)
-- with option: ``-aut`` it produces the graphical representation of the parsed automata
-  (see example/aut.dot)
+Le parser peut générer deux sorties graphiques au format `.dot`
+- avec l'option: ``-aut`` il produit la représentation graphique de l'automate
+  (voir example/aut.dot)
+- avec l'option: ``-ast`` il produit un graphe représentant l'Abstract Syntax Tree du parsing
+  (voir example/ast.dot). Cette sortie est surtout utile pour déboguer le parser.
 
-The parser can take input
-- from a file
+Le parser accepte deux sortes d'entrées
+- un fichier
   ``java -cp ./bin parser.AutomataParser -aut -file example/automata.txt``
-- from a string
+- une chaîne de caractères
   ``java -cp ./bin parser.AutomataParser -aut -string "Aut(Idle){ * (Idle)}"
 
-## LA SYNTAXE 
+## LA SYNTAXE DES AUTOMATES
 
 voir [SYNTAX.md](SYNTAX.md)
+
+## L'INTERPRÉTATION DES ACTIONS ET CONDITIONS DES TRANSITIONS
+
+On a fixé les actions et les conditions disponibles pour écrire des automates,
+ainsi que leur [interprétation](INTERPRETATION.md)
 
 ## DES EXEMPLES D'AUTOMATES
 
 voir [automate0.txt](example/automata0.txt)
-
