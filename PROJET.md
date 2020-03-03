@@ -48,30 +48,30 @@ directement dans l'entité. Considérons le cas concret d'un personnage qui se d
 
 L'extrait de code suivant
 ```java
-class Personnage{
+class Player{
   void move(){ 
      if (aquatique) {...} else {...} 
   }
 ```       
-n'est pas le codage qu'on vous recommande. On vous conseille de définir deux doublures, *stunt* en anglais, l'une pour le monde aquatique, l'autre pour le monde terrestre, et de changer de doublure en fonction du monde.
+n'est pas le codage qu'on vous recommande. On vous conseille de définir deux avatar, l'un pour le monde aquatique, l'autre pour le monde terrestre, et de changer d'avatar en fonction du monde.
 
 ```java
-class Aquaman extends Stunt{
+class Aquaman implements Avatar{
    void move(){ // nage lentement en se fatiquant }
 }
 
-class Groundman extends Stunt{
+class Groundman extends Avatar{
    void move(){ // marche vite sans se fatiguer }
 }   
 
-class Personnage{
-  Stunt stunt ; 
+class Player{
+  Avatar avatar ; 
   // on change de doublure selon le monde 
-  //   stunt = new Groundman(); // quand le personnage est sur terre
-  //   stunt = new Aquaman();   // quand le personnage est dans l'eau
+  //   avatar = new Groundman(); // quand le personnage est sur terre
+  //   avatar = new Aquaman();   // quand le personnage est dans l'eau
   
   // l'action move est définie une fois pour toute indépendamment du nombre de monde.
-  void move(){ this.stunt.move(); } 
+  void move(){ avatar.move(); } 
 }
 ```
 
