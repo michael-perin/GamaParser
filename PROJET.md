@@ -189,7 +189,7 @@ Les conditions permettent de tester la présence ou l'absence d'une entités dan
 
 ## Un interpréteur d'automates
 
-**L'interprétation des actions et des conditions** est définie dans le fichier [interpretation.md](interpretation.md)
+**La syntaxe, le parser et l'interprétation des actions et des conditions** sont présentés [ici](README.md)
 
 ### Des automates simples qui serviront à tester votre interpréteur
 
@@ -205,7 +205,7 @@ Afin de prendre en main le langage de descriptiont d'automates et de tester votr
   
 ### Réalisation de l'interpréteur d'automates
 
-Le parser construit un AST (Arbre de Syntaxe Abstraite) défini dans [Ast.java](src/ricm3/parser/Ast.java). 
+Le parser construit un AST (Arbre de Syntaxe Abstraite) défini dans `Ast.java`. 
 L'AST produit correspond à l'ordre de lecture du fichier. Ce n'est pas la représentation la plus adaptée pour faire fonctionner l'automate.
 
 On vous conseille de définir une méthode *make* dans chaque classe interne de Ast afin de générer une représentation  de l'automate qui facilitera son interprétation.
