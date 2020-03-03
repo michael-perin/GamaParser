@@ -5,14 +5,14 @@ Une entité est forcément orientée dans une direction Up, Down, Right, Left
 
 ## LES DIRECTIONS
 
-### Absolue
+### Absolues
 - N = North
 - S = South
 - E = East
 - W = West
 
 
-### Relative
+### Relatives
 - F = front
 - B = back
 - L = on my left
@@ -66,7 +66,7 @@ Une entité est forcément orientée dans une direction Up, Down, Right, Left
 ### Wait
 - Wait = attente active, c'est une action qui prend du temps
 
-### Deux actions essentielles pour votre jeu (direction optionnelle, par défaut F)
+### Wizz et Pop = deux actions essentielles pour votre jeu (la direction est optionnelle, par défaut F)
 -  Wizz(Direction) = ?
 -  Pop(Direction)  = ?
 
