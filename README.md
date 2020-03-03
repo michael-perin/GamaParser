@@ -1,6 +1,9 @@
 # GamaParser = Un parser d'automates en Java CC
 
-## PARSER 
+Le parser d'automates est une partie clef du [projet](PROJET.md) de fin d'année INFO3.
+Tout élément du jeu sera défini par un automate Gama, avec une syntaxe imposée, ce qui permet aux différentes équipes de s'échanger leurs automates.
+
+## LE PARSER 
 
 Le parser [parser_automata.jj](src/ricm3/parser/parser_automata.jj) écrit en JavaCC prend en paramètre de ligne de commande un nom de fichier et construit l'Abstract Syntaxe Tree (AST). Il peut exporter sur la sortie standard l'AST et/ou le graphe de l'automate au format `.dot`. 
 
