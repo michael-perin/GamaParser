@@ -1,6 +1,6 @@
 # Projet de fin d'année INFO3 à Polytech' Grenoble
 
-## Game Play & Format d'échange imposés, mais thème libre
+## Game Play & Formats d'échange imposés, mais thème libre
 
 Le projet consiste à réaliser un moteur de jeu à base d'automates.
 
@@ -79,7 +79,7 @@ class Personnage{
 
 ## Créativité
 
-Ces contraintes pédagogiques sont imposées, par contre... 
+Ces contraintes pédagogiques sont imposées. En revanche ...
 
 ### Le thème du jeu est libre 
 
@@ -95,15 +95,16 @@ Ces contraintes pédagogiques sont imposées, par contre...
 - ...
 
 ### Les paramètres des entités et leur gestion sont non specifiés
-- puissance de frappe en fonction de l'énergie
-- vitesse de déplacement en fonction de l'énergie
-- inertie en fonction de l'énergie
-- résistance en fonction de l'énergie
+- puissance de frappe en fonction de l'énergie ?
+- vitesse de déplacement en fonction de l'énergie ?
+- inertie en fonction de l'énergie ?
+- résistance en fonction de l'énergie ?
 - au dessous de 0 points d'énergie, on devient un zombie ?
 - au delà de 100 points d'énergie, on explose ?
-- Lorsque l'entité du joueur meurt, le joueur se réincarne dans l'entité la plus proche qui se tranforme temporairement en fantôme (indesctrucible et inoffensif). Le joueur prend le contrôle de l'entité.  À vous de trouver une manière pour que le joueur puisse changer d'entité.
+- Lorsque l'entité du joueur meurt ?
+  Le joueur se réincarne dans l'entité la plus proche qui se tranforme temporairement en fantôme (indesctrucible et inoffensif) ? 
+- Le joueur peut-il changer l'entité qu'il contrôle ? (À vous de trouver une manière pour que le joueur puisse changer d'entité).
 - ...
-
 
 
 ## Format d'animation graphique : fichier `.ani`
@@ -111,7 +112,7 @@ Ces contraintes pédagogiques sont imposées, par contre...
 Pour pouvoir s'échanger les graphismes entre jeux il faut **fournir par personnage** :
 * un sprite sheet *32 pixels x 32 pixels* au format `.png` 
 
-Un sprite sheet est une grande image découpée en carrés de 32 pixels de côté qui représente plusieurs illustration d'un personnage. Une animation correspond à un enchainement d'images sélectionnées dans le sprit sheet.
+Un sprite sheet est une grande image découpée en carrés de 32 pixels de côté qui représente plusieurs illustration d'un personnage. Une animation correspond à un enchaînement d'images sélectionnées dans le sprit sheet.
      
 Par exemple : JUMP = 1;3;4;5;6;9;12;1
 
